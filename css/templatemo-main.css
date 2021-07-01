@@ -162,7 +162,7 @@ a:hover { color: #FF0; }
   background-size: 85%;
 }
 .baner-content img {
-  width: 85%;
+
   margin: auto;
 }
 
@@ -317,7 +317,7 @@ h4, .h4 {
   padding-right: 15px;
   padding-top: 8vh;
   background-image: url(../img/source3.jpg);
- 
+   text-align: center;
   min-height: 100vh;
   background-size: cover;
   background-position: center center;
