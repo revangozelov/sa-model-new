@@ -47,9 +47,13 @@ a:hover { color: #FF0; }
   z-index: 99999;
   width: 100%;
 
-  background: #f2f2f2;
+ 
   -webkit-transition: all .3s;
   transition: all .3s;
+}
+.fixed-side-navbar-logo img{
+  background: #f2f2f2;
+  padding: 5px;
 }
 .fixed-side-navbar:hover {
   background: transparent;
@@ -150,6 +154,7 @@ a:hover { color: #FF0; }
 .parallax-content {
   width: 100%;
   min-height: 100vh;
+  margin-top: 3%;
   background-size: cover;
 }
 
@@ -201,7 +206,7 @@ a:hover { color: #FF0; }
   padding-top: 15vh;
 
   background-repeat: no-repeat ;
-
+ text-align: center;
   min-height: 100vh;
 
 }
@@ -315,12 +320,16 @@ h4, .h4 {
 .tabs-content {
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 8vh;
-  background-image: url(../img/source3.jpg);
+  padding-top: 2vh;
+   
    text-align: center;
   min-height: 100vh;
   background-size: cover;
   background-position: center center;
+}
+.tabs-content img ,.service-content img ,.parallax-content img {
+  width: 80%;
+  margin: auto;
 }
 
 section {

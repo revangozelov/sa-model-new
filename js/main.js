@@ -6,6 +6,7 @@ https://templatemo.com/tm-526-vanilla
 
 */
 
+
 jQuery(document).ready(function($) {
 
 	'use strict';
@@ -58,3 +59,8 @@ jQuery(document).ready(function($) {
 
 
 });
+/* new fullpage('#fullpage', {
+  anchors: ['page1', 'page2', 'page3', 'page4'],
+  sectionsColor: ['yellow', 'orange', '#C0C0C0', '#ADD8E6'],
+});
+ */
