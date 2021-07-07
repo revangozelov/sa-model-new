@@ -1,10 +1,4 @@
-/*
 
-Vanilla Template
-
-https://templatemo.com/tm-526-vanilla
-
-*/
 
 p {
   font-size: 15px;
@@ -521,18 +515,49 @@ footer em {
   font-style: normal;
 }
 
+#warning-message {
+  
+  text-align: center;
+  display: none;
+
+}
+#warning-message img, #warning-message span {
+  
+  margin: auto;
+    justify-content: center;
+    display: block;
+    margin-top: 50%;
+}
+#warning-message span {
+  
+  margin: auto;
+    justify-content: center;
+    display: block;
+  
+}
+
+@media only screen and (orientation:portrait){
+    .landModeCl { display:none; }
+    #warning-message { display:block; }
+}
+@media only screen and (orientation:landscape){
+    #warning-message { display:none; }
+}
+
 @media (max-width: 767px){
   
   .baner-content {
-    padding-top: 30vh;
+    padding-top: 5vh;
   }
 
   .baner-content h1 {
     font-size: 64px;
   }
 
-  .baner-content em {
-  }
+  .fixed-side-navbar-logo img {
+   
+    width: 150px;
+}
 
   .baner-content span {
     font-size: 24px;

@@ -1,13 +1,6 @@
-/* 
-
-Vanilla Template
-
-https://templatemo.com/tm-526-vanilla
-
-*/
 
 
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
 
 	'use strict';
 
