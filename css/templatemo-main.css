@@ -156,6 +156,7 @@ a:hover { color: #FF0; }
   min-height: 100vh;
   margin-top: 3%;
   background-size: cover;
+  position: relative;
 }
 
 
@@ -315,7 +316,11 @@ h4, .h4 {
   border-radius: 20px;
   background: #fff;
 }
-
+.btn-more-info{
+  position: absolute;
+  bottom: 130px;
+  left: 20px;
+}
 
 .tabs-content {
   padding-left: 15px;

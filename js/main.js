@@ -59,8 +59,31 @@ jQuery(document).ready(function($) {
 
 
 });
-/* new fullpage('#fullpage', {
-  anchors: ['page1', 'page2', 'page3', 'page4'],
-  sectionsColor: ['yellow', 'orange', '#C0C0C0', '#ADD8E6'],
-});
- */
+// extension:
+$.fn.scrollEnd = function(callback, timeout) {          
+  $(this).on('scroll', function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,timeout));
+  });
+};
+/* 
+
+$(window).bind('mousewheel', function(event) {
+ 
+  if (event.originalEvent.wheelDelta >= 0) {
+
+    $(window).scrollEnd(function(){
+      $('.nav-link.active').parent().prev().find("a").click();
+    }, 200);
+    
+  }
+  else {
+    $(window).scrollEnd(function(){
+      $('.nav-link.active').parent().next().find("a").click();
+    }, 200);
+     
+  }
+}); */
