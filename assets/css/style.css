@@ -764,10 +764,13 @@ section {
 .services .service-box {
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
   height: 100%;
-  padding: 60px 30px;
+  padding: 15px 5px;
   text-align: center;
   transition: 0.3s;
   border-radius: 5px;
+}
+.services .service-box img{
+  width: 100%;
 }
 
 .services .service-box .icon {
@@ -800,8 +803,10 @@ section {
   margin-left: 5px;
   font-size: 18px;
 }
-
-.services .service-box.blue {
+.services .service-box:hover {
+  transform: scale(1.1);
+}
+/* .services .service-box.blue {
   border-bottom: 3px solid #2db6fa;
 }
 
@@ -901,16 +906,27 @@ section {
 
 .services .service-box.pink:hover {
   background: #f51f9c;
-}
+} */
 
-.services .service-box:hover h3, .services .service-box:hover p, .services .service-box:hover .read-more {
+.services .service-box:hover h3, .services .service-box:hover p {
   color: #fff;
 }
 
 .services .service-box:hover .icon {
   background: #fff;
 }
-
+.banners-fullimg-cont{
+  height: 100vh;
+  width: 100%;
+}
+.banners-fullimg-cont img{
+  width: 100%;
+  
+}
+.banners-fullimg-cont div{
+  width: 95%;
+  margin: auto;
+}
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/

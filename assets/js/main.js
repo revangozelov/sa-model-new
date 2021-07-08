@@ -1,10 +1,56 @@
-/**
-* Template Name: FlexStart - v1.4.0
-* Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
+var getUrlParameter = function getUrlParameter(sParam) {
+  var sPageURL = window.location.search.substring(1),
+      sURLVariables = sPageURL.split('&'),
+      sParameterName,
+      i;
+       
+  for (i = 0; i < sURLVariables.length; i++) {
+      sParameterName = sURLVariables[i].split('=');
+
+     
+      if (sParameterName[0] === sParam) {
+          return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+      }
+  }
+  return false;
+};
+var UrlQb = "https://app.sourcedagile.com/";
+(function () {
+
+    var alte = getUrlParameter("point");
+
+
+
+      if (alte === 'certificate') {
+
+        var dt = getUrlParameter('certificateId');
+       
+
+        if(dt === false){
+           
+          genCertificationBlock14();
+        }else{
+
+          var subdt = getUrlParameter('sub_cert');
+
+
+          if(subdt===false){
+            getGroupInside(dt);
+          }else{
+            getSingleSerc(subdt);
+          }
+      
+          
+
+        }
+
+      }
+
+      
+     
+
+
+
   "use strict";
 
   /**
@@ -15,7 +61,12 @@
     if (all) {
       return [...document.querySelectorAll(el)]
     } else {
-      return document.querySelector(el)
+      try {
+        return document.querySelector(el)
+      } catch (err) {
+
+      }
+
     }
   }
 
@@ -110,7 +161,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -119,7 +170,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -129,7 +180,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -204,9 +255,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -216,6 +267,9 @@
         });
         aos_init();
       }, true);
+
+
+
     }
 
   });
@@ -287,3 +341,187 @@
   });
 
 })();
+
+
+function genCertificationBlock14() {
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationGroupList4Web",
+    data: JSON.stringify(), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var orn = dat[index].orderNo
+
+
+        var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+
+        $('#certificatie-block')
+          .append($("<div>").attr('id', idSld)
+            .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index).css('order', orn)
+            .append($("<div>")
+              .addClass('service-box ' + rand)
+              .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+              .append(' <a href="#" id="red_certification" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+            ))
+
+
+
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+
+$(document).on("click", "#red_certification", function () {
+
+  var id = $(this).parent().parent().attr('id');
+  
+
+  getGroupInside(id);
+  insertParam("certificateId", id)
+
+})
+$(document).on("click", "#sub_certification", function () {
+
+  var id = $(this).parent().parent().attr('id');
+  
+
+  getSingleSerc(id);
+  insertParam("sub_cert", id)
+
+})
+
+function getGroupInside(id) {
+
+  var ts = {
+    "kv": {
+      "fkCertificationGroupId": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationList",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+      
+
+
+        var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+
+        $('#certificatie-block')
+          .append($("<div>").attr('id', idSld)
+            .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
+            .append($("<div>")
+              .addClass('service-box ' + rand)
+              .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+              .append(' <a href="#" id="sub_certification" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+            ))
+
+
+
+      }
+
+
+    }
+  })
+
+
+}
+function getSingleSerc(id) {
+
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationTrainingInfo",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var desct = dat[index].trainingDescription
+      
+        
+        $('#certificatie-block')
+          .append($("<div>").attr('id', idSld)
+
+            .append(desct))
+
+
+
+      }
+
+
+    }
+  })
+
+
+}
+
+function insertParam(key, value) {
+  key = encodeURIComponent(key);
+  value = encodeURIComponent(value);
+
+  // kvp looks like ['key1=value1', 'key2=value2', ...]
+  var kvp = document.location.search.substr(1).split('&');
+  let i=0;
+
+  for(; i<kvp.length; i++){
+      if (kvp[i].startsWith(key + '=')) {
+          let pair = kvp[i].split('=');
+          pair[1] = value;
+          kvp[i] = pair.join('=');
+          break;
+      }
+  }
+
+  if(i >= kvp.length){
+      kvp[kvp.length] = [key,value].join('=');
+  }
+
+  // can return this or...
+  let params = kvp.join('&');
+
+  // reload page with new params
+  document.location.search = params;
+}
+

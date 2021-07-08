@@ -181,13 +181,6 @@ a:hover { color: #FF0; }
   font-style: normal;
 }
 
-.baner-content span {
-  display: inline-block;
-  margin-top: -20px;
-  font-weight: 300;
-  font-size: 48px;
-  color: #fff;
-}
 
 .baner-content .primary-button {
   margin-top: 15px;
@@ -393,63 +386,6 @@ section {
 }
 
 
-.contact-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 16vh;
-  background-image: url(../img/5th-section.jpg);
-}
-
-.contact-form {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 30px 25px;
-  margin-bottom: 30px;
-}
-
-#contact input {
-  border-radius: 3px;
-  padding-left: 15px;
-  font-size: 13px;
-  color: #232323;
-  background-color: rgba(250, 250, 250, 1);
-  outline: none;
-  border: none;
-  box-shadow: none;
-  line-height: 50px;
-  height: 50px;
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-#contact textarea {
-  border-radius: 3px;
-  padding-left: 15px;
-  padding-top: 10px;
-  font-size: 13px;
-  color: #232323;
-  background-color: rgba(250, 250, 250, 1);
-  outline: none;
-  border: none;
-  box-shadow: none;
-  height: 165px;
-  max-height: 220px;
-  width: 100%;
-  margin-bottom: 25px;
-}
-
-#contact button {
-  display: inline-block;
-  background-color: #2574b5;
-  padding: 15px 24px;
-  width: 100%;
-  border-radius: 3px;
-  text-transform: uppercase;
-  font-size: 11px;
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 0.5px;
-}
 
 .map {
   margin-bottom: 30px;
@@ -460,60 +396,7 @@ section {
 
 
 
-footer {
-  text-align: center;
-  background-color: #282b2f;
-  padding: 70px 0px;
-}
 
-footer .primary-button {
-  margin-bottom: 30px;
-}
-
-footer ul {
-  padding: 0px;
-  margin: 0px;
-  list-style: none;
-}
-
-footer ul li {
-  display: inline-block;
-  margin: 0px 4px;
-}
-
-footer ul li a {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  display: inline-block;
-  background-color: #f96c20;
-  color: white;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: all 0.5s;
-  font-size: 17px;
-}
-
-footer ul li a:hover {
-  color: #282b2f;
-  background-color: #2574b5;
-}
-
-footer p {
-  font-size: 12px;
-  color: #fff;
-  margin-top: 15px;
-  color: #fff;
-  letter-spacing: 0.5px;
-  margin-bottom: 0px;
-}
-
-footer em {
-  color: #2574b5;
-  font-weight: 600;
-  font-style: normal;
-}
 
 #warning-message {
   

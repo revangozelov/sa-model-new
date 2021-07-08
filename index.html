@@ -26,13 +26,14 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/templatemo-main.css">
 
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
+  <header id="" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
@@ -51,90 +52,83 @@
   </header><!-- End Header -->
 
 
-  <main id="main">
+  <div id="warning-message">
+    <img src="img/3024768.png" alt="">
+  <span>
+      This website is only viewable in landscape mode
+  </span>
 
-    <section id="services" class="services">
+</div>
+<div class="landModeCl">
+ 
+  <div class="fixed-side-navbar">
+      <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="#home"><span>Sourced Agile Model Overview</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#services"><span>Find Your Start Point</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="#Certificatie"><span>Certifications and Tranings</span></a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#our-story"><span>Sourced Agile System</span></a></li>
+      
+          <!--        <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Tranings</span></a></li> -->
+          <li class="nav-item"><a class="nav-link" href="#contact"><span>Contact Us</span></a></li>
+      </ul>
+  </div>
 
-      <div class="container" data-aos="fade-up">
 
-        <header class="section-header">
-       
-          <p>Sourced Agile Model</p>
-        </header>
+  <div class="parallax-content baner-content" id="home">
 
-        <div class="row gy-4">
+      <img src="img/source2.png" usemap="#image-map">
 
-          <img src="img/source2.png" alt="">
+      <div>
+        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+       </div>
+      
 
-        </div>
+  </div>
 
-      </div>
+  <div class="service-content" id="services">
 
-    </section>
-    <section id="services" class="services">
+      
+      <img src="img/source.png" usemap="#image-map2">
+      
 
-      <div class="container" data-aos="fade-up">
+      <div>
+        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+       </div>
+      
 
-        <header class="section-header">
-       
-       
-        </header>
+  </div>
+  <div class="tabs-content" id="Certificatie">
+      
+    <img src="img/source4.png" usemap="#image-map3" style="margin: auto;">
 
-        <div class="row gy-4">
-
-          <img src="img/source.png" alt="">
-
-        </div>
-
-      </div>
-
-    </section>
+   <div>
+    <a href="index-main.html?&point=certificate"  class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+   </div>
   
-    <section id="services" class="services">
+</div>
 
-      <div class="container" data-aos="fade-up">
+  <div class="tabs-content" id="our-story" style="">
+      
+      <img src="img/source3.png" usemap="#image-map3">
 
-        <header class="section-header">
-       
-       
-        </header>
+      <div>
+        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+       </div>
+      
+  </div>
 
-        <div class="row gy-4">
 
-          <img src="img/source2.png" alt="">
 
-        </div>
 
-      </div>
 
-    </section>
-  
-    <section id="services" class="services">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-       
-       
-        </header>
-
-        <div class="row gy-4">
-
-          <img src="img/source2.png" alt="">
-
-        </div>
-
-      </div>
-
-    </section>
-  
 
 
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
 
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <header class="section-header">
           <h2>Contact</h2>
@@ -217,8 +211,6 @@
 
     </section><!-- End Contact Section -->
 
-  </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
@@ -281,9 +273,11 @@
     </div>
   </footer><!-- End Footer -->
 
+</div>    
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
@@ -291,9 +285,45 @@
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  
+<script src="js/main.js"></script>
+<script>
+  function openCity(cityName) {
+      var i;
+      var x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+      }
+      document.getElementById(cityName).style.display = "block";
+  }
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+
+  $(document).ready(function () {
+      // Add smooth scrolling to all links
+      $(".fixed-side-navbar a, .primary-button a").on('click', function (event) {
+
+          // Make sure this.hash has a value before overriding default behavior
+          if (this.hash !== "") {
+              // Prevent default anchor click behavior
+              event.preventDefault();
+
+              // Store hash
+              var hash = this.hash;
+
+              // Using jQuery's animate() method to add smooth page scroll
+              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+              $('html, body').animate({
+                  scrollTop: $(hash).offset().top
+              }, 800, function () {
+
+                  // Add hash (#) to URL when done scrolling (default click behavior)
+                  window.location.hash = hash;
+              });
+          } // End if
+      });
+  });
+</script>
+
 
 </body>
 
