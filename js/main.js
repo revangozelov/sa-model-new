@@ -1,5 +1,217 @@
 
 
+var UrlQb = "https://app.sourcedagile.com/";
+
+
+$(document).ready(function() {
+  // --- VARIABLES
+  var fullAnimation = false;
+  var currentSlide = 0;
+  var lastSlide = $('.panel').length - 1;
+  var scrollDirection = "";
+
+  // --- FUNCTIONS
+  function slidePage(scrollDirection, currentSlide) {
+      fullAnimation = false;
+      if(scrollDirection == "down") {
+          $('.current-slide-animating').toggleClass('current-slide-animating prev-slide');
+          $('.panel').eq(currentSlide - 1).addClass('prev-slide');
+          if(currentSlide != lastSlide) {
+              $('.panel').eq(currentSlide + 1).addClass('next-slide');
+          }
+      } else {
+          $('.current-slide-animating').toggleClass('current-slide-animating next-slide');
+          $('.panel').eq(currentSlide + 1).addClass('next-slide');
+          if(currentSlide != 0) {
+              $('.panel').eq(currentSlide - 1).addClass('prev-slide');
+          }
+      } 
+  }
+
+  // --- EVENTS
+  $(window).bind('mousewheel', function(event) {
+      scrollDirection = event.originalEvent.wheelDelta > 0 ? "up" : "down";
+      if(fullAnimation == false) {
+          // if scroll down
+          if(currentSlide != lastSlide && scrollDirection == "down") {
+              fullAnimation = true;
+              currentSlide += 1;
+              $('.current-slide').toggleClass('current-slide current-slide-animating')
+              $('.next-slide').toggleClass('next-slide current-slide');
+              $('.panel.prev-slide').removeClass('prev-slide');
+              $('.panel.next-slide').removeClass('next-slide');
+              setTimeout(function() {
+                  slidePage(scrollDirection, currentSlide)
+              }, 600);
+          }
+          // if scroll up
+          if(currentSlide != 0 && scrollDirection == "up") {
+              fullAnimation = true;
+              currentSlide -= 1;
+              $('.current-slide').toggleClass('current-slide current-slide-animating')
+              $('.prev-slide').toggleClass('prev-slide current-slide');
+              $('.panel.prev-slide').removeClass('prev-slide');
+              $('.panel.next-slide').removeClass('next-slide');
+              setTimeout(function() {
+                  slidePage(scrollDirection, currentSlide)
+              }, 600);
+          }
+      }
+  });
+});
+function convertStDate(dt) {
+
+	var arr = dt.slice(0, 4);
+	var arr1 = dt.slice(4, 6);
+	var arr2 = dt.slice(6, 8);
+
+	var fns = arr + "/" + arr1 + '/' + arr2;
+
+	return fns
+}
+
+function convertStTime(dt) {
+
+	var arr = dt.slice(0, 2);
+	var arr1 = dt.slice(2, 4);
+
+
+	var fns = arr + ":" + arr1;
+
+	return fns
+}
+
+function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
+
+  var ts = {
+    "kv": {
+      "id": fkId
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+        var logo = dat[0].logo
+   
+      $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm));
+
+      new Swiper('.testimonials-slider', {
+        speed: 600,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false
+        },
+        slidesPerView: 'auto',
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          clickable: true
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 40
+          },
+      
+          1200: {
+            slidesPerView: 3,
+          }
+        }
+      });
+
+
+
+    }
+  })
+
+
+}
+
+
+function genEventListBlock(id,logo,header,lng,strtm,endtm){
+  return  ` <div id='${id}' class="swiper-slide">
+  <div class="testimonial-item">
+  <div class="profile mt-auto">
+  <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
+  <h3> ${header}</h3>
+  <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
+</div>
+    <p>
+    Language ${lng}
+    </p>
+
+    <a class="getstarted scrollto" href="https://app.sourcedagile.com/login.html">Join</a>
+        
+  </div>
+</div>`
+}
+
+var lang  =[
+  {key:"en",
+    value: "English"
+   },
+  {key:"az",
+    value: "Azeribaijan"
+   },
+  {key:"ru",
+    value: "Russian"
+   },
+  
+]
+function genEventsList(){
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    data: JSON.stringify(), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+      
+      for (let index = 0; index < dat.length; index++) {
+        var id = dat[index].id
+        var fkId = dat[index].fkCertificationId
+        var header = dat[index].eventTitle
+        var lng = dat[index].eventLang
+        var stst = dat[index].eventStatus
+        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
+ 
+        var dl = lang.find(x => x.key === lng).value;
+        
+
+        if(stst === "A"){
+          getSingleSerc(fkId,id,header,dl,strtm,endtm)
+        }
+
+        
+
+
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+
+genEventsList();
+ 
+
 $(document).ready(function($) {
 
 	'use strict';
@@ -49,3 +261,4 @@ $.fn.scrollEnd = function(callback, timeout) {
     $this.data('scrollTimeout', setTimeout(callback,timeout));
   });
 };
+

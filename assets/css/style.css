@@ -762,7 +762,7 @@ section {
 # Services
 --------------------------------------------------------------*/
 .services .service-box {
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+
   height: 100%;
   padding: 15px 5px;
   text-align: center;
@@ -796,6 +796,7 @@ section {
   font-weight: 600;
   font-size: 16px;
   padding: 8px 20px;
+  
 }
 
 .services .service-box .read-more i {
@@ -803,9 +804,21 @@ section {
   margin-left: 5px;
   font-size: 18px;
 }
+.services .dropMenuListCert{
+  position: absolute;
+    width: 100%;
+    z-index: 500;
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0px 0 30px rgb(1 41 112 / 25%);
+    padding: 30px 5px;
+    border: 1px solid lightgrey;
+    display: none;
+}
 .services .service-box:hover {
   transform: scale(1.1);
 }
+
 /* .services .service-box.blue {
   border-bottom: 3px solid #2db6fa;
 }
@@ -1321,8 +1334,7 @@ section {
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 90px;
-  border-radius: 50%;
+  width: 100%;
   border: 4px solid #fff;
   margin: 0 auto;
 }
@@ -2140,6 +2152,10 @@ section {
 
 .blog .sidebar .recent-posts .post-item + .post-item {
   margin-top: 15px;
+}
+.blog .sidebar .recent-posts .post-item {
+  padding: 5px;
+  border-radius: 6px;
 }
 
 .blog .sidebar .recent-posts img {

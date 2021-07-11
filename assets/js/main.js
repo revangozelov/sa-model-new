@@ -22,27 +22,35 @@ var UrlQb = "https://app.sourcedagile.com/";
 
 
       if (alte === 'certificate') {
-
-        var dt = getUrlParameter('certificateId');
-       
-
-        if(dt === false){
-           
-          genCertificationBlock14();
-        }else{
-
+          $('#services').show()
+    
           var subdt = getUrlParameter('sub_cert');
 
 
           if(subdt===false){
-            getGroupInside(dt);
+            genCertificationBlock14()
           }else{
             getSingleSerc(subdt);
           }
       
-          
+        
 
+      }
+      if (alte === 'sourcedModelOver') {
+        $('#blog').show();
+
+        
+        var subdt = getUrlParameter('sub_sect');
+        genSectionBlockGen();
+        if(subdt===false){
+        
+          
+        }else{
+
+           
+          genSectionSingle(subdt);
         }
+     
 
       }
 
@@ -343,11 +351,30 @@ var UrlQb = "https://app.sourcedagile.com/";
 })();
 
 
-function genCertificationBlock14() {
+function addGenSectList(id,nm,img,desct){
+
+  return `
+  <article class="entry" id='${id}'>
+
+  <div class="entry-img">
+    <img src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" class="img-fluid">
+  </div>
+
+  <h2 class="entry-title">
+    <a href="">${nm}</a>
+  </h2>
+  <div class="entry-content">
+    ${desct}
+  </div>
+
+</article>`
+}
+
+function genSectionBlockGen() {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationGroupList4Web",
+    url: UrlQb + "api/post/zd/traininghub/getModelSectionList4Web",
     data: JSON.stringify(), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -359,19 +386,113 @@ function genCertificationBlock14() {
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
+        var sctnm = dat[index].sectionName
+     
+
+
+        $('#sidebarsection')
+          .append($("<div>").attr('id', idSld)
+            .addClass('post-item clearfix')
+            .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+            .append('<h4><a href="#">'+sctnm+'</a></h4>'))
+
+
+
+            var subdt = getUrlParameter('sub_sect');
+
+
+            if(subdt=== false){
+
+              $("#sidebarsection").children().first().click();
+
+            }else{
+              $("#sidebarsection").find('#'+subdt).css("background",'aliceblue');
+            }
+            
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+function genSectionSingle(id) {
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getModelSectionList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+  
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var sctnm = dat[index].sectionName
+        var dsc = dat[index].sectionFullDesc
+     
+
+
+        $('#entries-model')
+          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+
+
+
+      }
+
+
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+function genCertificationBlock14() {
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationGroupList4Web",
+    data: JSON.stringify(), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+      $('#certificatie-block').append($("<div>").addClass('dropMenuListCert'))
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
         var orn = dat[index].orderNo
 
 
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
+       
         $('#certificatie-block')
           .append($("<div>").attr('id', idSld)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index).css('order', orn)
             .append($("<div>")
               .addClass('service-box ' + rand)
               .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-              .append(' <a href="#" id="red_certification" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
             ))
 
 
@@ -387,13 +508,24 @@ function genCertificationBlock14() {
   });
 }
 
-$(document).on("click", "#red_certification", function () {
+$(document).on("click", ".service-box", function (e) {
 
-  var id = $(this).parent().parent().attr('id');
-  
-
+  e.stopPropagation();
+  var id = $(this).parent().attr('id');
+  var $el = $(this).parent();  
+var bottom = $el.position().top + $el.height()-40;
+   
+    $(".dropMenuListCert").css("top", bottom)
   getGroupInside(id);
-  insertParam("certificateId", id)
+///  insertParam("certificateId", id)
+
+})
+$(document).on("click", "body", function () {
+
+ 
+    $(".dropMenuListCert").hide()
+
+///  insertParam("certificateId", id)
 
 })
 $(document).on("click", "#sub_certification", function () {
@@ -403,6 +535,15 @@ $(document).on("click", "#sub_certification", function () {
 
   getSingleSerc(id);
   insertParam("sub_cert", id)
+
+})
+$(document).on("click", ".post-item", function () {
+
+  var id = $(this).attr('id');
+  
+
+  genSectionSingle(id)
+  insertParam("sub_sect", id)
 
 })
 
@@ -425,7 +566,7 @@ function getGroupInside(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-
+      $('.dropMenuListCert').empty();
 
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
@@ -436,16 +577,19 @@ function getGroupInside(id) {
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
-        $('#certificatie-block')
+        $('.dropMenuListCert')
           .append($("<div>").attr('id', idSld)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
             .append($("<div>")
               .addClass('service-box ' + rand)
               .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-              .append(' <a href="#" id="sub_certification" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+              .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
+              .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
+              .append(' <a href="#" id="sub_certification" pid='+idSld+' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
             ))
 
 
+            $(".dropMenuListCert").css("display",'flex');
 
       }
 
@@ -466,7 +610,7 @@ function getSingleSerc(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationTrainingInfo",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -475,16 +619,18 @@ function getSingleSerc(id) {
 
       var dat = data.tbl[0].r
 
-
+    console.log(data);
       for (let index = 0; index < dat.length; index++) {
-        var idSld = dat[index].id
-        var desct = dat[index].trainingDescription
+        var idSld = dat[index].id;
+        var desct = dat[index].description;
+        var lgo = dat[index].logo;
+        var crtnm = dat[index].certificationName;
       
         
         $('#certificatie-block')
-          .append($("<div>").attr('id', idSld)
-
-            .append(desct))
+          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>'))
+          .append($("<div>").attr('id', idSld).append('<img class="col-lg-4" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
+          .append($("<div>").attr('id', idSld).append(desct))
 
 
 

@@ -14,7 +14,9 @@
 
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +40,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
-        
+
       </a>
 
       <nav id="navbar" class="navbar">
@@ -54,79 +56,103 @@
 
   <div id="warning-message">
     <img src="img/3024768.png" alt="">
-  <span>
+    <span>
       This website is only viewable in landscape mode
-  </span>
+    </span>
 
-</div>
-<div class="landModeCl">
- 
-  <div class="fixed-side-navbar">
-      <ul class="nav flex-column">
-          <li class="nav-item"><a class="nav-link" href="#home"><span>Sourced Agile Model Overview</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="#services"><span>Find Your Start Point</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="#Certificatie"><span>Certifications and Tranings</span></a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#our-story"><span>Sourced Agile System</span></a></li>
-      
-          <!--        <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Tranings</span></a></li> -->
-          <li class="nav-item"><a class="nav-link" href="#contact"><span>Contact Us</span></a></li>
-      </ul>
   </div>
+  <div class="landModeCl">
+
+    <div class="fixed-side-navbar">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#home"><span>Sourced Agile Model Overview</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#services"><span>Find Your Start Point</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#Certificatie"><span>Certifications and Tranings</span></a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#our-story"><span>Sourced Agile System</span></a></li>
+
+        <!--        <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Tranings</span></a></li> -->
+        <li class="nav-item"><a class="nav-link" href="#testimonials"><span>Events</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"><span>Contact Us</span></a></li>
+      </ul>
+    </div>
 
 
-  <div class="parallax-content baner-content" id="home">
+    <div class="parallax-content panel baner-content" id="home">
 
       <img src="img/source2.png" usemap="#image-map">
 
       <div>
-        <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-       </div>
-      
+        <a href="index-main.html?&point=sourcedModelOver" class="read-more"><span>Read More</span> <i
+            class="bi bi-arrow-right"></i></a>
+      </div>
 
-  </div>
 
-  <div class="service-content" id="services">
+    </div>
 
-      
+    <div class="service-content panel" id="services">
+
+
       <img src="img/source.png" usemap="#image-map2">
-      
+
 
       <div>
         <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-       </div>
-      
+      </div>
 
-  </div>
-  <div class="tabs-content" id="Certificatie">
-      
-    <img src="img/source4.png" usemap="#image-map3" style="margin: auto;">
 
-   <div>
-    <a href="index-main.html?&point=certificate"  class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-   </div>
-  
-</div>
+    </div>
+    <div class="tabs-content panel" id="Certificatie">
 
-  <div class="tabs-content" id="our-story" style="">
-      
+      <img src="img/source4.png" usemap="#image-map3" style="margin: auto;">
+
+      <div>
+        <a href="index-main.html?&point=certificate" class="read-more"><span>Read More</span> <i
+            class="bi bi-arrow-right"></i></a>
+      </div>
+
+    </div>
+
+    <div class="tabs-content panel" id="our-story" >
+
       <img src="img/source3.png" usemap="#image-map3">
 
       <div>
         <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
-       </div>
-      
-  </div>
+      </div>
+
+    </div>
 
 
 
 
+       <!-- ======= Testimonials Section ======= -->
+       <section id="testimonials panel" class="testimonials">
 
+        <div class="container">
+  
+          <header class="section-header">
+            <h2>Events</h2>
+            <p>Events Lists</p>
+          </header>
+  
+          <div class="testimonials-slider swiper-container">
+            <div class="swiper-wrapper" id="event_list_hub">
+  
+        
+  
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+  
+        </div>
+  
+      </section><!-- End Testimonials Section -->
 
 
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="contact panel" class="contact panel">
 
       <div class="container">
 
@@ -211,70 +237,72 @@
 
     </section><!-- End Contact Section -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+    <!-- ======= Footer ======= -->
+    <footer id="footer panel" class="footer panel">
 
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <img src="assets/img/logo.png" alt="">
-              
-            </a>
-            <div class="social-links mt-3">
-<!--               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
- -->              <a href="https://www.facebook.com/sourcedagile" class="facebook"><i class="bi bi-facebook"></i></a>
-<!--               <a href="#" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
- -->              <a href="https://az.linkedin.com/in/anarrustamov" class="linkedin"><i class="bi bi-linkedin bx bxl-linkedin"></i></a>
+      <div class="footer-top">
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-5 col-md-12 footer-info">
+              <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="">
+
+              </a>
+              <div class="social-links mt-3">
+                <!--               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+ --> <a href="https://www.facebook.com/sourcedagile" class="facebook"><i class="bi bi-facebook"></i></a>
+                <!--               <a href="#" class="instagram"><i class="bi bi-instagram bx bxl-instagram"></i></a>
+ --> <a href="https://az.linkedin.com/in/anarrustamov" class="linkedin"><i
+                    class="bi bi-linkedin bx bxl-linkedin"></i></a>
+              </div>
             </div>
+
+            <div class="col-lg-2 col-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              </ul>
+            </div>
+
+
+            <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+              <h4>Contact Us</h4>
+              <p>
+                15551, Sepapaja 6, <br>
+                Tallinn, Estonia
+                <br>
+                <strong>Phone:</strong> <br>
+                <strong>Email:</strong> info@sourcedagile.com<br>
+              </p>
+
+            </div>
+
           </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-
-          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
-            <p>
-              15551, Sepapaja 6, <br>
-              Tallinn, Estonia
-              <br>
-              <strong>Phone:</strong> <br>
-              <strong>Email:</strong> info@sourcedagile.com<br>
-            </p>
-
-          </div>
-
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="copyright">
-        © Copyright Sourced Agile, LLC All rights reserved, 2020.
+      <div class="container">
+        <div class="copyright">
+          © Copyright Sourced Agile, LLC All rights reserved, 2020.
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+          Designed by <a href="https://sourcedagile.com/">Sourced Agile Team</a>
+        </div>
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="https://sourcedagile.com/">Sourced Agile Team</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+    </footer><!-- End Footer -->
 
-</div>    
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  </div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -285,44 +313,45 @@
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  
-<script src="js/main.js"></script>
-<script>
-  function openCity(cityName) {
+
+
+  <script src="js/main.js"></script>
+  <script>
+    function openCity(cityName) {
       var i;
       var x = document.getElementsByClassName("city");
       for (i = 0; i < x.length; i++) {
-          x[i].style.display = "none";
+        x[i].style.display = "none";
       }
       document.getElementById(cityName).style.display = "block";
-  }
+    }
 
 
-  $(document).ready(function () {
+    $(document).ready(function () {
       // Add smooth scrolling to all links
       $(".fixed-side-navbar a, .primary-button a").on('click', function (event) {
 
-          // Make sure this.hash has a value before overriding default behavior
-          if (this.hash !== "") {
-              // Prevent default anchor click behavior
-              event.preventDefault();
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
 
-              // Store hash
-              var hash = this.hash;
+          // Store hash
+          var hash = this.hash;
 
-              // Using jQuery's animate() method to add smooth page scroll
-              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-              $('html, body').animate({
-                  scrollTop: $(hash).offset().top
-              }, 800, function () {
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function () {
 
-                  // Add hash (#) to URL when done scrolling (default click behavior)
-                  window.location.hash = hash;
-              });
-          } // End if
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        } // End if
       });
-  });
-</script>
+    });
+  </script>
 
 
 </body>
