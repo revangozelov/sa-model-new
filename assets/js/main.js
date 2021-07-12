@@ -645,10 +645,10 @@ function getSingleSerc(id) {
       
         
         $('#certificatie-block').append(
-          $("<div>").addClass("col-lg-4")
-          .append($("<div>").attr('id', idSld).append('<img class="" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
+          $("<div>").addClass("col-lg-5")
+          .append($("<div>").attr('id', idSld).append('<img class="" width="100%" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
           .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')))
-          .append($("<div>").attr('id', idSld).append(desct))
+          .append($("<div>").addClass("col-lg-7").attr('id', idSld).append(desct))
 
 
 
