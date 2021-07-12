@@ -169,6 +169,7 @@ section {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  background: #fff;
 }
 
 .header.header-scrolled {
@@ -1311,7 +1312,7 @@ section {
 /*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
-.testimonials .testimonial-item {
+ .testimonial-item {
   box-sizing: content-box;
   padding: 30px;
   margin: 40px 30px;
@@ -1324,35 +1325,34 @@ section {
   transition: 0.3s;
 }
 
-.testimonials .testimonial-item .stars {
+.testimonial-item .stars {
   margin-bottom: 15px;
 }
-
-.testimonials .testimonial-item .stars i {
+ .testimonial-item .stars i {
   color: #ffc107;
   margin: 0 1px;
 }
 
-.testimonials .testimonial-item .testimonial-img {
+.testimonial-item .testimonial-img {
   width: 100%;
   border: 4px solid #fff;
   margin: 0 auto;
 }
 
-.testimonials .testimonial-item h3 {
+.testimonial-item h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 10px 0 5px 0;
   color: #111;
 }
 
-.testimonials .testimonial-item h4 {
+.testimonial-item h4 {
   font-size: 14px;
   color: #999;
   margin: 0;
 }
 
-.testimonials .testimonial-item p {
+.testimonial-item p {
   font-style: italic;
   margin: 0 auto 15px auto;
 }
@@ -1733,7 +1733,7 @@ section {
 .blog .entry {
   padding: 30px;
   margin-bottom: 60px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); */
 }
 
 .blog .entry .entry-img {
@@ -2083,7 +2083,7 @@ section {
 .blog .sidebar {
   padding: 30px;
   margin: 0 0 60px 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); */
 }
 
 .blog .sidebar .sidebar-title {
@@ -2168,6 +2168,18 @@ section {
 .blog .sidebar .recent-posts .post-item {
   padding: 5px;
   border-radius: 6px;
+}
+.blog .sidebar .recent-posts .post-item1 + .post-item1 {
+  margin-top: 15px;
+}
+.blog .sidebar .recent-posts .post-item1 {
+  padding: 5px;
+  border-radius: 6px;
+}
+#skilss-list-ul li{
+
+  cursor: pointer;
+
 }
 
 .blog .sidebar .recent-posts img {
