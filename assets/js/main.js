@@ -61,6 +61,23 @@ var UrlQb = "https://app.sourcedagile.com/";
      
 
       }
+      if (alte === 'systemSkils') {
+        $('#skilss').show();
+
+        
+        var subdt = getUrlParameter('sub_future');
+        genSkilssBlock();
+        if(subdt===false){
+        
+          
+        }else{
+
+           
+          genFeatureSingle(subdt);
+        }
+     
+
+      }
 
       
      
@@ -427,6 +444,55 @@ function genSectionBlockGen() {
     }
   });
 }
+function genSkilssBlock() {
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getSystemFeatureList4Web",
+    data: JSON.stringify(), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+  
+        var sctnm = dat[index].featureName
+        var ornm = dat[index].orderNo
+     
+
+
+        $('#skilss-list-ul')
+                   .append($("<li>")
+                              .addClass("list-group-item feature-item").css("order",ornm).attr("id",idSld).attr("orderNo",ornm)
+                              .append(ornm+". "+sctnm))
+
+
+
+            var subdt = getUrlParameter('sub_future');
+
+
+            if(subdt=== false){
+
+              $("#skilss-list-ul").find("[orderNo='1']").first().click();
+
+            }else{
+              $("#skilss-list-ul").find('#'+subdt).addClass("active");
+            }
+            
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
 function genSectionSingle(id) {
   var ts = {
     "kv": {
@@ -464,6 +530,51 @@ function genSectionSingle(id) {
 
 
 
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+function genFeatureSingle(id) {
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getSystemFeatureList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+  
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var sctnm = dat[index].featureName
+        var stat = dat[index].status
+        var dsc = dat[index].featureDescription
+     
+
+       if(stat === "A"){
+
+        $('#entries-skilss')
+          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+
+      }
+
+      }
+      
 
     },
 
@@ -561,6 +672,14 @@ $(document).on("click", ".post-item", function () {
 
   genSectionSingle(id)
   insertParam("sub_sect", id)
+
+})
+$(document).on("click", ".feature-item", function () {
+
+  var id = $(this).attr('id');
+
+  genFeatureSingle(id)
+  insertParam("sub_future", id)
 
 })
 
