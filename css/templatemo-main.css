@@ -1,4 +1,18 @@
 
+#fv-dots ul li a span {
+  background-color: #ddd;
+  transition: 0.2s ease-in-out all;
+  width: 6px;
+  height: 6px;
+}
+
+#fv-dots ul a.active span {
+  background-color: #173549 !important;
+}
+
+#fv-dots ul li {
+  padding: 6px;
+}
 
 p {
   font-size: 15px;
@@ -453,13 +467,14 @@ section {
   .baner-content .primary-button {
     margin-top: 15px;
   }
+  
 
   .service-content {
     padding-top: 5vh;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
-    
+
   }
 
   .service-content .left-text .line-dec {
