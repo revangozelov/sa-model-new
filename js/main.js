@@ -255,6 +255,7 @@ $(document).ready(function () {
     //Navigation
     navbar: "#navbar",
     backToTop: true,
+    dotsTooltips: true,
 
     // Callback
     onScrollEnd: function (currentView) {
