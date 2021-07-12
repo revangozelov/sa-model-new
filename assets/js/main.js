@@ -28,7 +28,15 @@ var UrlQb = "https://app.sourcedagile.com/";
 
 
           if(subdt===false){
-            genCertificationBlock14()
+
+            var subdt2 = getUrlParameter('sub_training');
+
+
+            if(subdt2===false){
+              genCertificationBlock14()
+            }else{
+              getSingleTraining(subdt);
+            }
           }else{
             getSingleSerc(subdt);
           }
@@ -537,6 +545,15 @@ $(document).on("click", "#sub_certification", function () {
   insertParam("sub_cert", id)
 
 })
+$(document).on("click", "#training_dest", function () {
+
+  var id = $(this).attr('pid');
+  
+
+  getSingleTraining(id);
+  insertParam("sub_training", id)
+
+})
 $(document).on("click", ".post-item", function () {
 
   var id = $(this).attr('id');
@@ -620,6 +637,50 @@ function getSingleSerc(id) {
       var dat = data.tbl[0].r
 
     console.log(data);
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id;
+        var desct = dat[index].description;
+        var lgo = dat[index].logo;
+        var crtnm = dat[index].certificationName;
+      
+        
+        $('#certificatie-block').append(
+          $("<div>").addClass("col-lg-4")
+          .append($("<div>").attr('id', idSld).append('<img class="" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
+          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')))
+          .append($("<div>").attr('id', idSld).append(desct))
+
+
+
+      }
+
+
+    }
+  })
+
+
+}
+function getSingleTraining(id) {
+
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+
+    
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
         var desct = dat[index].description;

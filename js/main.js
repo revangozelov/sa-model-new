@@ -70,6 +70,48 @@ function convertStDate(dt) {
 	return fns
 }
 
+
+
+$(document).on("click","#button-message-sub", function(){
+
+
+  var nm = $("#contact_mail_name").val();
+  var body = $("#contact_mail_body").val();
+  var subject = $("#contact_mail_subject").val();
+  var email = $("#contact_mail_email").val();
+  if(nm.length>3&&body.length>4&&subject.length>4&&email.length>5){
+  var ts ={    "kv":{       
+    "body":body, 
+    "senderEmail":email,     
+   "senderFullname": nm, 
+    "subject":subject   
+ }}
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/cl/traininghub/sendWebMessageToCoreContainer",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+
+      alert("Mesaj Gonderildi");
+    }
+  })
+
+
+$("#contact_mail_name").val("");
+  $("#contact_mail_body").val("");
+ $("#contact_mail_subject").val("");
+ $("#contact_mail_email").val("");
+  }else{
+   alert("Please fill in all fields")
+  }
+})
+
+
 function convertStTime(dt) {
 
 	var arr = dt.slice(0, 2);
