@@ -1715,6 +1715,20 @@ section {
 # Blog
 --------------------------------------------------------------*/
 
+#fv-dots ul li a span {
+  background-color: #ddd;
+  transition: 0.2s ease-in-out all;
+  width: 6px;
+  height: 6px;
+}
+
+#fv-dots ul a.active span {
+  background-color: #173549 !important;
+}
+
+#fv-dots ul li {
+  padding: 6px;
+}
 
 .blog .entry {
   padding: 30px;
@@ -2157,7 +2171,7 @@ section {
 }
 
 .blog .sidebar .recent-posts img {
-  width: 80px;
+  width: 40px;
   float: left;
 }
 

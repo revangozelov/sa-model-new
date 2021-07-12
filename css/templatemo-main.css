@@ -151,6 +151,8 @@ a:hover { color: #FF0; }
   margin-top: 3%;
   background-size: cover;
   position: relative;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 
@@ -318,6 +320,8 @@ h4, .h4 {
   min-height: 100vh;
   background-size: cover;
   background-position: center center;
+  display: table-cell;
+  vertical-align: middle;
 }
 .tabs-content img ,.service-content img {
   width: 80%;
@@ -453,6 +457,9 @@ section {
   .service-content {
     padding-top: 5vh;
     text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    
   }
 
   .service-content .left-text .line-dec {

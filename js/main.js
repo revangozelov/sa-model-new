@@ -3,62 +3,7 @@
 var UrlQb = "https://app.sourcedagile.com/";
 
 
-$(document).ready(function() {
-  // --- VARIABLES
-  var fullAnimation = false;
-  var currentSlide = 0;
-  var lastSlide = $('.panel').length - 1;
-  var scrollDirection = "";
 
-  // --- FUNCTIONS
-  function slidePage(scrollDirection, currentSlide) {
-      fullAnimation = false;
-      if(scrollDirection == "down") {
-          $('.current-slide-animating').toggleClass('current-slide-animating prev-slide');
-          $('.panel').eq(currentSlide - 1).addClass('prev-slide');
-          if(currentSlide != lastSlide) {
-              $('.panel').eq(currentSlide + 1).addClass('next-slide');
-          }
-      } else {
-          $('.current-slide-animating').toggleClass('current-slide-animating next-slide');
-          $('.panel').eq(currentSlide + 1).addClass('next-slide');
-          if(currentSlide != 0) {
-              $('.panel').eq(currentSlide - 1).addClass('prev-slide');
-          }
-      } 
-  }
-
-  // --- EVENTS
-  $(window).bind('mousewheel', function(event) {
-      scrollDirection = event.originalEvent.wheelDelta > 0 ? "up" : "down";
-      if(fullAnimation == false) {
-          // if scroll down
-          if(currentSlide != lastSlide && scrollDirection == "down") {
-              fullAnimation = true;
-              currentSlide += 1;
-              $('.current-slide').toggleClass('current-slide current-slide-animating')
-              $('.next-slide').toggleClass('next-slide current-slide');
-              $('.panel.prev-slide').removeClass('prev-slide');
-              $('.panel.next-slide').removeClass('next-slide');
-              setTimeout(function() {
-                  slidePage(scrollDirection, currentSlide)
-              }, 600);
-          }
-          // if scroll up
-          if(currentSlide != 0 && scrollDirection == "up") {
-              fullAnimation = true;
-              currentSlide -= 1;
-              $('.current-slide').toggleClass('current-slide current-slide-animating')
-              $('.prev-slide').toggleClass('prev-slide current-slide');
-              $('.panel.prev-slide').removeClass('prev-slide');
-              $('.panel.next-slide').removeClass('next-slide');
-              setTimeout(function() {
-                  slidePage(scrollDirection, currentSlide)
-              }, 600);
-          }
-      }
-  });
-});
 function convertStDate(dt) {
 
 	var arr = dt.slice(0, 4);
@@ -97,7 +42,7 @@ $(document).on("click","#button-message-sub", function(){
     success: function (data, status, jqXHR) {
 
 
-      alert("Mesaj Gonderildi");
+      alert("Message Sended");
     }
   })
 
@@ -257,23 +202,23 @@ genEventsList();
 $(document).ready(function($) {
 
 	'use strict';
-
-  /*   var top_header = $('.parallax-content');
+/* 
+     var top_header = $('.parallax-content');
     top_header.css({'background-position':'center center'}); // better use CSS
 
     $(window).scroll(function () {
     var st = $(this).scrollTop();
     top_header.css({'background-position':'center calc(50% + '+(st*.5)+'px)'});
     });
- */
+ 
 
     $('body').scrollspy({ 
         target: '.fixed-side-navbar',
         offset: 200
-    });
+    }); */
       
       // smoothscroll on sidenav click
-
+/* 
     $('.tabgroup > div').hide();
         $('.tabgroup > div:first-of-type').show();
         $('.tabs a').click(function(e){
@@ -288,7 +233,7 @@ $(document).ready(function($) {
         $(target).show();
       
     })
-
+ */
    
 
 
@@ -304,3 +249,20 @@ $.fn.scrollEnd = function(callback, timeout) {
   });
 };
 
+
+$(document).ready(function () {
+  $(".landModeCl").fullView({
+    //Navigation
+    navbar: "#navbar",
+    backToTop: true,
+
+    // Callback
+    onScrollEnd: function (currentView) {
+      if (!currentView.hasClass("nav-transparent")) {
+        $(".header").addClass("changed");
+      } else {
+        $(".header").removeClass("changed");
+      }
+    }
+  });
+});

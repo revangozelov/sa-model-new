@@ -61,6 +61,23 @@ var UrlQb = "https://app.sourcedagile.com/";
      
 
       }
+      if (alte === 'sourcedModelOver1') {
+        $('#blog').show();
+
+        
+        var subdt = getUrlParameter('sub_sect1');
+        genSectionBlockGen1();
+        if(subdt===false){
+        
+          
+        }else{
+
+           
+          genSectionSingle1(subdt);
+        }
+     
+
+      }
       if (alte === 'systemSkils') {
         $('#skilss').show();
 
@@ -381,14 +398,15 @@ function addGenSectList(id,nm,img,desct){
   return `
   <article class="entry" id='${id}'>
 
-  <div class="entry-img">
-    <img src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" class="img-fluid">
-  </div>
-
-  <h2 class="entry-title">
+  <div class="row col-lg-12">
+    <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" class="col-lg-4 img-fluid">
+    <h2 class="entry-title col-lg-6">
     <a href="">${nm}</a>
   </h2>
-  <div class="entry-content">
+  </div>
+
+ 
+  <div class="entry-content col-lg-12">
     ${desct}
   </div>
 
@@ -424,6 +442,55 @@ function genSectionBlockGen() {
 
 
             var subdt = getUrlParameter('sub_sect');
+
+
+            if(subdt=== false){
+
+              $("#sidebarsection").children().first().click();
+
+            }else{
+              $("#sidebarsection").find('#'+subdt).css("background",'aliceblue');
+            }
+            
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+function genSectionBlockGen1() {
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getModelRoleList4Web",
+    data: JSON.stringify(), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var sctnm = dat[index].roleName
+     
+
+
+        $('#sidebarsection')
+          .append($("<div>").attr('id', idSld)
+            .addClass('post-item1 clearfix')
+            .append('<img width="20px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+            .append('<h4><a href="#">'+sctnm+'</a></h4>'))
+
+
+
+            var subdt = getUrlParameter('sub_sect1');
 
 
             if(subdt=== false){
@@ -518,6 +585,51 @@ function genSectionSingle(id) {
         var imgSld = dat[index].logo
         var sctnm = dat[index].sectionName
         var dsc = dat[index].sectionFullDesc
+     
+
+
+        $('#entries-model')
+          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+
+
+
+      }
+
+
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+function genSectionSingle1(id) {
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getModelRoleList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+  
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var sctnm = dat[index].roleName
+        var dsc = dat[index].roleFullDesc
      
 
 
@@ -672,6 +784,15 @@ $(document).on("click", ".post-item", function () {
 
   genSectionSingle(id)
   insertParam("sub_sect", id)
+
+})
+$(document).on("click", ".post-item1", function () {
+
+  var id = $(this).attr('id');
+  
+
+  genSectionSingle1(id)
+  insertParam("sub_sect1", id)
 
 })
 $(document).on("click", ".feature-item", function () {
