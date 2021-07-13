@@ -48,7 +48,7 @@ var UrlQb = "https://app.sourcedagile.com/";
       if (alte === 'sourcedModelOver') {
         $('#blog').show();
 
-        
+        $(".trig-header").text("Sourced Agile Model Zones")
         var subdt = getUrlParameter('sub_sect');
         genSectionBlockGen();
         if(subdt===false){
@@ -73,7 +73,7 @@ var UrlQb = "https://app.sourcedagile.com/";
       if (alte === 'sourcedModelOver1') {
         $('#blog').show();
 
-        
+        $(".trig-header").text("Sourced Agile Model Roles")
         var subdt = getUrlParameter('sub_sect1');
         genSectionBlockGen1();
         if(subdt===false){
@@ -535,7 +535,7 @@ function addGenSectList(id,nm,img,desct){
   <article class="entry" id='${id}'>
 
   <div class="row col-lg-12">
-    <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" class="col-lg-4 img-fluid">
+    <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" class="col-lg-2 img-fluid">
     <h2 class="entry-title col-lg-6">
     <a href="">${nm}</a>
   </h2>
@@ -621,7 +621,7 @@ function genSectionBlockGen1() {
         $('#sidebarsection')
           .append($("<div>").attr('id', idSld)
             .addClass('post-item1 clearfix')
-            .append('<img width="20px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+            .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
             .append('<h4><a href="#">'+sctnm+'</a></h4>'))
 
 

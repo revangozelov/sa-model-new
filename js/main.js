@@ -1,6 +1,27 @@
 
 
 var UrlQb = "https://app.sourcedagile.com/";
+/**
+   * Easy selector helper function
+   */
+ const select = (el, all = false) => {
+  el = el.trim()
+  if (all) {
+    return [...document.querySelectorAll(el)]
+  } else {
+    try {
+      return document.querySelector(el)
+    } catch (err) {
+
+    }
+
+  }
+}
+$(document).on('click', '.mobile-nav-toggle', function (e) {
+  select('#navbar').classList.toggle('navbar-mobile')
+  this.classList.toggle('bi-list')
+  this.classList.toggle('bi-x')
+})
 
 
 
@@ -259,7 +280,6 @@ $(document).ready(function () {
   $(".landModeCl").fullView({
     //Navigation
     navbar: "#navbar",
-    backToTop: true,
     dotsTooltips: true,
 
     // Callback

@@ -2149,19 +2149,19 @@ section {
   font-size: 14px;
 }
 
-.blog .sidebar .recent-posts .post-item + .post-item {
-  margin-top: 15px;
-}
+
 .blog .sidebar .recent-posts .post-item {
   padding: 5px;
   border-radius: 6px;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
 }
-.blog .sidebar .recent-posts .post-item1 + .post-item1 {
-  margin-top: 15px;
-}
+
 .blog .sidebar .recent-posts .post-item1 {
   padding: 5px;
   border-radius: 6px;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
 }
 #skilss-list-ul li{
 
@@ -2170,13 +2170,14 @@ section {
 }
 
 .blog .sidebar .recent-posts img {
-  width: 40px;
+  height: 60px;
+  max-width: 60px;
   float: left;
 }
 
 .blog .sidebar .recent-posts h4 {
   font-size: 15px;
-  margin-left: 95px;
+  margin-left: 60px;
   font-weight: bold;
 }
 
