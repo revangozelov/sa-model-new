@@ -4,6 +4,13 @@ var UrlQb = "https://app.sourcedagile.com/";
 /**
    * Easy selector helper function
    */
+    /**
+   * Easy on scroll event listener 
+   */
+     const onscroll = (el, listener) => {
+      el.addEventListener('scroll', listener)
+    }
+  
  const select = (el, all = false) => {
   el = el.trim()
   if (all) {
@@ -17,6 +24,19 @@ var UrlQb = "https://app.sourcedagile.com/";
 
   }
 }
+let backtotop = select('.back-to-top')
+if (backtotop) {
+  const toggleBacktotop = () => {
+    if (window.scrollY > 100) {
+      backtotop.classList.add('active')
+    } else {
+      backtotop.classList.remove('active')
+    }
+  }
+  window.addEventListener('load', toggleBacktotop)
+  onscroll(document, toggleBacktotop)
+}
+
 $(document).on('click', '.mobile-nav-toggle', function (e) {
   select('#navbar').classList.toggle('navbar-mobile')
   this.classList.toggle('bi-list')
@@ -281,7 +301,7 @@ $(document).ready(function () {
     //Navigation
     navbar: "#navbar",
     dotsTooltips: true,
-
+    speed: 100,
     // Callback
     onScrollEnd: function (currentView) {
       if (!currentView.hasClass("nav-transparent")) {

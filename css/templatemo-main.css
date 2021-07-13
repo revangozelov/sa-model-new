@@ -1,36 +1,37 @@
-
+/* Override Styles */
 #fv-dots ul li a span {
-  background-color: #ddd;
-  transition: 0.2s ease-in-out all;
-  width: 6px;
-  height: 6px;
+  background-color: #888888;
+  border-radius: 0;
+  transition: all 0.5s ease;
 }
 
 #fv-dots ul a.active span {
-  background-color: #173549 !important;
+  width: 11px;
+  height: 11px;
+  transform: rotate(45deg);
+  background-color: #bdbdbd;
 }
-
-#fv-dots ul li {
-  padding: 6px;
-}
-
 
 section {
   padding: 10vh 0 35px;
   background: #fff;
 }
+
 footer {
   padding: 10vh 0 35px !important;
 
 }
-.navbar a, .navbar a:focus {
- 
- padding: .5rem 1rem !important; 
+
+.navbar a,
+.navbar a:focus {
+
+  padding: .5rem 1rem !important;
 
 
 }
-.section-header{
-padding-bottom: 20px !important;
+
+.section-header {
+  padding-bottom: 20px !important;
 }
 
 .service-content {
@@ -38,54 +39,59 @@ padding-bottom: 20px !important;
   padding-right: 15px;
   padding-top: 10vh;
 
-  background-repeat: no-repeat ;
- text-align: center;
+  background-repeat: no-repeat;
+  text-align: center;
 
 
 }
-.service-content img  {
- 
+
+.service-content img {
+
   width: 80%;
   margin: auto;
 
 }
 
 #warning-message {
-  
+
   text-align: center;
   display: none;
 
 }
-#warning-message img, #warning-message span {
-  
-  margin: auto;
-    justify-content: center;
-    display: block;
-    margin-top: 50%;
-}
+
+#warning-message img,
 #warning-message span {
-  
+
   margin: auto;
-    justify-content: center;
-    display: block;
-  
+  justify-content: center;
+  display: block;
+  margin-top: 50%;
 }
 
-@media only screen and (orientation:portrait){
-  .service-content img  {
- 
-   transform: rotate(90deg);
-  
+#warning-message span {
+
+  margin: auto;
+  justify-content: center;
+  display: block;
+
+}
+
+@media only screen and (orientation:portrait) {
+  .service-content {
+
+    
+
   }
 }
-@media only screen and (orientation:landscape){
-    #warning-message { display:none; }
+
+@media only screen and (orientation:landscape) {
+  #warning-message {
+    display: none;
+  }
 }
 
-@media (max-width: 767px){
-  
+@media (max-width: 767px) {
 
-  
 
   .service-content {
     padding-top: 5vh;
@@ -95,14 +101,11 @@ padding-bottom: 20px !important;
   }
 
   .service-content img {
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    position: absolute;
+    transform: rotate(90deg);
 
   }
 
- 
+
 
 }
 
@@ -111,5 +114,3 @@ padding-bottom: 20px !important;
     max-width: 1170px;
   }
 }
-
-

@@ -724,6 +724,8 @@ function genSectionSingle(id) {
      
 
 
+         
+        $('#entries-model').empty();
         $('#entries-model')
           .append(addGenSectList(idSld,sctnm,imgSld,dsc))
 
@@ -769,6 +771,7 @@ function genSectionSingle1(id) {
      
 
 
+        $('#entries-model').empty();
         $('#entries-model')
           .append(addGenSectList(idSld,sctnm,imgSld,dsc))
 
@@ -816,6 +819,7 @@ function genFeatureSingle(id) {
 
        if(stat === "A"){
 
+        $('#entries-skilss').empty();
         $('#entries-skilss')
           .append(addGenSectList(idSld,sctnm,imgSld,dsc))
 
@@ -842,6 +846,7 @@ function genCertificationBlock14() {
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
+      $('#certificatie-block').empty();
       $('#certificatie-block').append($("<div>").addClass('dropMenuListCert'))
 
       for (let index = 0; index < dat.length; index++) {
@@ -854,6 +859,7 @@ function genCertificationBlock14() {
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
        
+        
         $('#certificatie-block')
           .append($("<div>").attr('id', idSld)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index).css('order', orn)
@@ -904,6 +910,15 @@ $(document).on("click", "#sub_certification", function () {
   insertParam("sub_cert", id)
 
 })
+$(document).on("click", "#back_certififcationlist", function () {
+
+  var id = $(this).attr('pid');
+  
+
+  genCertificationBlock14();
+  insertParam("point", "certificate");
+
+})
 $(document).on("click", "#training_dest", function () {
 
   var id = $(this).attr('pid');
@@ -916,8 +931,8 @@ $(document).on("click", "#training_dest", function () {
 $(document).on("click", ".post-item", function () {
 
   var id = $(this).attr('id');
-  
-
+  $(".post-item").css("background","white");
+  $(this).css("background","aliceblue");
   genSectionSingle(id)
   insertParam("sub_sect", id)
 
@@ -925,7 +940,8 @@ $(document).on("click", ".post-item", function () {
 $(document).on("click", ".post-item1", function () {
 
   var id = $(this).attr('id');
-  
+  $(".post-item1").css("background","white");
+  $(this).css("background","aliceblue");
 
   genSectionSingle1(id)
   insertParam("sub_sect1", id)
@@ -1012,18 +1028,21 @@ function getSingleSerc(id) {
 
       var dat = data.tbl[0].r
 
-    console.log(data);
+   
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
         var desct = dat[index].description;
         var lgo = dat[index].logo;
         var crtnm = dat[index].certificationName;
       
-        
+        $('#certificatie-block').empty();
         $('#certificatie-block').append(
           $("<div>").addClass("col-lg-5")
           .append($("<div>").attr('id', idSld).append('<img class="" width="100%" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
-          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')))
+          .append($("<div>").addClass("text-center").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')
+          .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a> <br>')
+          .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a><br>')
+          .append(' <a href="#" id="back_certififcationlist" pid='+idSld+' class="read-more"><span>Back To Certififcation List</span> <i class="bi bi-arrow-left"></i></a>')))
           .append($("<div>").addClass("col-lg-7").attr('id', idSld).append(desct))
 
 
@@ -1047,7 +1066,7 @@ function getSingleTraining(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationTrainingInfo",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -1065,7 +1084,10 @@ function getSingleTraining(id) {
       
         
         $('#certificatie-block')
-          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>'))
+          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')
+          .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
+          .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
+          .append(' <a href="#" id="sub_certification" pid='+idSld+' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>'))
           .append($("<div>").attr('id', idSld).append('<img class="col-lg-4" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
           .append($("<div>").attr('id', idSld).append(desct))
 
@@ -1080,31 +1102,9 @@ function getSingleTraining(id) {
 
 }
 
-function insertParam(key, value) {
-  key = encodeURIComponent(key);
-  value = encodeURIComponent(value);
-
-  // kvp looks like ['key1=value1', 'key2=value2', ...]
-  var kvp = document.location.search.substr(1).split('&');
-  let i=0;
-
-  for(; i<kvp.length; i++){
-      if (kvp[i].startsWith(key + '=')) {
-          let pair = kvp[i].split('=');
-          pair[1] = value;
-          kvp[i] = pair.join('=');
-          break;
-      }
-  }
-
-  if(i >= kvp.length){
-      kvp[kvp.length] = [key,value].join('=');
-  }
-
-  // can return this or...
-  let params = kvp.join('&');
-
-  // reload page with new params
-  document.location.search = params;
+function insertParam(name, value) {
+  const params = new URLSearchParams(window.location.search);
+  params.set(name, value);
+  window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
 }
 
