@@ -251,6 +251,11 @@ $.fn.scrollEnd = function(callback, timeout) {
 
 
 $(document).ready(function () {
+  $(document).on("click",'.fv-tooltiptext', function(){
+
+
+    $(this).parent().find("a").click();
+  })
   $(".landModeCl").fullView({
     //Navigation
     navbar: "#navbar",

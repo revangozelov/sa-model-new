@@ -20,8 +20,12 @@ p {
 }
 
 section {
-  padding: 25px 0 35px;
+  padding: 15vh 0 35px;
   background: #fff;
+}
+footer {
+  padding: 15vh 0 35px !important;
+
 }
 
 body { 
@@ -472,8 +476,15 @@ section {
   .service-content {
     padding-top: 5vh;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+    position: relative;
+
+  }
+
+  .service-content img {
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
 
   }
 
