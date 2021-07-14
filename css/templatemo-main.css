@@ -77,15 +77,19 @@ footer {
 }
 
 @media only screen and (orientation:portrait) {
-  .service-content {
-
-    
-
+  .img-none-rotate {
+    display: none;
+  }
+  .img-rotate {
+    display: block;
   }
 }
 
 @media only screen and (orientation:landscape) {
-  #warning-message {
+  .img-none-rotate {
+    display: block;
+  }
+  .img-rotate {
     display: none;
   }
 }
@@ -94,18 +98,25 @@ footer {
 
 
   .service-content {
-    padding-top: 5vh;
+    padding-top: 15vh;
     text-align: center;
     position: relative;
 
   }
-
+  .header {
+   
+    padding: 5px 0;
+    
+}
   .service-content img {
-    transform: rotate(90deg);
 
+    height: 70%;
   }
 
-
+  .header .logo img {
+    max-height: 20px;
+    margin-right: 6px;
+}
 
 }
 

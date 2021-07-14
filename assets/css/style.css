@@ -2169,8 +2169,13 @@ section {
 
 }
 
-.blog .sidebar .recent-posts img {
+.blog .sidebar .recent-posts .post-item1 img {
   height: 60px;
+  max-width: 60px;
+  float: left;
+}
+.blog .sidebar .recent-posts .post-item img {
+
   max-width: 60px;
   float: left;
 }
