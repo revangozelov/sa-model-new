@@ -456,16 +456,47 @@ function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
     crossDomain: true,
     dataType: "json",
     success: function (data, status, jqXHR) {
-
+ 
+     
       var dat = data.tbl[0].r
         var logo = dat[0].logo
       
         $("#certificatie-block").hide()
         $("#certificatie-block1").show()
       $("#certificatie-block1").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
+  
+     
 
-   
+    }
+  })
 
+
+}
+function getCertificationEventList(fkId,id,header,lng,strtm,endtm) {
+
+  var ts = {
+    "kv": {
+      "id": fkId
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+ 
+     
+      var dat = data.tbl[0].r
+        var logo = dat[0].logo
+      
+ 
+      $('#cert-event-list').append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
+     
 
     }
   })
@@ -1130,6 +1161,7 @@ function getSingleSerc(id) {
 }
 function genSertfifcationBlokLarge(id){
   getSingleTraining(id);
+  getSingleEventListApply(id);
   getSingleSerc(id);
   var alte = getUrlParameter("section-tab");
 
@@ -1182,6 +1214,55 @@ function getSingleTraining(id) {
        
       }
 
+
+    }
+  })
+
+
+}
+function getSingleEventListApply(id) {
+
+  var ts = {
+    "kv": {
+      "fkCertificationId": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+        
+         
+     
+      for (let index = 0; index < dat.length; index++) {
+        var id = dat[index].id
+        var fkId = dat[index].fkCertificationId
+        var header = dat[index].eventTitle
+        var lng = dat[index].eventLang
+        var stst = dat[index].eventStatus
+        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
+ 
+        var dl = lang.find(x => x.key === lng).value;
+        
+    
+        if(stst === "A"){
+         
+          getCertificationEventList(fkId,id,header,dl,strtm,endtm)
+        }
+
+        
+
+
+      }
 
     }
   })
