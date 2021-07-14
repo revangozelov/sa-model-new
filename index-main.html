@@ -50,11 +50,14 @@
          
               <li><a href="index-main.html?&point=certificate">Certifications and Trainings</a></li>
               <li><a href="index-main.html?&point=systemSkils">Sourced Agile System</a></li>
+              
           
             </ul>
           </li>   
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="https://app.sourcedagile.com/login.html">Login</a></li>
+      
+          <li><a class=" nav-link" href="https://app.sourcedagile.com/login.html">System Login</a></li>
+          
+          <li><a href="" class="nav-link"><button class=" btn btn-info ">My Account</button></a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -66,7 +69,7 @@
   <main id="main">
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services" style="display: none; overflow: visible;">
+    <section id="services" class="services" style=" display: none; overflow: visible;">
 
       <div class="container" data-aos="fade-up">
 
@@ -75,12 +78,52 @@
           <p>Certifications and Trainings</p>
         </header>
 
-        <div id="certificatie-block" class="row gy-4">
+        <div id="certificatie-block" class="row gy-4" style="display: none;">
 
-      
+          <div class="col-lg-3  text-center">
+
+            <img width="100%" src="" id="certification-image-single" alt="">
+            <h3 id="cert-name-single" class="col-lg-12 text-center"> Certification Name</h3>
+            <a href="#" id="back_certififcationlist"  class="read-more"><span>Back To Certififcation List</span> <i class="bi bi-arrow-left"></i></a>
+           <br> <a href="#" id="event-list-back"  class="read-more"><span>Events List</span> <i class="bi bi-arrow-left"></i></a>
+          </div>
+          <div  class="cstmtab right-side col-md-9 col-sm-12 col-lg-9">
+
+            <div class="nav nav_custom_profile">
+              <ul>
+                <li value="0" class="cert-desct active">Certifications</li>
+                <li value="1"  class="train-desct user-setting">Trainings</li>
+                <li value="2" class=" apply-cert user-setting">Apply</li>
+            
+              </ul>
+            </div>
+            <div class="profile-body">
+              <div class="profile-history tab">
+                <div class="certifications-desct">
+          
+                </div>
+              </div>
+              <div class="profile-posts tab">
+                <div class="training-full-desct container Trainings">
+
+                </div>
+              </div>
+         
+              <div class="profile-settings tab">
+                <div class="Apply-block">
+            
+              
+                </div>
+              </div>
+           
+            </div>
+          </div>
 
         </div>
 
+          <div id="certificatie-block1" class="row gy-4" style="display: none;">
+
+          </div>
       </div>
 
     </section><!-- End Services Section -->
@@ -97,7 +140,7 @@
 
             <div  class="sidebar">
 
-              <h3 class="sidebar-title">Model List</h3>
+           
               <div id="sidebarsection" class="sidebar-item recent-posts">
               
                
@@ -148,6 +191,49 @@
       </div>
     </section>
 
+<!-- Modal -->
+<div class="modal fade" id="applEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apply Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="eventNameAplly"></h5>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Name:</label>
+          <input type="text" class="form-control" id="recipient-name">
+        </div>
+        <div class="form-group">
+          <label for="recipient-surname" class="col-form-label">Surname:</label>
+          <input type="text" class="form-control" id="recipient-surname">
+        </div>
+        <div class="form-group">
+          <label for="recipient-email" class="col-form-label">Email:</label>
+          <input type="email" class="form-control" id="recipient-email">
+        </div>
+        <div class="form-group">
+          <label for="recipient-number" class="col-form-label">Number:</label>
+          <input type="number" class="form-control" id="recipient-number">
+        </div>
+        <div class="form-group">
+          <label for="message-text" class="col-form-label">Message:</label>
+          <textarea class="form-control" id="recipient-message"></textarea>
+        </div>
+
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="send-request">Send Request</button>
+      </div>
+    </div>
+  </div>
+</div>
   
 
   </main><!-- End #main -->

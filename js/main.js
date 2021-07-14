@@ -130,7 +130,7 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
       var dat = data.tbl[0].r
         var logo = dat[0].logo
    
-      $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm));
+      $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
 
       new Swiper('.testimonials-slider', {
         speed: 600,
@@ -166,7 +166,7 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
 }
 
 
-function genEventListBlock(id,logo,header,lng,strtm,endtm){
+function genEventListBlock(id,logo,header,lng,strtm,endtm,certId){
   return  ` <div id='${id}' class="swiper-slide">
   <div class="testimonial-item">
   <div class="profile mt-auto">
@@ -178,7 +178,11 @@ function genEventListBlock(id,logo,header,lng,strtm,endtm){
     Language ${lng}
     </p>
 
-    <a class="getstarted scrollto" href="https://app.sourcedagile.com/login.html">Join</a>
+    <a class="getstarted scrollto" id='event-apply-btn' href="">Apply</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=train">Training</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=cert">Certification</a>
         
   </div>
 </div>`
@@ -220,6 +224,7 @@ function genEventsList(){
         
 
         if(stst === "A"){
+     
           getSingleSerc(fkId,id,header,dl,strtm,endtm)
         }
 

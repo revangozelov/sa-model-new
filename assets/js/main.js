@@ -14,10 +14,33 @@ var getUrlParameter = function getUrlParameter(sParam) {
   }
   return false;
 };
+$(".cstmtab .nav ul li").click(function () {
+  $(this)
+    .addClass("active")
+    .siblings()
+    .removeClass("active");
+
+  let vale = $(this).val()
+  tabs(vale);
+
+});
+
+
+const tab = document.querySelectorAll(".tab");
+
+function tabs(panelIndex) {
+  tab.forEach(function (node) {
+    node.style.display = "none";
+  });
+  $(tab[panelIndex]).css('display', 'block');
+
+}
+tabs(0); 
 
 var UrlQb = "https://app.sourcedagile.com/";
 (function () {
 
+  
     var alte = getUrlParameter("point");
 
 
@@ -30,16 +53,10 @@ var UrlQb = "https://app.sourcedagile.com/";
 
           if(subdt===false){
 
-            var subdt2 = getUrlParameter('sub_training');
-
-
-            if(subdt2===false){
-              genCertificationBlock14()
-            }else{
-              getSingleTraining(subdt);
-            }
+            genCertificationBlock14()
+            
           }else{
-            getSingleSerc(subdt);
+            genSertfifcationBlokLarge(subdt);
           }
       
         
@@ -442,8 +459,10 @@ function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
 
       var dat = data.tbl[0].r
         var logo = dat[0].logo
-   
-      $("#certificatie-block").append(genEventListBlock(id,logo,header,lng,strtm,endtm));
+      
+        $("#certificatie-block").hide()
+        $("#certificatie-block1").show()
+      $("#certificatie-block1").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
 
    
 
@@ -455,7 +474,7 @@ function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
 }
 
 
-function genEventListBlock(id,logo,header,lng,strtm,endtm){
+function genEventListBlock(id,logo,header,lng,strtm,endtm,certId){
   return  ` <div id='${id}' class=" col-lg-4 col-md-6">
   <div class="testimonial-item">
   <div class="profile mt-auto">
@@ -467,7 +486,11 @@ function genEventListBlock(id,logo,header,lng,strtm,endtm){
     Language ${lng}
     </p>
 
-    <a class="getstarted scrollto" href="https://app.sourcedagile.com/login.html">Join</a>
+    <a class="getstarted scrollto" id='event-apply-btn' href="#">Apply</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=train">Training</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=cert">Certification</a>
         
   </div>
 </div>`
@@ -496,6 +519,7 @@ function genEventsList2(){
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
       
+      $("#certificatie-block1").empty();
       for (let index = 0; index < dat.length; index++) {
         var id = dat[index].id
         var fkId = dat[index].fkCertificationId
@@ -507,7 +531,7 @@ function genEventsList2(){
  
         var dl = lang.find(x => x.key === lng).value;
         
-
+        console.log("asds");
         if(stst === "A"){
          
           getSingleEvent(fkId,id,header,dl,strtm,endtm)
@@ -846,8 +870,10 @@ function genCertificationBlock14() {
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
-      $('#certificatie-block').empty();
-      $('#certificatie-block').append($("<div>").addClass('dropMenuListCert'))
+      $('#certificatie-block').css("display","none");
+      $('#certificatie-block1').show();
+      $('#certificatie-block1').empty();
+      $('#certificatie-block1').append($("<div>").addClass('dropMenuListCert'))
 
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
@@ -860,11 +886,11 @@ function genCertificationBlock14() {
 
        
         
-        $('#certificatie-block')
+        $('#certificatie-block1')
           .append($("<div>").attr('id', idSld)
-            .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index).css('order', orn)
+            .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').css('order', orn)
             .append($("<div>")
-              .addClass('service-box ' + rand)
+              .addClass('service-box service-box-list ' + rand)
               .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
             ))
 
@@ -881,7 +907,48 @@ function genCertificationBlock14() {
   });
 }
 
-$(document).on("click", ".service-box", function (e) {
+$(document).on("click", "#event-list-back", function (e) {
+
+  genEventsList2()
+
+})
+
+$(document).on("click", "#event-apply-btn", function (e) {
+var evntNm = $(this).parents(".testimonial-item").find("h3").text();
+var evntId = $(this).parents(".testimonial-item").parent().attr("id");
+
+   $(".eventNameAplly").text("Event Name:"+evntNm);
+   $(".eventNameAplly").attr("id",evntId);
+
+  $("#applEventModal").modal("show");
+
+
+
+})
+$(document).on("click", "#send-request", function (e) {
+    
+     var nm = $("#recipient-name").val();
+     var eml = $("#recipient-email").val();
+     var nmbr = $("#recipient-number").val();
+     var mesg = $("#recipient-message").val();
+     var srnm = $("#recipient-surname").val();
+     var id = $(".eventNameAplly").attr("id");
+
+
+     if(nm.trim().length >2 && eml.trim().length >2 &&nmbr.trim().length >2 && mesg.trim().length >2 && srnm.trim().length> 2){
+
+      sendRequestEventApply(nm,eml,srnm,mesg,id,nmbr);
+
+     }else{
+
+      alert("Fill in all the fields")
+
+     }
+   
+   
+
+})
+$(document).on("click", ".service-box-list", function (e) {
 
   e.stopPropagation();
   var id = $(this).parent().attr('id');
@@ -903,10 +970,10 @@ $(document).on("click", "body", function () {
 })
 $(document).on("click", "#sub_certification", function () {
 
-  var id = $(this).parent().parent().attr('id');
+  var id = $(this).attr('pid');
   
-
-  getSingleSerc(id);
+  insertParam("section-tab", "cert"); 
+  genSertfifcationBlokLarge(id)
   insertParam("sub_cert", id)
 
 })
@@ -919,13 +986,20 @@ $(document).on("click", "#back_certififcationlist", function () {
   insertParam("point", "certificate");
 
 })
-$(document).on("click", "#training_dest", function () {
+$(document).on("click", "#training_dest_mini", function () {
 
   var id = $(this).attr('pid');
-  
+  insertParam("section-tab", "train"); 
+  genSertfifcationBlokLarge(id);
+  insertParam("sub_cert", id)
 
-  getSingleTraining(id);
-  insertParam("sub_training", id)
+})
+$(document).on("click", "#apply_dest", function () {
+
+  var id = $(this).attr('pid');
+  insertParam("section-tab", "apply"); 
+  genSertfifcationBlokLarge(id);
+  insertParam("sub_cert", id);
 
 })
 $(document).on("click", ".post-item", function () {
@@ -950,6 +1024,9 @@ $(document).on("click", ".post-item1", function () {
 $(document).on("click", ".feature-item", function () {
 
   var id = $(this).attr('id');
+
+  $(".feature-item").removeClass("active");
+  $(this).addClass("active");
 
   genFeatureSingle(id)
   insertParam("sub_future", id)
@@ -992,7 +1069,7 @@ function getGroupInside(id) {
             .append($("<div>")
               .addClass('service-box ' + rand)
               .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-              .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
+              .append(' <a href="#" id="training_dest_mini" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
               .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
               .append(' <a href="#" id="sub_certification" pid='+idSld+' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
             ))
@@ -1027,7 +1104,8 @@ function getSingleSerc(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-
+      $('#certificatie-block1').hide();
+      $('#certificatie-block').show();
    
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
@@ -1035,17 +1113,12 @@ function getSingleSerc(id) {
         var lgo = dat[index].logo;
         var crtnm = dat[index].certificationName;
       
-        $('#certificatie-block').empty();
-        $('#certificatie-block').append(
-          $("<div>").addClass("col-lg-5")
-          .append($("<div>").attr('id', idSld).append('<img class="" width="100%" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
-          .append($("<div>").addClass("text-center").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')
-          .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a> <br>')
-          .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a><br>')
-          .append(' <a href="#" id="back_certififcationlist" pid='+idSld+' class="read-more"><span>Back To Certififcation List</span> <i class="bi bi-arrow-left"></i></a>')))
-          .append($("<div>").addClass("col-lg-7").attr('id', idSld).append(desct))
 
-
+        $("#certification-image-single").attr("src",UrlQb + 'api/get/zdfiles/traininghub/' + lgo)
+        $("#cert-name-single").text(crtnm);
+        $('#certificatie-block').attr("pid",idSld);
+        $(".certifications-desct").html(desct);
+     
 
       }
 
@@ -1054,6 +1127,29 @@ function getSingleSerc(id) {
   })
 
 
+}
+function genSertfifcationBlokLarge(id){
+  getSingleTraining(id);
+  getSingleSerc(id);
+  var alte = getUrlParameter("section-tab");
+
+
+
+  if (alte === 'train') {
+      $(".train-desct").click();
+   
+
+  }
+  if (alte === 'cert') {
+      $(".cert-desct").click();
+   
+
+  }
+  if (alte === 'apply') {
+      $(".apply-cert").click();
+   
+
+  }
 }
 function getSingleTraining(id) {
 
@@ -1075,24 +1171,15 @@ function getSingleTraining(id) {
 
       var dat = data.tbl[0].r
 
-    
+  
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
-        var desct = dat[index].description;
-        var lgo = dat[index].logo;
-        var crtnm = dat[index].certificationName;
+        var crtnm = dat[index].trainingDescription;
       
         
-        $('#certificatie-block')
-          .append($("<div>").append('<h3 class="col-lg-12 text-center">'+crtnm+'</h3>')
-          .append(' <a href="#" id="training_dest" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
-          .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
-          .append(' <a href="#" id="sub_certification" pid='+idSld+' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>'))
-          .append($("<div>").attr('id', idSld).append('<img class="col-lg-4" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + lgo + '" alt="">'))
-          .append($("<div>").attr('id', idSld).append(desct))
-
-
-
+         $('.training-full-desct').append(crtnm).attr("id",idSld);
+        
+       
       }
 
 
@@ -1101,7 +1188,42 @@ function getSingleTraining(id) {
 
 
 }
+function sendRequestEventApply(nm,eml,srnm,msg,id,nmbr){
+  var ts = {
+  
+      "kv":{
+          "applierSurname":srnm,
+          "fkEventsId": id,
+          "applierEmail":eml,
+          "applierMessage":msg,
+          "applierMobile":nmbr,
+          "applierName":nm
+      }
 
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/cl/traininghub/createApplyForEvent",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      
+      $("#recipient-name").val();
+      $("#recipient-email").val();
+     $("#recipient-number").val();
+      $("#recipient-message").val();
+      $("#recipient-surname").val();
+      $("#applEventModal").modal("hide");
+      alert("Send Request Succesfuly");
+    }
+  })
+
+
+}
 function insertParam(name, value) {
   const params = new URLSearchParams(window.location.search);
   params.set(name, value);
