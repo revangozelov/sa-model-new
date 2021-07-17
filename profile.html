@@ -1,0 +1,401 @@
+<div class="padFullBody" style="margin-top: 100px;">
+
+ 
+   <div class="container profile_container">
+     <div class="profile-header">
+       <div class="profile-img">
+ 
+         <img src="img/userprofile.png" width="200" id="profile_picture_img" alt="Profile Image">
+         <div class="upload-btn-wrapper">
+           <button class="btn">Change Image</button>
+           <form>
+             <input type="file" id="profile_change" name="myfile" />
+           </form>
+ 
+         </div>
+ 
+ 
+       </div>
+       <div class="profile-nav-info">
+         <h3 class="user-name" id="user_name_pr">Revan Gozelov</h3>
+      
+ 
+       </div>
+       <div class="profile-option">
+         <div class="notification">
+           <i class="fa fa-bell"></i>
+           <span class="alert-message">0</span>
+         </div>
+       </div>
+     </div>
+ 
+     <div class="main-bd">
+       <div class="left-side">
+         <div class="profile-side">
+           <p class="mobile-no"><i class="fa fa-phone"></i> <span id="user_pr_mobile"></span></p>
+           <p class="user-mail"><i class="fa fa-envelope"></i> <span id="user_pr_mail"></span>
+           </p>
+           <div class="user-bio">
+             <h3>Additional Information</h3>
+             <p class="bio">
+               Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+             </p>
+           </div>
+           <div class="profile-btn">
+             <!-- <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button> -->
+             <button class="createbtn" data-bs-toggle="modal" data-bs-target="#changePasswordModal"> Change Password</button>
+           </div>
+           <div class="profile-btn">
+        
+           </div>
+          
+         </div>
+ 
+       </div>
+       <div  class="cstmtab right-side col-md-9 col-sm-12 col-lg-9">
+ 
+         <div class="nav nav_custom_profile">
+           <ul>
+             <li value="0" class="user-post active">Account setting</li>
+             <li value="1"  class="hst_panel_usr user-setting">Applied Events</li>
+             <li value="2" class=" hst_panel_pay user-setting">Certification</li>
+             <li value="3" class=" hst_panel_blnc user-setting">Payment List</li>
+           </ul>
+         </div>
+         <div class="profile-body">
+           <div class="profile-posts tab">
+             <h1>Account Settings</h1>
+             <div class="container">
+               <form>
+ 
+                 <div class="row">
+                   <div class="col-md-6">
+                     <div>
+                       <label for="first">Name</label>
+                       <input type="text" class="form-control" placeholder="" id="update_user_name">
+                     </div>
+                   </div>
+                   <!--  col-md-6   -->
+ 
+                   <div class="col-md-6">
+                     <div>
+                       <label for="last">Surname</label>
+                       <input type="text" class="form-control" placeholder="" id="update_user_surname">
+                     </div>
+                   </div>
+                   <!--  col-md-6   -->
+                 </div>
+ 
+ 
+                 <div class="row">
+                   <div class="col-md-6">
+ 
+                     <div>
+                       <label for="email">Email</label>
+                       <input type="email" disabled class="form-control" id="update_user_mail" placeholder="email">
+                     </div>
+                   </div>
+                   <!--  col-md-6   -->
+ 
+                   <div class="col-md-6">
+ 
+                     <div>
+                       <label for="phone">Mobile</label>
+                       <input class="form-control" id="update_user_mobil"  name="phone"
+                         value="+994 (__) ___-__-__" required>
+                     </div>
+                   </div>
+                   <!--  col-md-6   -->
+                 </div>
+                 <!--  row   -->
+ 
+ 
+                 <div class="row">
+ 
+                   <!--  col-md-6   -->
+ 
+                   <div class="col-md-6">
+                     <div>
+                       <label for="url">Birth Day</label>
+                       <input type="date" class="form-control" id="update_user_brthday">
+                     </div>
+ 
+                   </div>
+ 
+                   <div class="col-md-6">
+                     <div>
+                       <label for="female_male">Gender</label>
+                       <select name="" class="form-control" id="update_user_gender">
+                         <option value="choose">choose</option>
+                         <option value="male">Male</option>
+ 
+                         <option value="female">Female</option>
+                       </select>
+ 
+                     </div>
+ 
+                   </div>
+                   <!--  col-md-6   -->
+                 </div>
+                 <!--  row   -->
+                 
+                 <!--  row   -->
+                 <div class="row">
+ 
+ 
+                 </div>
+                 <!--  col-md-6   -->
+ 
+                 <button  id="update_user_btn" class="btn btn-primary">Save changes</button>
+               </form>
+             </div>
+           </div>
+           <div class="profile-history tab">
+             <div class="account-setting">
+               <h1>Tarixçə</h1>
+               <table class="resp-cst table table-bordered responsive">
+                 <thead>
+                   <tr>
+                     <th>#</th>
+                     <th> İmtahan Adı</th>
+                     <th>Vaxt</th>
+                     <th>Nəticə</th>
+                   </tr>
+                 </thead>
+                 <tbody id="history_exam_result_table">
+                   
+                 
+                 </tbody>
+               </table>
+             </div>
+           </div>
+           <div class="profile-settings tab">
+             <div class="account-setting">
+               <h1>Ödəniş Tarixçəsi</h1>
+               <table class="resp-cst table table-bordered responsive">
+                 <thead>
+                   <tr>
+                     <th>#</th>
+                     <th> İmtahan Adı</th>
+                     <th> Miqdar</th>
+                     <th>Balans(Əvvəlki)</th>
+                     <th>Balans(Sonrakı)</th>
+                     <th>Ödəniş Tarixi</th>
+                   </tr>
+                 </thead>
+                 <tbody id="history_price_result_table">
+                   
+                 
+                 </tbody>
+               </table>
+             </div>
+           </div>
+           <div class="profile-settings tab">
+             <div class="account-setting">
+               <h1>Balans Tarixçəsi</h1>
+               <table class="resp-cst table table-bordered responsive">
+                 <thead>
+                   <tr>
+                     <th>#</th>
+                     <th> Miqdar</th>
+                     <th>Balans(Əvvəlki)</th>
+                     <th>Balans(Sonrakı)</th>
+                     <th>Ödəniş Tarixi</th>
+                   </tr>
+                 </thead>
+                 <tbody id="history_balance_result_table">
+                   
+                 
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ 
+ 
+
+ </div> 
+ <div class="modal fade" id="resultHstoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true" style="padding-right: 0 !important;">
+       <div class="modal-dialog cst-modal-qeb"  role="document">
+           <div class="modal-content" >
+               <div class="modal-header ">
+                   <h1 class="modal-title" id="exampleModalLabel">Imtahan Nəticələri</h1>
+                    <div style="margin-left: 20px;">
+                           
+                               <button data-ide='result_cont_page1' class="cnvrtpdfBtn btn btn-primary">PDF-ə Çevir</button>
+                       </div>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+               
+                   <div class="modal-body ">
+
+                       <div class  id="result_cont_page1"  >           
+        
+                           </nav>
+                              <div class=" row" >
+                               <table class="zigzag-table" style="width: 100%; border-right: 1px solid rgba(214, 214, 214, 0.911);">
+                                 <th>İmtahan  </th>
+                                 <th>Nəticələri</th>
+                                 <th>#</th>
+                                  <tbody>
+                                 <tr>
+                                   <td>İmtahan verənin adı və soyadı:</td>
+                                   <td id="result-name1" ></td>
+                                   <td id="result-sunmae1"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>İmtahan adı: </td>
+                                   <td id="exam_nmea_end1"> </td>
+                                   
+                                 </tr>
+                                 <tr>
+                                   <td>İmtahan Müddəti</td>
+                                   <td id="exam_hours1" ></td>
+                                   <td>Dəqiqə</td>
+                                 </tr>
+                                 <tr>
+                                   <td>Variant </td>
+                                   <td id="variant_exam1"></td>
+                                   <td>Variantı</td>
+                                 </tr>
+                                 <tr>
+                                  <td>Başlanğıc Tarixi </td>
+                                  <td id="start_date_exam1" ></td>
+                                  <td id="start_hours_exam1" ></td>
+                                </tr>
+                                 <tr>
+                                   <td>Bitiş Tarixi</td>
+                                   <td id="end_date_exam1" ></td>
+                                   <td id="end_hours_exam1"></td>
+                                 </tr>
+                                 <tr>
+                                   <td>Yekun Bal</td>
+                                   <td id="general_result_exam1" ></td>
+                                   <td>Bal</td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                                <table class="zigzag-table" style="width: 100%;">
+                                  <thead>
+                                    <tr>
+                                      
+                                      <th>Fənn</th>
+                                      <th>Düzgün Cavab (Qapalı)</th>
+                                      <th class="openTypeQuestth">Düzgün Cavab (Açıq)</th>
+                                      <th class="stTypeQuestth">Düzgün Cavab (Situasiya)</th>
+                                      <th>Bal</th>
+                                    </tr>
+                                  
+                                   
+                                  </thead>
+                                  <tbody id="fenn-resul-body1">
+                                
+                                 
+                               </tbody>
+                             </table>
+                              </div>
+                           
+                         </div>
+
+                   </div>
+                  
+
+              
+           </div>
+       </div>
+   </div>
+   
+   <div class="modal fade" id="amountEnterdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true" style="padding-right: 0 !important;">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header ">
+               <h1 class="modal-title" id="newsHeaderCnt"></h1>
+
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+
+           <div  class="modal-body">
+
+               <div class="form-group row">
+                  
+                   <div class="col-12"><label>Miqdar: </label></div>
+                   <div class="form-group col-12 row pymntCurrenbtnGroup">
+                       
+                       <div class="col-6 ">
+                         <button data-quentity='5' onclick="fixedNum(this)" class="btn btn-outline-secondary">5 AZN</button>
+                       </div>
+                       <div class="col-6">
+                         <button data-quentity='10' onclick="fixedNum(this)" class="btn btn-outline-secondary">10 AZN</button>
+                       </div>
+                       <div class="col-6">
+                         <button data-quentity='20' onclick="fixedNum(this)" class="btn btn-outline-secondary">20 AZN</button>
+                       </div>
+                        <div class="col-6">
+                         <button  data-quentity='50' onclick="fixedNum(this)" class="btn btn-outline-secondary">50 AZN</button>
+                       </div>
+                      
+       
+                   </div>
+                   <div class="input-group col-12 ">
+                       <div class="input-group-btn">
+                           <button id="down" class="btn btn-default" onclick=" down('0')"><i class="fas fa-minus"></i></button>
+                       </div>
+                       <input type="number" id="quentityNumber" class="form-control input-number" minlength="1" value="1" />
+                       <div class="input-group-btn">
+                           <button id="up" class="btn btn-default" onclick="up('100000')"><i class="fas fa-plus"></i></button>
+                       </div>
+                   </div>
+               </div>
+
+
+           </div>
+           <div class="modal-footer">
+               <div class="">
+              
+                <button type="button" class="btn btn-primary" id="quentityOrderSend">Göndər</button>
+               </div>
+            
+              
+                </div>
+
+
+       </div>
+   </div>
+</div>
+   <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header customModal ">
+               <h5 class="modal-title" id="exampleModalLabel">İmtahan ödəniş paneli</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+          
+               <div class="modal-body " id="blockGenIdExamInfo">
+
+                               
+
+                
+
+
+               </div>
+               <div class="modal-footer">
+
+                  
+                   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#amountEnterdModal" >Balansı artırın</button>
+                   <button type="button" class="btn btn-primary" id="submit_payment_exam">İmtahan Başla</button>
+               </div>
+       </div>
+   </div>
+</div>

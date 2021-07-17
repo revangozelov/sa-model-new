@@ -338,9 +338,17 @@ section {
   .mobile-nav-toggle {
     display: block;
   }
-  .navbar ul {
+  .navbar .ul-menus {
     display: none;
   }
+  .header .logo img {
+  
+    width: 140px;
+}
+.header {
+   padding: 5px 0;
+  
+}
 }
 
 .navbar-mobile {
@@ -360,7 +368,7 @@ section {
   right: 15px;
 }
 
-.navbar-mobile ul {
+.navbar-mobile .ul-menus {
   display: block;
   position: absolute;
   top: 55px;
@@ -2427,7 +2435,7 @@ section {
 
 .profile_container {
 	max-width: 92%;
-	margin-top: 8%;
+	margin-top: 1%;
 	margin-bottom: 100px;
 }
 
@@ -2438,7 +2446,7 @@ section {
 	height: 190px;
 	position: relative;
 	box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-	border-top: solid #0a65ab ;
+	border-top: solid #0dcaf0 ;
 	border-radius: 5px
 }
 
@@ -2513,7 +2521,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     color: #777;
-    border: 2px solid #0a65ab ;
+    border: 2px solid #0dcaf0 ;
     text-align: center;
     width: 100%;
     padding: 5px;
@@ -2542,20 +2550,20 @@ section {
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
 	outline: none;
-	background: #0a65ab ;
+	background: #0dcaf0 ;
 }
 
 .profile-option:hover {
 	background: #fff;
-	border: 1px solid #0a65ab ;
+	border: 1px solid #0dcaf0 ;
 }
 
 .profile-option:hover .notification i {
-	color: #0a65ab ;
+	color: #0dcaf0 ;
 }
 
 .profile-option:hover span {
-	background: #0a65ab ;
+	background: #0dcaf0 ;
 }
 
 .profile-option .notification i {
@@ -2569,8 +2577,8 @@ section {
 	top: -5px;
 	right: -5px;
 	background: #fff;
-	color: #0a65ab ;
-	border: 1px solid #0a65ab ;
+	color: #0dcaf0 ;
+	border: 1px solid #0dcaf0 ;
 	padding: 5px;
 	border-radius: 50%;
 	height: 20px;
@@ -2595,7 +2603,7 @@ section {
 	padding: 90px 30px 20px;
 	font-family: "Bree Serif", serif;
 	z-index: 99;
-	border-left: 7px solid #0a65ab ;
+	border-left: 7px solid #0dcaf0 ;
 	border-radius: 5px;
 	margin-top: 10px;
 }
@@ -2607,13 +2615,13 @@ section {
 }
 
 .profile-side p i {
-	color: #0a65ab ;
+	color: #0dcaf0 ;
 	margin-right: 10px;
 }
 
 .mobile-no i {
 	transform: rotateY(180deg);
-	color: #0a65ab ;
+	color: #0dcaf0 ;
 }
 
 .profile-btn {
@@ -2626,7 +2634,7 @@ button.createbtn {
 	padding: 10px;
 	width: 100%;
 	border-radius: 3px;
-	background: #0a65ab ;
+	background: #0dcaf0 ;
 	color: #fff;
 	font-family: "Bree Serif";
 	font-size: 1rem;
@@ -2698,7 +2706,7 @@ button.createbtn i {
 
 .nav_custom_profile ul li:hover,
 .nav_custom_profile ul li.active {
-	box-shadow: 0px -3px 0px #0a65ab  inset;
+	box-shadow: 0px -3px 0px #0dcaf0  inset;
 }
 
 .profile-body {
@@ -2835,4 +2843,112 @@ button.createbtn i {
 
 .profile-posts {
 	font-size: 12px;
+}
+
+
+
+* Fix dropdown menu in navbars */
+.navbar-custom-menu {
+	display: none;
+}
+
+.navbar-custom-menu>.navbar-nav>li {
+	position: relative;
+}
+
+.navbar-custom-menu>.navbar-nav>li>.dropdown-menu {
+	position: absolute;
+	right: 0;
+	left: auto;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu .user-image {
+	float: left;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin-right: 10px;
+	/* margin-top: -2px; */
+	border: 1px dashed #0a65ab ;
+}
+
+@media (max-width: 991px) {
+	.navbar-custom-menu>.navbar-nav {
+		float: right;
+	
+	}
+
+	.navbar-custom-menu>.navbar-nav>li {
+		position: static;
+	}
+
+	.navbar-custom-menu>.navbar-nav>li>.dropdown-menu {
+		position: absolute;
+		right: 5%;
+		left: auto;
+		border: 1px solid #ddd;
+		background: #fff;
+	}
+}
+
+.navbar-custom-menu>.navbar-nav>li>.dropdown-menu {
+	position: absolute;
+	right: 0;
+	left: auto;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu,
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>.user-body {
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 1px 0 10px 0;
+	border-top-width: 0;
+	width: 280px;
+	border-radius: 6px;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+	/* height: 175px; */
+	padding: 10px;
+	text-align: center;
+	background-color: #0a65ab ;
+	border-radius: 6px 6px 0 0;
+}
+
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>li.user-header>img {
+	z-index: 5;
+	height: 90px;
+	width: 90px;
+	border: 3px solid;
+	border-color: transparent;
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+	z-index: 5;
+	color: #fff;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 17px;
+	margin-top: 10px;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>.user-footer {
+	background-color: #f9f9f9;
+	padding: 10px;
+}
+
+.navbar-custom-menu>.navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default {
+	color: #666666;
+	border-radius: 0;
+	box-shadow: none;
+	border-width: 1px;
+	background-color: #f4f4f4;
+	color: #444;
+	border-color: #ddd;
 }

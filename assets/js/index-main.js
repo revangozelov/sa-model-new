@@ -1,3 +1,6 @@
+var UsId 
+
+
 var getUrlParameter = function getUrlParameter(sParam) {
   var sPageURL = window.location.search.substring(1),
       sURLVariables = sPageURL.split('&'),
@@ -14,28 +17,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
   }
   return false;
 };
-$(".cstmtab .nav ul li").click(function () {
-  $(this)
-    .addClass("active")
-    .siblings()
-    .removeClass("active");
 
-  let vale = $(this).val()
-  tabs(vale);
-
-});
-
-
-const tab = document.querySelectorAll(".tab");
-
-function tabs(panelIndex) {
-  tab.forEach(function (node) {
-    node.style.display = "none";
-  });
-  $(tab[panelIndex]).css('display', 'block');
-
-}
-tabs(0); 
 
 var UrlQb = "https://app.sourcedagile.com/";
 (function () {
@@ -121,7 +103,61 @@ var UrlQb = "https://app.sourcedagile.com/";
      
 
       }
+  
+      if (alte === 'profile') {
+       let sud = localStorage.getItem('UsId');
+        if (sud !== null) {
+          $.get("profile.html", function (html_string)
+          {
+              $('#main').html(html_string);
+            
+              $(".cstmtab .nav ul li").click(function () {
+                $(this)
+                  .addClass("active")
+                  .siblings()
+                  .removeClass("active");
+              
+                let vale = $(this).val()
+                tabs(vale);
+              
+              });
+              let tab = document.querySelectorAll(".tab");
+              
+              function tabs(panelIndex) {
+                tab.forEach(function (node) {
+                  node.style.display = "none";
+                });
+                $(tab[panelIndex]).css('display', 'block');
+              
+              }
+              tabs(0); 
+          });
+        }
+        else{
+          window.location.href = 'index.html';
+        }
+       
 
+      }
+      if (alte === 'login') {
+
+        $.get("login.html", function (html_string)
+        {
+            $('#main').html(html_string);
+          
+      
+        });
+
+      }
+      if (alte === 'active') {
+        var ids = getUrlParameter('id');
+        activProfileUserId(ids)
+      
+          
+      
+
+      }
+  
       
      
 
@@ -956,6 +992,7 @@ var evntId = $(this).parents(".testimonial-item").parent().attr("id");
 
 
 })
+
 $(document).on("click", "#send-request", function (e) {
     
      var nm = $("#recipient-name").val();
@@ -1310,4 +1347,3 @@ function insertParam(name, value) {
   params.set(name, value);
   window.history.replaceState({}, "", decodeURIComponent(`${window.location.pathname}?${params}`));
 }
-

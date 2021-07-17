@@ -37,22 +37,64 @@
  
 
   <!-- ======= Header ======= -->
-  <header id="" class="header fixed-top">
+  <header id="" class="header fixed-top" style="padding:0;">
     <div class="container-fluid  d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
 
       </a>
+      <div class="navbar-custom-menu" style="display: none;">
+        <ul class="nav navbar-nav">
 
-      <nav id="navbar" class="navbar">
+            <li class="dropdown user user-menu ">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
+                    <!-- The user image in the navbar-->
+                    <img src="img/userprofile.png" id="user_index_img" class="user-image" alt="User Image">
+                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                    <!-- <span class="hidden-xs">John Abia</span> -->
+                </a>
+                <ul class="dropdown-menu ">
+                    <!-- The user image in the menu -->
+                    <li class="user-header">
+                        <img src="img/userprofile.png" class="img-circle" id="user_index_img_large" alt="User Image">
+
+                        <p id="name_index_block">revan </p>
+                    </li>
+
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="index-main.html?&point=profile" class="btn btn-default btn-flat">Profil</a>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" id="exit_profile_name" class="btn btn-default btn-flat">Çıxış</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+
+        </ul>
+    </div>
+
+      <nav id="navbar"  class="navbar">
         <ul>
-          <li><a class=" nav-link" href="https://app.sourcedagile.com/login.html">System Login</a></li>
-          <li><button class=" btn btn-info " href="https://app.sourcedagile.com/login.html">My Account</button></li>
-     
+        
+          <li class="dropdown"> <a href="#"><button class="btn btn-info">Login <i class="bi bi-chevron-down"></i></button> </a>
+            <ul style="left:-100px">
+              <li><a class="nav-link" type="button" id="login_btn_data" data-bs-toggle="modal" data-bs-target="#loginModalPage" >Simulation Training Login</a></li>
+              <li><a class="nav-link" href="https://app.sourcedagile.com/login.html" type="button" >System  Login</a></li>
+          
+            
+          
+            </ul>
+          </li>  
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+     
 
     </div>
   </header><!-- End Header -->
@@ -307,7 +349,106 @@
   </div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
+<!-- Modal -->
+<div class="modal fade" id="applEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apply Event</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="eventNameAplly"></h5>
 
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Name:</label>
+          <input type="text" class="form-control" id="recipient-name">
+        </div>
+        <div class="form-group">
+          <label for="recipient-surname" class="col-form-label">Surname:</label>
+          <input type="text" class="form-control" id="recipient-surname">
+        </div>
+        <div class="form-group">
+          <label for="recipient-email" class="col-form-label">Email:</label>
+          <input type="email" class="form-control" id="recipient-email">
+        </div>
+        <div class="form-group">
+          <label for="recipient-number" class="col-form-label">Number:</label>
+          <input type="number" class="form-control" id="recipient-number">
+        </div>
+        <div class="form-group">
+          <label for="message-text" class="col-form-label">Message:</label>
+          <textarea class="form-control" id="recipient-message"></textarea>
+        </div>
+
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="send-request">Send Request</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="loginModalPage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="user_from_sub">
+        <div class="modal-body ">
+
+         <div class="modalOnBlock1">  
+             <div class="form-group contact_form">
+            <label for="exampleInputEmail1">Email </label>
+            <input type="email" id="exampleInputEmail1" class="form-control" aria-describedby="emailHelp"
+                placeholder="Email">
+        </div>
+        <div class="form-group contact_form ">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" id="exampleInputPassword1" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group form-check">
+            <span id="errorMessage" style="color: red;"></span>
+        </div>
+         </div>
+         <div class="modalOnblock2" style="display: none;">
+
+            <div class="form-group contact_form">
+                <label for="forgotEmailIn">Email</label>
+                <input type="email" id="forgotEmailİn" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Email">
+            </div>
+         </div>
+          
+
+
+        </div>
+        <div class="modal-footer">
+       <div class="modeOn1">
+        <a  id="enter-forgot-menu" style="cursor: pointer;">Forget Password</a>
+        <a href="index-main.html?&point=login"><button type="button" class="btn btn-outline-secondary">Regstr</button></a>
+        
+        <button type="button" class="btn btn-primary" id="sign_in_btn">Login</button>
+       </div>
+       <div class="modeOn2" style="display: none;">
+        
+        <button type="button" class="btn btn-primary" id="exit-forgot-menu">Back</button>
+        
+        <button type="button" class="btn btn-primary" id="submit-email-forgot">Send</button>
+       </div>
+          
+        </div>
+
+    </form>
+    </div>
+  </div>
+</div>
   <!-- Vendor JS Files -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
@@ -321,6 +462,7 @@
 
   <script src="js/main.js"></script>
 
+  <script src="assets/js/user.js"></script>
 
 
 </body>

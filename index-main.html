@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -42,8 +43,8 @@
       </a>
 
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto " href="index.html">Home</a></li>
+        <ul class="ul-menus">
+    
           <li class="dropdown"><a href="#"><span>Sourced Agile</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="index-main.html?&point=sourcedModelOver">Sourced Agile Model Overview</a></li>
@@ -54,11 +55,56 @@
           
             </ul>
           </li>   
-      
-          <li><a class=" nav-link" href="https://app.sourcedagile.com/login.html">System Login</a></li>
+
+       
+         
+          <li class="dropdown"> <a href="#"><button class="btn btn-info">Login <i class="bi bi-chevron-down"></i></button> </a>
+            <ul>
+              <li><a class="nav-link" type="button" id="login_btn_data" data-bs-toggle="modal" data-bs-target="#loginModalPage" >Simulation Training Login</a></li>
+              <li><a class="nav-link" href="https://app.sourcedagile.com/login.html" type="button" >System  Login</a></li>
           
-          <li><a href="" class="nav-link"><button class=" btn btn-info ">My Account</button></a></li>
+            
+          
+            </ul>
+          </li> 
         </ul>
+   
+          <div class="navbar-custom-menu" style="display: none;">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown user user-menu show">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
+                        <!-- The user image in the navbar-->
+                        <img src="img/userprofile.png" id="user_index_img" class="user-image" alt="User Image">
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <!-- <span class="hidden-xs">John Abia</span> -->
+                    </a>
+                    <ul class="dropdown-menu show">
+                        <!-- The user image in the menu -->
+                        <li class="user-header">
+                            <img src="img/userprofile.png" class="img-circle" id="user_index_img_large" alt="User Image">
+
+                            <p id="name_index_block">revan </p>
+                        </li>
+
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="index-main.html?&point=profile" class="btn btn-default btn-flat">Profil</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" id="exit_profile_name" class="btn btn-default btn-flat">Çıxış</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+
+            </ul>
+        </div>
+      
+    
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -191,6 +237,8 @@
       </div>
     </section>
 
+
+  </main><!-- End #main -->
 <!-- Modal -->
 <div class="modal fade" id="applEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -234,10 +282,100 @@
     </div>
   </div>
 </div>
-  
+<!-- Modal -->
+<div class="modal fade" id="loginModalPage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="user_from_sub">
+        <div class="modal-body ">
 
-  </main><!-- End #main -->
+         <div class="modalOnBlock1">  
+             <div class="form-group contact_form">
+            <label for="exampleInputEmail1">Email </label>
+            <input type="email" id="exampleInputEmail1" class="form-control" aria-describedby="emailHelp"
+                placeholder="Email">
+        </div>
+        <div class="form-group contact_form ">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" id="exampleInputPassword1" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group form-check">
+            <span id="errorMessage" style="color: red;"></span>
+        </div>
+         </div>
+         <div class="modalOnblock2" style="display: none;">
 
+            <div class="form-group contact_form">
+                <label for="forgotEmailIn">Email</label>
+                <input type="email" id="forgotEmailİn" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Email">
+            </div>
+         </div>
+          
+
+
+        </div>
+        <div class="modal-footer">
+       <div class="modeOn1">
+        <a  id="enter-forgot-menu" style="cursor: pointer;">Forget Password</a>
+        <a href="index-main.html?&point=login"><button type="button" class="btn btn-outline-secondary">Regstr</button></a>
+        
+        <button type="button" class="btn btn-primary" id="sign_in_btn">Login</button>
+       </div>
+       <div class="modeOn2" style="display: none;">
+        
+        <button type="button" class="btn btn-primary" id="exit-forgot-menu">Back</button>
+        
+        <button type="button" class="btn btn-primary" id="submit-email-forgot">Send</button>
+       </div>
+          
+        </div>
+
+    </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="user_from_sub">
+        <div class="modal-body ">
+
+
+
+          <div class="form-group contact_form ">
+            <label for="exampleInputPassword1">Old Password</label>
+            <input class="form-control" type="password" id="exampleInputPasswordOld" placeholder="Old Password">
+          </div>
+          <div class="form-group contact_form ">
+            <label for="exampleInputPassword1">New Password</label>
+            <input class="form-control" type="password" id="exampleInputPasswordNew" placeholder="New Password">
+          </div>
+          <div class="form-group contact_form ">
+            <label for="exampleInputPassword1">Təkrar Yeni Şifrə</label>
+            <input class="form-control" type="password" id="exampleInputPasswordReNew" placeholder="Again New Password">
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" id="changePass-UserREg" class="btn btn-primary">Save</button>
+        </div>
+
+    </form>
+    </div>
+  </div>
+</div>
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
@@ -305,14 +443,15 @@
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/index-main.js"></script>
+  
+  <script src="assets/js/user.js"></script>
 
 </body>
 
