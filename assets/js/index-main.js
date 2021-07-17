@@ -627,7 +627,7 @@ function addGenSectList(id,nm,img,desct){
 
   <div class="row col-lg-12">
     <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" style="max-height:100px; max-width:100px" class="col-lg-2 img-fluid">
-    <h2 class="entry-title col-lg-6">
+    <h2 class="entry-title col-lg-10">
     <a href="">${nm}</a>
   </h2>
   </div>
