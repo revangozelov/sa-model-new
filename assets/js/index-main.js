@@ -35,6 +35,8 @@ var UrlQb = "https://app.sourcedagile.com/";
 
           if(subdt===false){
 
+            $('#certificatie-block').css("display","none");
+           $('#certificatie-block1').show();
             genCertificationBlock14()
             
           }else{
@@ -652,7 +654,7 @@ function genSectionBlockGen() {
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
 
-
+      $('#sidebarsection').empty();
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
@@ -701,7 +703,7 @@ function genSectionBlockGen1() {
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
 
-
+      $('#sidebarsection').empty();
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
@@ -709,6 +711,7 @@ function genSectionBlockGen1() {
      
 
 
+  
         $('#sidebarsection')
           .append($("<div>").attr('id', idSld)
             .addClass('post-item1 clearfix')
@@ -937,8 +940,7 @@ function genCertificationBlock14() {
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
-      $('#certificatie-block').css("display","none");
-      $('#certificatie-block1').show();
+      
       $('#certificatie-block1').empty();
       $('#certificatie-block1').append($("<div>").addClass('dropMenuListCert'))
 
@@ -1049,7 +1051,8 @@ $(document).on("click", "#back_certififcationlist", function () {
 
   var id = $(this).attr('pid');
   
-
+  $('#certificatie-block').css("display","none");
+  $('#certificatie-block1').show();
   genCertificationBlock14();
   insertParam("point", "certificate");
 
