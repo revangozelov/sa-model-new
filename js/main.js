@@ -1,6 +1,4 @@
 
-
-var UrlQb = "https://app.sourcedagile.com/";
 /**
    * Easy selector helper function
    */
@@ -132,30 +130,7 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
    
       $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
 
-      new Swiper('.testimonials-slider', {
-        speed: 600,
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        },
-        slidesPerView: 'auto',
-        pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-          clickable: true
-        },
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 40
-          },
-      
-          1200: {
-            slidesPerView: 3,
-          }
-        }
-      });
+     
 
 
 
@@ -200,6 +175,32 @@ var lang  =[
    },
   
 ]
+$(document).ajaxComplete(function(){
+  new Swiper('.testimonials-slider', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 40
+      },
+  
+      1200: {
+        slidesPerView: 3,
+      }
+    }
+  });
+});
 function genEventsList(){
   $.ajax({
     type: "POST",
@@ -225,7 +226,7 @@ function genEventsList(){
 
         if(stst === "A"){
      
-          getSingleSerc(fkId,id,header,dl,strtm,endtm)
+          getSingleSerc(fkId,id,header,dl,strtm,endtm);
         }
 
         
@@ -233,6 +234,7 @@ function genEventsList(){
 
       }
 
+     
 
     },
 

@@ -19,7 +19,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-var UrlQb = "https://app.sourcedagile.com/";
+
 (function () {
 
   
@@ -628,7 +628,7 @@ function addGenSectList(id,nm,img,desct){
   <article class="entry" id='${id}'>
 
   <div class="row col-lg-12">
-    <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" style="max-height:100px; max-width:100px" class="col-lg-2 img-fluid">
+    <img  src="${UrlQb}api/get/zdfiles/traininghub/${img}" alt="" style="max-height:100px; max-width:60px" class="col-lg-2 img-fluid">
     <h2 class="entry-title col-lg-10">
     <a href="">${nm}</a>
   </h2>
@@ -1124,18 +1124,21 @@ function getGroupInside(id) {
 
       var dat = data.tbl[0].r
       $('.dropMenuListCert').empty();
+   
+
 
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
+        
         var imgSld = dat[index].logo
-      
+        var order = dat[index].orderNo
 
 
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
         $('.dropMenuListCert')
-          .append($("<div>").attr('id', idSld)
+          .append($("<div>").attr('id', idSld).css("order",order)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
             .append($("<div>")
               .addClass('service-box ' + rand)

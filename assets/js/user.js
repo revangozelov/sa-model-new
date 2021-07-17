@@ -1,242 +1,266 @@
 var fkUserCode = localStorage.getItem("UsId");
 
+var UrlQb = "https://app.sourcedagile.com/";
 $(document).on("click", '#sign_in_btn', function () {
     var userNm = $(this).parents('.modal-content').find('#exampleInputEmail1').val();
     var userPass = $(this).parents('.modal-content').find('#exampleInputPassword1').val();
     getUserLogin(userNm, userPass);
-  
-  
-  })
-  
-  function getUserLogin(usNm, pass) {
-  
+
+
+})
+
+function getUserLogin(usNm, pass) {
+
     let datUs = {
-      "kv": {
-        "email": usNm,
-        "password": pass 
-  
-  
-      }
+        "kv": {
+            "email": usNm,
+            "password": pass
+
+
+        }
     }
     $.ajax({
-      type: "POST",
-      url: UrlQb + "api/post/cl/traininghub/loginUser",
-      data: JSON.stringify(datUs), // now data come in this function
-      contentType: "application/json; charset=utf-8",
-      crossDomain: true,
-      dataType: "json",
-      success: function (data, status, jqXHR) {
-  
-         
-        var dat = data.kv;
-        try {
-          var err = data.err[0]['code'];
-       
-            $('#errorMessage').text(err);
-            return
-          
-        } catch (err) {
-          localStorage.setItem('UsId', dat.fkUserId);
-  
-          $('#loginModalPage').modal("toggle");
-  
-         window.location.reload();
+        type: "POST",
+        url: UrlQb + "api/post/cl/traininghub/loginUser",
+        data: JSON.stringify(datUs), // now data come in this function
+        contentType: "application/json; charset=utf-8",
+        crossDomain: true,
+        dataType: "json",
+        success: function (data, status, jqXHR) {
+
+
+            var dat = data.kv;
+            try {
+                var err = data.err[0]['code'];
+
+                $('#errorMessage').text(err);
+                return
+
+            } catch (err) {
+                localStorage.setItem('UsId', dat.fkUserId);
+
+                $('#loginModalPage').modal("toggle");
+
+                window.location.reload();
+            }
+
+
+
+
+
+
+        },
+
+        error: function (jqXHR, status) {
+
         }
-  
-  
-  
-  
-  
-  
-      },
-  
-      error: function (jqXHR, status) {
-  
-      }
     });
-  }
+}
 
 
-  function activateRegstrPage(text,type){
-  
+function activateRegstrPage(text, type) {
+
     return `  <div class="container "><div style="margin-top:170px" class="alert alert-${type}" role="alert">
     ${text}
   </div></div>
     `
-  }
-  function activProfileUserId(id){
-  
-    var ts = {    "kv":{      
-      "id": id 
-        }}
-    $.ajax({
-      type: "POST",
-      url: UrlQb + "api/post/cl/traininghub/activateUser",
-      data: JSON.stringify(ts), // now data come in this function
-      contentType: "application/json; charset=utf-8",
-      crossDomain: true,
-      dataType: "json",
-      success: function (data, status, jqXHR) {
-  
-  
-        try {
-          var dat = data.err[0]
-          $('#main').html(activateRegstrPage(dat.val,"warning"));
-        } catch (error) {
-          $('#main').html(activateRegstrPage("Your registration has been completed successfully","success"));
+}
+
+function activProfileUserId(id) {
+
+    var ts = {
+        "kv": {
+            "id": id
         }
-     
-  
-        
-        
-       
-      }
+    }
+    $.ajax({
+        type: "POST",
+        url: UrlQb + "api/post/cl/traininghub/activateUser",
+        data: JSON.stringify(ts), // now data come in this function
+        contentType: "application/json; charset=utf-8",
+        crossDomain: true,
+        dataType: "json",
+        success: function (data, status, jqXHR) {
+
+
+            try {
+                var dat = data.err[0]
+                $('#main').html(activateRegstrPage(dat.val, "warning"));
+            } catch (error) {
+                $('#main').html(activateRegstrPage("Your registration has been completed successfully", "success"));
+            }
+
+
+
+
+
+        }
     })
-  }
-  
-  $(document).on('click', '#changePass-UserREg', function () {
-  
-  
+}
+
+$(document).on('click', '#changePass-UserREg', function () {
+
+
     var oldps = $('#exampleInputPasswordOld').val();
     var newps = $('#exampleInputPasswordNew').val();
     var cnewps = $('#exampleInputPasswordReNew').val();
-  
+
     if (newps === cnewps) {
-      updatePass(fkUserCode, oldps, newps, cnewps);
+        updatePass(fkUserCode, oldps, newps, cnewps);
     }
-  
-  
-  
-  })
-  
-  function updatePass(id, oldps, newps, cnewps) {
-  
+
+
+
+})
+
+function updatePass(id, oldps, newps, cnewps) {
+
     var prop = {
-      "kv": {
-        "fkUserId": id,
-        "oldPassword": oldps,
-        "newPassword": newps,
-        "confirmPassword": cnewps
-      }
+        "kv": {
+            "fkUserId": id,
+            "oldPassword": oldps,
+            "newPassword": newps,
+            "confirmPassword": cnewps
+        }
     }
     $.ajax({
-      type: "POST",
-      url: UrlQb + "api/post/cl/traininghub/updateActiveUserPassword4Web",
-      data: JSON.stringify(prop), // now data come in this function
-      contentType: "application/json; charset=utf-8",
-      crossDomain: true,
-      dataType: "json",
-      success: function (data, status, jqXHR) {
-  
-        try {
-          var err = data.err[0]
-  
-        } catch {
-          $('#changePasswordModal').modal("toggle");
+        type: "POST",
+        url: UrlQb + "api/post/cl/traininghub/updateActiveUserPassword4Web",
+        data: JSON.stringify(prop), // now data come in this function
+        contentType: "application/json; charset=utf-8",
+        crossDomain: true,
+        dataType: "json",
+        success: function (data, status, jqXHR) {
+
+            try {
+                var err = data.err[0]
+
+            } catch {
+                $('#changePasswordModal').modal("toggle");
+            }
+
+
+        },
+
+        error: function (jqXHR, status) {
+            // error handler
+
+            alert('fail' + status.code);
         }
-  
-  
-      },
-  
-      error: function (jqXHR, status) {
-        // error handler
-  
-        alert('fail' + status.code);
-      }
     });
-  }
-  $(document).on('click', '#enter-forgot-menu', function () {
+}
+$(document).on('click', '#enter-forgot-menu', function () {
     var prt = $(this).parents('.modal-dialog');
-  
-  
+
+
     prt.find('.modeOn1').toggle();
     prt.find('.modeOn2').toggle();
     prt.find('.modalOnblock2').toggle();
     prt.find('.modalOnBlock1').toggle();
-  
-  
-  })
-  $(document).on('click', '#exit-forgot-menu', function () {
+
+
+})
+$(document).on('click', '#exit-forgot-menu', function () {
     var prt = $(this).parents('.modal-dialog');
-  
-  
+
+
     prt.find('.modeOn1').toggle();
     prt.find('.modeOn2').toggle();
     prt.find('.modalOnblock2').toggle();
     prt.find('.modalOnBlock1').toggle();
-  
-  
-  })
-  $(document).on('click', '#submit-email-forgot', function () {
+
+
+})
+$(document).on('click', '#submit-email-forgot', function () {
     var val = $(this).parents('.modal-dialog').find('#forgotEmailİn').val();
-  
+
     forgotPassApi(val);
-  })
-  
-  
-  function forgotPassApi(ml) {
+})
+
+
+function forgotPassApi(ml) {
     let dtset = {
-      "kv": {
-        "email": ml
-  
-      }
+        "kv": {
+            "email": ml
+
+        }
     }
     $.ajax({
-      type: "POST",
-      url: UrlQb + "api/post/cl/traininghub/forgotPassword4Web",
-      data: JSON.stringify(dtset), // now data come in this function
-      contentType: "application/json; charset=utf-8",
-      crossDomain: true,
-      dataType: "json",
-      success: function (data) {
-  
-  
-        try {
-          var val = data.err[0]['val'];
-          alertBoxGenerate(val, 'warning', 'Uğursuz Əməliyyat');
-        } catch (error) {
-          var val = data.kv['succesMessage'];
-          alertBoxGenerate(val, 'succes', 'Bildiriş');
+        type: "POST",
+        url: UrlQb + "api/post/cl/traininghub/forgotPassword4Web",
+        data: JSON.stringify(dtset), // now data come in this function
+        contentType: "application/json; charset=utf-8",
+        crossDomain: true,
+        dataType: "json",
+        success: function (data) {
+
+
+            try {
+                var val = data.err[0]['val'];
+                alertBoxGenerate(val, 'warning', 'Uğursuz Əməliyyat');
+            } catch (error) {
+                var val = data.kv['succesMessage'];
+                alertBoxGenerate(val, 'succes', 'Bildiriş');
+            }
+        },
+
+        error: function (jqXHR, status) {
+            // error handler
+
+            alert('fail' + status.code);
         }
-      },
-  
-      error: function (jqXHR, status) {
-        // error handler
-  
-        alert('fail' + status.code);
-      }
     });
-  }
-  $(".cstmtab .nav ul li").click(function () {
+}
+$(".cstmtab .nav ul li").click(function () {
     $(this)
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+
     let vale = $(this).val()
     tabs(vale);
-  
-  });
-  let tab = document.querySelectorAll(".tab");
-  
-  function tabs(panelIndex) {
+
+});
+let tab = document.querySelectorAll(".tab");
+
+function tabs(panelIndex) {
     tab.forEach(function (node) {
-      node.style.display = "none";
+        node.style.display = "none";
     });
     $(tab[panelIndex]).css('display', 'block');
-  
-  }
-  tabs(0); 
 
-  $(document).on("click", "#login-modal-btn", function (e) {
+}
+tabs(0);
+
+$(document).on("click", "#login-modal-btn", function (e) {
 
     $("#loginModalPage").modal("show");
-  
-  
-  
-  })
 
-  
+
+
+})
+
+//user register send api
+function resetFlud(email) {
+
+    $('#name-f').val();
+
+    $('#name-l').val();
+    $('#email').val();
+    $('#tel').val();
+    $('#pass').val();
+    $('#pass2').val();
+    $('#Date').val();
+    $('#code-country').val();
+
+
+
+    $('.visible_cts_block').css('visibility', 'hidden');
+
+    $('.visible_cts_block').before('<div class="alert alert-success" role="alert">Qeydiyyat uğurla başa çatmışdır.Zəhmət olmasa ' + email + ' adresini yoxlayın</div>');
+
+}
+
 function setUserInfoDataBase() {
 
     var nm = $('#name-f').val();
@@ -247,68 +271,76 @@ function setUserInfoDataBase() {
     var repass = $('#pass2').val();
     var date = $('#Date').val();
     var codeCn = $('#code-country').val();
-  
-  
+
+
     let objectUser = {
-      "kv": {
-        "name": nm,
-        "surname": surnm,
-        "email": eml,
-        "mobile": "(+"+codeCn+")"+numb,
-        "password": pass,
-        "confirmPassword": repass,
-        "birthDate": date
-      }
-  
-    }
-  
-    if (nm && surnm && eml && numb.trim().length > 3) {
-      if (pass.trim().length > 3) {
-  
-        if (pass == repass) {
-  
-  
-          $.ajax({
-            type: "POST",
-            url: UrlQb + "api/post/cl/traininghub/registerNewUser",
-            data: JSON.stringify(objectUser), // now data come in this function
-            contentType: "application/json; charset=utf-8",
-            crossDomain: true,
-            dataType: "json",
-            success: function (data, status, jqXHR) {
-  
-            
-            },
-  
-            error: function (jqXHR, status) {
-              // error handler
-  
-              alert('fail' + status.code);
-            }
-          });
-        } else {
-          alert('Duplicate Password Not Recorded Correctly');
+        "kv": {
+            "name": nm,
+            "surname": surnm,
+            "email": eml,
+            "mobile": "(+" + codeCn + ")" + numb,
+            "password": pass,
+            "confirmPassword": repass,
+            "birthDate": date
         }
-  
-      } else {
-        alert('Password short');
-      }
-  
-  
-    } else {
-      alert('Fill in all the fields!!!');
+
     }
-  
-  }
-  
-  
-  $(document).on('click', '#submit_regstr_qb', function () {
-  
+
+    if (nm && surnm && eml && numb.trim().length > 3) {
+        if (pass.trim().length > 3) {
+
+            if (pass == repass) {
+
+
+                $.ajax({
+                    type: "POST",
+                    url: UrlQb + "api/post/cl/traininghub/registerNewUser",
+                    data: JSON.stringify(objectUser), // now data come in this function
+                    contentType: "application/json; charset=utf-8",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data, status, jqXHR) {
+
+
+                        try {
+
+                            alertBoxGenerate(data.err[0]['val'], 'warning', 'Xəta')
+                            data.err[0]['val'];
+                        } catch (error) {
+                            resetFlud(eml);
+                        }
+                    },
+
+                    error: function (jqXHR, status) {
+                        // error handler
+
+                        alert('fail' + status.code);
+                    }
+                });
+            } else {
+                alert('Duplicate Password Not Recorded Correctly');
+            }
+
+        } else {
+            alert('Password short');
+        }
+
+
+    } else {
+        alert('Fill in all the fields!!!');
+    }
+
+}
+
+
+$(document).on('click', '#submit_regstr_qb', function () {
+
     setUserInfoDataBase()
-  })
-  
-  getUserInfoProfile()
-  function getUserInfoProfile() { // pass your data in method
+})
+
+getUserInfoProfile()
+
+function getUserInfoProfile() { // pass your data in method
 
 
     userId = localStorage.getItem('UsId');
@@ -324,7 +356,7 @@ function setUserInfoDataBase() {
 
         }
         $('#login_btn_data').css('display', 'none');
-        
+
         $('[data-target="#exampleModal"]').css('display', 'none');
         $('.navbar-custom-menu').css('display', 'block');
 
@@ -347,15 +379,15 @@ function setUserInfoDataBase() {
                     var gendr = dat[index]['gender'];
                     var cty = dat[index].city;
                     var mbl = dat[index]['mobile'];
-                   // var brthDt = deTimeSplit(dat[index]['birthDate']);
+                    // var brthDt = deTimeSplit(dat[index]['birthDate']);
 
                     var nm = dat[index]['name'];
                     var srnm = dat[index]['surname'];
                     var imgTc = dat[index]['imgUrl'];
                     var eml = dat[index]['email']
-                
 
-                  
+
+
 
                     nmFK = nm;
                     surNmFK = srnm
@@ -367,11 +399,11 @@ function setUserInfoDataBase() {
                     $("#update_user_surname").val(srnm);
                     $("#update_user_mail").val(eml);
                     $("#update_user_mobil").val(mbl);
-                  //  $("#update_user_brthday").val(brthDt);
+                    //  $("#update_user_brthday").val(brthDt);
                     $("#update_user_gender").val(gendr);
-                   
 
-                   
+
+
                     if (imgTc === "") {
 
                         $("#profile_picture_img").attr('src', 'img/userprofile.png');
@@ -410,6 +442,7 @@ $(document).on("click", '#exit_profile_name', function () {
 
 
 })
+
 function userImageIn(img, name, srnm) {
 
     $('#user_index_img').attr('src', UrlQb + 'api/get/zdfiles/traininghub/' + img);
@@ -509,6 +542,7 @@ function uploadFile4IpoCore(fileext, file_base_64, file_name) {
     });
     return finalname;
 }
+
 function updateUserImage(img) {
     let objectUser1 = {
         "kv": {
