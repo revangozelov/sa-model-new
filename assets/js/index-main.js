@@ -1132,7 +1132,8 @@ $(document).on("click", ".post-item", function () {
   $(".post-item").css("background","white");
   $(this).css("background","aliceblue");
   genSectionSingle(id)
-  insertParam("sub_sect", id)
+  insertParam("sub_sect", id);
+  $('html, body').animate({ scrollTop: $('#entries-model').offset().top-300 }, 'fast');
 
 })
 $(document).on("click", ".post-item1", function () {
@@ -1140,10 +1141,10 @@ $(document).on("click", ".post-item1", function () {
   var id = $(this).attr('id');
   $(".post-item1").css("background","white");
   $(this).css("background","aliceblue");
-
+   
   genSectionSingle1(id)
   insertParam("sub_sect1", id)
-
+ $('html, body').animate({ scrollTop: $('#entries-model').offset().top }, 'slow');
 })
 $(document).on("click", ".feature-item", function () {
 
