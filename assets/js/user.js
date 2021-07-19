@@ -288,7 +288,7 @@ function resetFlud(email) {
     $('#pass').val();
     $('#pass2').val();
     $('#Date').val();
-    $('#code-country').val();
+    $('#number-index-code').val();
 
 
 
@@ -307,7 +307,7 @@ function setUserInfoDataBase() {
     var pass = $('#pass').val();
     var repass = $('#pass2').val();
     var date = $('#Date').val();
-    var codeCn = $('#code-country').val();
+    var codeCn = $('#number-index-code').val();
 
 
     let objectUser = {
@@ -423,6 +423,17 @@ function getUserInfoProfile() { // pass your data in method
                     var imgTc = dat[index]['imgUrl'];
                     var eml = dat[index]['email']
 
+                    var city = dat[index]['city'];
+                    var country = dat[index]['country'];
+                    var organ = dat[index]['organization'];
+
+
+                    var fb = dat[index]['socialFb']
+                    var insta = dat[index]['socialInstagram']
+                    var link = dat[index]['socialLn']
+                    var twt = dat[index]['socialTwitter']
+                    var xng = dat[index]['socialXing']
+
                
 
 
@@ -438,8 +449,14 @@ function getUserInfoProfile() { // pass your data in method
                     $("#update_user_mobil").val(mbl);
                     $("#update_user_brthday").val(brthDt);
                     $("#update_user_gender").val(gendr);
-
-
+                    $("#update_user_city").val(city);
+                    $("#update_user_country").val(country);
+                     $("#update_user_orgn").val(organ);
+                     $("#update_user_fbLink").val(fb);
+                    $("#update_user_xing").val(xng);
+                    $("#update_user_twitLink").val(twt);
+                    $("#update_user_insLink").val(insta);
+                    $("#update_user_LnLink").val(link);
 
                     if (imgTc === "") {
 
@@ -475,23 +492,37 @@ $(document).on("click", '#update_user_btn', function () {
 
     var nm = $("#update_user_name").val();
     var srnm = $("#update_user_surname").val();
-    var mail = $("#update_user_mail").val();
     var mbl = $("#update_user_mobil").val();
     var brthDay = reDeTimeSplit($("#update_user_brthday").val());
     var gndr = $("#update_user_gender").val();
+    var cty = $("#update_user_city").val();
+    var ctry = $("#update_user_country").val();
+    var organ = $("#update_user_orgn").val();
+    var fb = $("#update_user_fbLink").val();
+    var xng = $("#update_user_xing").val();
+    var twt = $("#update_user_twitLink").val();
+    var ins = $("#update_user_insLink").val();
+    var lnk = $("#update_user_LnLink").val();
 
     /* var stts = $("#update_user_status").val(); */
 
     let objectUser1 = {
         "kv": {
-            "updatedField": 'gender,mobile,name,email,birthDate,surname',
+            "updatedField": "birthDate,city,country,mobile,name,organization,socialFb,socialInstagram,socialLn,socialTwitter,socialXing,surname",
             "fkUserId": fkUserCode,
             "name": nm,
             "surname": srnm,
-            "email": mail,
             "mobile": mbl,
             "birthDate": brthDay,
             "gender": gndr,
+            "city": cty,
+            "country": ctry,
+            "organization": organ,
+            "socialFb": fb,
+            "socialInstagram": ins,
+            "socialLn": lnk,
+            "socialTwitter": twt,
+            "socialXing": xng,
          
 
         }

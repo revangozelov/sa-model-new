@@ -30,17 +30,26 @@ var getUrlParameter = function getUrlParameter(sParam) {
       if (alte === 'certificate') {
           $('#services').show()
     
-          var subdt = getUrlParameter('sub_cert');
-
+          var subdt = getUrlParameter('certificateId');
+          $('#certificatie-block').css("display","none");
+          $('#certificatie-block1').empty();
+          $('#certificatie-block1').show();
 
           if(subdt===false){
 
-            $('#certificatie-block').css("display","none");
-           $('#certificatie-block1').show();
+        
             genCertificationBlock14()
             
           }else{
-            genSertfifcationBlokLarge(subdt);
+            var crt = getUrlParameter('sub_cert');
+
+            if(crt === false){
+              getCertiDescription(subdt)
+          
+            }else{
+              genSertfifcationBlokLarge(crt);
+            }
+           
           }
       
         
@@ -66,7 +75,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
       if (alte === 'eventListAll') {
         $('#services').show();
 
-        $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events")
+        $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events");
         genEventsList2();
      
 
@@ -622,6 +631,50 @@ function genEventsList2(){
 }
 
 
+function getCertiDescription(id){
+
+  var ts = {
+    "kv": {
+      "id": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationGroupList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r[0]
+      
+      $('#certificatie-block1').empty();
+      
+        var idSld = dat.id
+        var desct = dat.description
+           
+        
+        $('#certificatie-block1')
+          .append($("<div>").attr('id', idSld)
+            .addClass('col-lg-12 col-md-12')
+            .append(desct))
+
+
+
+            getGroupInside(id);
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+
+
 
 function addGenSectList(id,nm,img,desct){
 
@@ -1021,20 +1074,18 @@ $(document).on("click", "#send-request", function (e) {
 })
 $(document).on("click", ".service-box-list", function (e) {
 
-  e.stopPropagation();
+ 
   var id = $(this).parent().attr('id');
-  var $el = $(this).parent();  
-var bottom = $el.position().top + $el.height()-40;
+  $('#certificatie-block1').empty();
    
-    $(".dropMenuListCert").css("top", bottom)
-  getGroupInside(id);
-///  insertParam("certificateId", id)
+  getCertiDescription(id);
+   insertParam("certificateId", id)
 
 })
 $(document).on("click", "body", function () {
 
  
-    $(".dropMenuListCert").hide()
+   // $(".dropMenuListCert").hide()
 
 ///  insertParam("certificateId", id)
 
@@ -1054,6 +1105,7 @@ $(document).on("click", "#back_certififcationlist", function () {
   
   $('#certificatie-block').css("display","none");
   $('#certificatie-block1').show();
+
   genCertificationBlock14();
   insertParam("point", "certificate");
 
@@ -1124,7 +1176,8 @@ function getGroupInside(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-      $('.dropMenuListCert').empty();
+     
+      $('#certificatie-block1').show();
    
 
 
@@ -1138,7 +1191,7 @@ function getGroupInside(id) {
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
-        $('.dropMenuListCert')
+        $('#certificatie-block1')
           .append($("<div>").attr('id', idSld).css("order",order)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
             .append($("<div>")
@@ -1150,7 +1203,6 @@ function getGroupInside(id) {
             ))
 
 
-            $(".dropMenuListCert").css("display",'flex');
 
       }
 
