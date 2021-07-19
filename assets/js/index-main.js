@@ -1144,7 +1144,7 @@ $(document).on("click", ".post-item1", function () {
    
   genSectionSingle1(id)
   insertParam("sub_sect1", id)
- $('html, body').animate({ scrollTop: $('#entries-model').offset().top }, 'slow');
+  $('html, body').animate({ scrollTop: $('#entries-model').offset().top-300 }, 'fast');
 })
 $(document).on("click", ".feature-item", function () {
 
