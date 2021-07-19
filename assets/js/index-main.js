@@ -66,7 +66,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
       if (alte === 'eventListAll') {
         $('#services').show();
 
-        
+        $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events")
         genEventsList2();
      
 
@@ -501,6 +501,7 @@ function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
       
         $("#certificatie-block").hide()
         $("#certificatie-block1").show()
+
       $("#certificatie-block1").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
   
      
@@ -600,7 +601,7 @@ function genEventsList2(){
  
         var dl = lang.find(x => x.key === lng).value;
         
-        console.log("asds");
+ 
         if(stst === "A"){
          
           getSingleEvent(fkId,id,header,dl,strtm,endtm)

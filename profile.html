@@ -66,7 +66,7 @@
            <div class="profile-posts tab">
              <h1>Account Settings</h1>
              <div class="container">
-               <form>
+            
  
                  <div class="row">
                    <div class="col-md-6">
@@ -102,7 +102,7 @@
                      <div>
                        <label for="phone">Mobile</label>
                        <input class="form-control" id="update_user_mobil"  name="phone"
-                         value="+994 (__) ___-__-__" required>
+                          required>
                      </div>
                    </div>
                    <!--  col-md-6   -->
@@ -138,16 +138,12 @@
                    <!--  col-md-6   -->
                  </div>
                  <!--  row   -->
+                
+            
+ 
                  
-                 <!--  row   -->
-                 <div class="row">
- 
- 
-                 </div>
-                 <!--  col-md-6   -->
- 
-                 <button  id="update_user_btn" class="btn btn-primary">Save changes</button>
-               </form>
+                 <button style="margin-top: 20px;"  id="update_user_btn" class="btn btn-primary">Save changes</button>
+             
              </div>
            </div>
            <div class="profile-history tab">
@@ -178,7 +174,7 @@
                      <th>#</th>
                      <th>Certification Name</th>
                      <th>Price </th>
-                     <th>Balans(Before)</th>
+                     <th>Balance(Before)</th>
                      <th>Balance(After)</th>
                      <th>History Payment</th>
                    </tr>
@@ -192,15 +188,15 @@
            </div>
            <div class="profile-settings tab">
              <div class="account-setting">
-               <h1>Balans Tarixçəsi</h1>
+               <h1>Payment History</h1>
                <table class="resp-cst table table-bordered responsive">
                  <thead>
                    <tr>
                      <th>#</th>
-                     <th> Miqdar</th>
-                     <th>Balans(Əvvəlki)</th>
-                     <th>Balans(Sonrakı)</th>
-                     <th>Ödəniş Tarixi</th>
+                     <th> Amount</th>
+                     <th>Balance(Before)</th>
+                     <th>Balance(After)</th>
+                     <th>Payment Date</th>
                    </tr>
                  </thead>
                  <tbody id="history_balance_result_table">

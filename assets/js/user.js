@@ -8,7 +8,44 @@ $(document).on("click", '#sign_in_btn', function () {
 
 
 })
+function alertBoxGenerate(text, type, nov) {
 
+	var box = `<div class="alert ${type}">
+	<span class='alert-close' onclick="this.parentElement.style.display='none';">&times;</span>
+	<b>${nov}</b><br>
+<ul><li>
+
+${text}
+</li>
+
+</ul></div>`
+
+
+	$('.alert_box_inside').append(box);
+
+	setTimeout(() => {
+		$('.alert_box_inside').empty();
+	}, 5000);
+}
+function deTimeSplit(dt) {
+    var arr = dt.slice(0, 4);
+    var arr1 = dt.slice(4, 6);
+    var arr2 = dt.slice(6, 8);
+
+    var fns = arr + "-" + arr1 + '-' + arr2;
+
+    return fns
+}
+
+function reDeTimeSplit(dt) {
+    var arr = dt.slice(0, 4);
+    var arr1 = dt.slice(5, 7);
+    var arr2 = dt.slice(8, 10);
+
+    var fns = arr + "" + arr1 + '' + arr2;
+
+    return fns
+}
 function getUserLogin(usNm, pass) {
 
     let datUs = {
@@ -197,10 +234,10 @@ function forgotPassApi(ml) {
 
             try {
                 var val = data.err[0]['val'];
-                alertBoxGenerate(val, 'warning', 'Uğursuz Əməliyyat');
+                alertBoxGenerate(val, 'warning', 'Wrong Operation');
             } catch (error) {
                 var val = data.kv['succesMessage'];
-                alertBoxGenerate(val, 'succes', 'Bildiriş');
+                alertBoxGenerate(val, 'succes', 'Notification');
             }
         },
 
@@ -281,7 +318,7 @@ function setUserInfoDataBase() {
             "mobile": "(+" + codeCn + ")" + numb,
             "password": pass,
             "confirmPassword": repass,
-            "birthDate": date
+            "birthDate": reDeTimeSplit(date)
         }
 
     }
@@ -304,7 +341,7 @@ function setUserInfoDataBase() {
 
                         try {
 
-                            alertBoxGenerate(data.err[0]['val'], 'warning', 'Xəta')
+                            alertBoxGenerate(data.err[0]['val'], 'warning', 'Error')
                             data.err[0]['val'];
                         } catch (error) {
                             resetFlud(eml);
@@ -379,14 +416,14 @@ function getUserInfoProfile() { // pass your data in method
                     var gendr = dat[index]['gender'];
                     var cty = dat[index].city;
                     var mbl = dat[index]['mobile'];
-                    // var brthDt = deTimeSplit(dat[index]['birthDate']);
+                    var brthDt = deTimeSplit(dat[index]['birthDate']);
 
                     var nm = dat[index]['name'];
                     var srnm = dat[index]['surname'];
                     var imgTc = dat[index]['imgUrl'];
                     var eml = dat[index]['email']
 
-
+               
 
 
                     nmFK = nm;
@@ -399,7 +436,7 @@ function getUserInfoProfile() { // pass your data in method
                     $("#update_user_surname").val(srnm);
                     $("#update_user_mail").val(eml);
                     $("#update_user_mobil").val(mbl);
-                    //  $("#update_user_brthday").val(brthDt);
+                    $("#update_user_brthday").val(brthDt);
                     $("#update_user_gender").val(gendr);
 
 
@@ -433,6 +470,63 @@ function getUserInfoProfile() { // pass your data in method
         });
     }
 }
+
+$(document).on("click", '#update_user_btn', function () {
+
+    var nm = $("#update_user_name").val();
+    var srnm = $("#update_user_surname").val();
+    var mail = $("#update_user_mail").val();
+    var mbl = $("#update_user_mobil").val();
+    var brthDay = reDeTimeSplit($("#update_user_brthday").val());
+    var gndr = $("#update_user_gender").val();
+
+    /* var stts = $("#update_user_status").val(); */
+
+    let objectUser1 = {
+        "kv": {
+            "updatedField": 'gender,mobile,name,email,birthDate,surname',
+            "fkUserId": fkUserCode,
+            "name": nm,
+            "surname": srnm,
+            "email": mail,
+            "mobile": mbl,
+            "birthDate": brthDay,
+            "gender": gndr,
+         
+
+        }
+
+    }
+
+
+    if (brthDay && nm && srnm && mbl.trim().length > 3) {
+
+        $.ajax({
+            type: "POST",
+            url: UrlQb + "api/post/cl/traininghub/updateActiveUserFullInfo4Web",
+            data: JSON.stringify(objectUser1), // now data come in this function
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+
+                alertBoxGenerate("Save succesfuly", "success", "Notification")
+
+
+            },
+
+            error: function (jqXHR, status) {
+                // error handler
+
+                alert('fail' + status.code);
+            }
+        });
+
+    } else {
+        alert('Fill in all the fields!!!');
+    }
+
+})
 //User sign in function
 $(document).on("click", '#exit_profile_name', function () {
 
@@ -563,7 +657,7 @@ function updateUserImage(img) {
         crossDomain: true,
         dataType: "json",
         success: function (data, status, jqXHR) {
-            alert('Photo Savad')
+            alert('Photo Saved')
         },
 
         error: function (jqXHR, status) {
