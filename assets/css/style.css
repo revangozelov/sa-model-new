@@ -3035,14 +3035,16 @@ button.createbtn i {
     -moz-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+    width: 100%;
+    margin-top: 10px;
 }
 .warning {
-    background: rgba(244, 215, 201, .37);
+    background: rgba(244, 215, 201);
     color: #d93025;
    
 }
 .info {
-    background: rgba(186, 208, 228, .37);
+    background: rgba(186, 208, 228);
     color: #00539f;
     
 }
@@ -3079,9 +3081,10 @@ button.createbtn i {
 }
 
 .alert_box_inside{
-	position: fixed;
-    /* top: 100px; */
-    bottom: 50px;
-    z-index: 500000;
-    background-color: #ffff;
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  z-index: 500000;
+
+  
 }

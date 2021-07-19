@@ -654,12 +654,15 @@ function getCertiDescription(id){
       
         var idSld = dat.id
         var desct = dat.description
+        var log = dat.logo
            
         
         $('#certificatie-block1')
           .append($("<div>").attr('id', idSld)
-            .addClass('col-lg-12 col-md-12')
-            .append(desct))
+            .addClass('col-lg-8 col-md-8')
+            .append($("<div>").addClass("text-left").append('<img width="300px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + log + '" alt="">'))
+            .append(desct)
+            )
 
 
 
@@ -1065,7 +1068,7 @@ $(document).on("click", "#send-request", function (e) {
 
      }else{
 
-      alert("Fill in all the fields")
+      alertBoxGenerate('Fill in all the fields!!!', "warning", "Error")
 
      }
    
@@ -1181,7 +1184,7 @@ function getGroupInside(id) {
       $('#certificatie-block1').show();
    
 
-
+     var blak = $("<div>").addClass("col-lg-4 col-md-4")
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         
@@ -1192,9 +1195,9 @@ function getGroupInside(id) {
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
-        $('#certificatie-block1')
-          .append($("<div>").attr('id', idSld).css("order",order)
-            .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
+      
+        blak.append($("<div>").attr('id', idSld).css("order",order)
+            .addClass('col-lg-12 col-md-12').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
             .append($("<div>")
               .addClass('service-box ' + rand)
               .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
@@ -1207,7 +1210,7 @@ function getGroupInside(id) {
 
       }
 
-
+      $('#certificatie-block1').append(blak)
     }
   })
 
@@ -1396,7 +1399,9 @@ function sendRequestEventApply(nm,eml,srnm,msg,id,nmbr){
       $("#recipient-message").val();
       $("#recipient-surname").val();
       $("#applEventModal").modal("hide");
-      alert("Send Request Succesfuly");
+      alertBoxGenerate('Send Request Succesfuly', "success", "Notification")
+
+      
     }
   })
 

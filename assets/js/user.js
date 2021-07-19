@@ -8,9 +8,11 @@ $(document).on("click", '#sign_in_btn', function () {
 
 
 })
+var ellepse = "notID"
+var idNotf =  564564646464646464 
 function alertBoxGenerate(text, type, nov) {
 
-	var box = `<div class="alert ${type}">
+	var box = `<div id="${ellepse+idNotf}" class="alert ${type}">
 	<span class='alert-close' onclick="this.parentElement.style.display='none';">&times;</span>
 	<b>${nov}</b><br>
 <ul><li>
@@ -23,9 +25,10 @@ ${text}
 
 	$('.alert_box_inside').append(box);
 
-	setTimeout(() => {
-		$('.alert_box_inside').empty();
-	}, 5000);
+	 setTimeout(() => {
+		$('#'+ellepse+idNotf).remove();
+	}, 5000); 
+    idNotf++
 }
 function deTimeSplit(dt) {
     var arr = dt.slice(0, 4);
@@ -142,10 +145,26 @@ $(document).on('click', '#changePass-UserREg', function () {
     var newps = $('#exampleInputPasswordNew').val();
     var cnewps = $('#exampleInputPasswordReNew').val();
 
-    if (newps === cnewps) {
-        updatePass(fkUserCode, oldps, newps, cnewps);
+    if(newps.trim().length > 0 && cnewps.trim().length > 0){
+        if(newps.trim().length > 5){
+     
+            if (newps === cnewps) {
+    
+           
+                updatePass(fkUserCode, oldps, newps, cnewps);
+            }else{
+                alertBoxGenerate("Again password incorrect","warning","error");
+            }
+        
+        }else{
+            alertBoxGenerate("Password short","warning","error");
+        }
+    }else{
+        alertBoxGenerate('Fill in all the fields!!!', "warning", "Error")
     }
 
+  
+    
 
 
 })
@@ -170,10 +189,13 @@ function updatePass(id, oldps, newps, cnewps) {
         success: function (data, status, jqXHR) {
 
             try {
-                var err = data.err[0]
+                var err = data.err[0];
+                
+                alertBoxGenerate(err.code,"warning","error");
 
             } catch {
                 $('#changePasswordModal').modal("toggle");
+                alertBoxGenerate("Changes Saved","success","Notification");
             }
 
 
@@ -211,7 +233,12 @@ $(document).on('click', '#exit-forgot-menu', function () {
 $(document).on('click', '#submit-email-forgot', function () {
     var val = $(this).parents('.modal-dialog').find('#forgotEmailİn').val();
 
-    forgotPassApi(val);
+    if(val.trim().length > 6){
+        forgotPassApi(val);
+    }else{
+        alertBoxGenerate("Email incorrect","warning","error");
+    }
+   
 })
 
 
@@ -236,8 +263,10 @@ function forgotPassApi(ml) {
                 var val = data.err[0]['val'];
                 alertBoxGenerate(val, 'warning', 'Wrong Operation');
             } catch (error) {
-                var val = data.kv['succesMessage'];
-                alertBoxGenerate(val, 'succes', 'Notification');
+                var val = data.kv.msg;
+                alertBoxGenerate(val, 'success', 'Notification');
+                $("#loginModalPage").modal("hide");
+             
             }
         },
 
@@ -355,16 +384,21 @@ function setUserInfoDataBase() {
                     }
                 });
             } else {
-                alert('Duplicate Password Not Recorded Correctly');
+               
+                alertBoxGenerate('Duplicate Password Not Recorded Correctly', "warning", "Error")
+
             }
 
         } else {
-            alert('Password short');
+     
+            alertBoxGenerate('Password short', "warning", "Error")
         }
 
 
     } else {
-        alert('Fill in all the fields!!!');
+     
+        alertBoxGenerate('Fill in all the fields!!!', "warning", "Error")
+        
     }
 
 }
@@ -554,7 +588,8 @@ $(document).on("click", '#update_user_btn', function () {
         });
 
     } else {
-        alert('Fill in all the fields!!!');
+        alertBoxGenerate('Fill in all the fields!!!', "warning", "Error") 
+       
     }
 
 })
@@ -688,7 +723,8 @@ function updateUserImage(img) {
         crossDomain: true,
         dataType: "json",
         success: function (data, status, jqXHR) {
-            alert('Photo Saved')
+            
+            alertBoxGenerate('Photo Saved', "success", "Notification") 
         },
 
         error: function (jqXHR, status) {
