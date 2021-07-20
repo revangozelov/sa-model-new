@@ -2465,7 +2465,7 @@ section {
 
 .upload-btn-wrapper {
 	position: absolute;
-	right: 100px;
+	right: 24%;
 	bottom: -6px;
 	overflow: hidden;
 	display: inline-block;

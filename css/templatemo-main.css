@@ -31,7 +31,9 @@ footer {
 }
 
 .section-header {
-  padding-bottom: 20px !important;
+  padding-bottom: 0px !important;
+ /*  position: absolute;
+  width: 100%; */
 }
 
 .service-content {
@@ -47,7 +49,8 @@ footer {
 
 .service-content img {
 
-  width: 80%;
+  width: 90%;
+  height: 80%;
   margin: auto;
 
 }
@@ -93,6 +96,7 @@ footer {
     display: none;
   }
 }
+
 
 @media (max-width: 767px) {
 
