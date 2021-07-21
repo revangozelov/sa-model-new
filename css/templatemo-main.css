@@ -76,6 +76,16 @@ footer {
     background-image: url(../img/source3r.png);
     background-size: 54% !important;
   }
+  .read-more-btn-block{
+      bottom: 50px;
+  }
+}
+@media only screen and (orientation:landscape) {
+  #fullview>div{
+   
+    background-size: 70% !important;
+  }
+ 
 }
 
 
