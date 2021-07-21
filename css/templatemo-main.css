@@ -85,7 +85,7 @@ footer {
    
     background-size: 70% !important;
   }
- 
+
 }
 
 
@@ -94,6 +94,14 @@ footer {
   .container {
     max-width: 1170px;
   }
+}
+
+
+@media (min-width: 1000px) {
+  .section-header p {
+    font-size: 15px;
+    line-height: 15px;
+}
 }
 
 
