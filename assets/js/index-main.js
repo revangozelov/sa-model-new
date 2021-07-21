@@ -98,10 +98,10 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
       }
       if (alte === 'systemSkils') {
-        $('#skilss').show();
+        /* $('#skilss').show(); */
 
         
-        var subdt = getUrlParameter('sub_future');
+      /*   var subdt = getUrlParameter('sub_future');
         genSkilssBlock();
         if(subdt===false){
         
@@ -110,8 +110,13 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
            
           genFeatureSingle(subdt);
-        }
-     
+        } */
+        $.get("system.html", function (html_string)
+        {
+            $('#main').html(html_string);
+          
+      
+        });
 
       }
   
