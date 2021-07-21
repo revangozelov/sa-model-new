@@ -24,7 +24,7 @@ footer {
 
 }
 #home{
-  background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source2_77C7F4CE1FF2D.png);
+  background-image: url(http://localhost/github/sa-model-new/img/source2.png);
 }
 #services{
   background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source_77C7F4E80BD94.png);
@@ -61,16 +61,20 @@ footer {
 
 @media only screen and (orientation:portrait) {
   #home{
-    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source2_77C7F4CE1FF2D.png);
+    background-image: url(http://localhost/github/sa-model-new/img/source2r.png);
+    background-size: 58% !important;
   }
   #services{
-    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source_77C7F4E80BD94.png);
+    background-image: url(http://localhost/github/sa-model-new/img/sourcer.png);
+    background-size: 50% !important;
   }
   #Certificatie{
-    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source4_77C7F5130238E.png) ;
+    background-image: url(http://localhost/github/sa-model-new/img/source4r.png) ;
+    background-size: 50% !important;
   }
   #our-story{
-    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source3_77C7F52B84A06.png);
+    background-image: url(http://localhost/github/sa-model-new/img/source3r.png);
+    background-size: 54% !important;
   }
 }
 
