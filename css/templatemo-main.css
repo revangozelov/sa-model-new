@@ -34,6 +34,7 @@ footer {
 }
 #our-story{
   background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source3_77C7F52B84A06.png);
+  background-size: 70% !important;
 }
 .navbar a,
 .navbar a:focus {
