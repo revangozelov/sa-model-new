@@ -46,57 +46,59 @@
       </a>
     
 
-      <nav id="navbar"  class="navbar">
-        <ul>
-        
+     
+      <nav id="navbar" class="navbar">
+        <ul class="ul-menus">
+           
+         
           <li class="dropdown"> <a href="#"><button class="btn btn-info">Login <i class="bi bi-chevron-down"></i></button> </a>
-            <ul style="left:-100px">
+            <ul>
               <li><a class="nav-link" type="button" id="login_btn_data" data-bs-toggle="modal" data-bs-target="#loginModalPage" >Simulation Training Login</a></li>
               <li><a class="nav-link" href="https://app.sourcedagile.com/login.html" type="button" >System  Login</a></li>
           
-            
-          
+    
             </ul>
-          </li>
-
+          </li> 
         </ul>
+   
+          <div class="navbar-custom-menu" style="display: none;">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown user user-menu show">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
+                        <!-- The user image in the navbar-->
+                        <img src="img/userprofile.png" id="user_index_img" class="user-image" alt="User Image">
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        <!-- <span class="hidden-xs">John Abia</span> -->
+                    </a>
+                    <ul class="dropdown-menu show">
+                        <!-- The user image in the menu -->
+                        <li href="index-main.html?&point=profile" class="user-header">
+                            <img src="img/userprofile.png" class="img-circle" id="user_index_img_large" alt="User Image">
+
+                            <p id="name_index_block">revan </p>
+                        </li>
+
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="index-main.html?&point=profile" class="btn btn-default btn-flat">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="#" id="exit_profile_name" class="btn btn-default btn-flat">Log out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+
+            </ul>
+        </div>
+      
+    
         <i class="bi bi-list mobile-nav-toggle"></i>
-        <div class="navbar-custom-menu" style="display: none;">
-          <ul class="nav navbar-nav">
-  
-              <li class="dropdown user user-menu ">
-                  <!-- Menu Toggle Button -->
-                  <a href="#" class="" data-toggle="dropdown" aria-expanded="true">
-                      <!-- The user image in the navbar-->
-                      <img src="img/userprofile.png" id="user_index_img" class="user-image" alt="User Image">
-                      <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                      <!-- <span class="hidden-xs">John Abia</span> -->
-                  </a>
-                  <ul class="dropdown-menu ">
-                      <!-- The user image in the menu -->
-                      <li class="user-header" href="index-main.html?&point=profile">
-                          <img src="img/userprofile.png" class="img-circle" id="user_index_img_large" alt="User Image">
-  
-                          <p id="name_index_block"> </p>
-                      </li>
-  
-                      <!-- Menu Footer-->
-                      <li class="user-footer">
-                          <div class="pull-left">
-                              <a href="index-main.html?&point=profile" class="btn btn-default btn-flat">Profile</a>
-                          </div>
-                          <div class="pull-right">
-                              <a href="#" id="exit_profile_name" class="btn btn-default btn-flat">Log out</a>
-                          </div>
-                      </li>
-                  </ul>
-              </li>
-              <!-- Control Sidebar Toggle Button -->
-  
-          </ul>
-      </div>
       </nav><!-- .navbar -->
-     
 
     </div>
     
@@ -104,35 +106,47 @@
 
 
   <div id="fullview">
-    <div class="service-content" data-tooltip="Model Overview" id="home" style="background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source2_77C7F4CE1FF2D.png);" >
+    <div class="service-content" data-tooltip="Model Overview" id="home"  >
       <header class="header-model-img section-header">
         <p>Sourced Agile ® Model</p>
       </header>
 
-      <a href="index-main.html?&point=sourcedModelOver1" class="read-more float-right"><span>Read More Role List</span> <i class="bi bi-arrow-right"></i></a> 
+      <div class="read-more-btn-block">
+        <a href="index-main.html?&point=sourcedModelOver1" class="read-more "><span>Read More Role List</span> <i class="bi bi-arrow-right"></i></a> 
 
-      <a href="index-main.html?&point=sourcedModelOver" class="read-more float-left"><span>Read More Zone List</span> <i class="bi bi-arrow-right"></i></a>
-   
+        <a href="index-main.html?&point=sourcedModelOver" class="read-more"><span>Read More Zone List</span> <i class="bi bi-arrow-right"></i></a>
+     
+      </div>
+     
     </div>
-    <div class="service-content" data-tooltip="Find Your Point" id="services" style="background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source_77C7F4E80BD94.png) ;">
+    <div class="service-content" data-tooltip="Find Your Point" id="services" >
       
     <header class="header-model-img section-header">
       <p>Sourced Agile ® Model</p>
     </header>
-    <a href="index-main.html?&point=sourcedModelOver" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+    <div class="read-more-btn-block">
+      <a href="index-main.html?&point=sourcedModelOver" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+
     </div>
-    <div class="service-content " data-tooltip="Certificatie" id="Certificatie" style="background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source4_77C7F5130238E.png) ;" >
+    </div>
+    <div class="service-content " data-tooltip="Certificatie" id="Certificatie"  >
       <header class="header-model-img section-header">
         <p>Certifications and Trainings</p>
       </header>
-      <a href="index-main.html?&point=certificate" class="read-more"><span>Read More</span> <i
-        class="bi bi-arrow-right"></i></a>
+      <div class="read-more-btn-block">
+        <a href="index-main.html?&point=certificate" class="read-more"><span>Read More</span> <i
+          class="bi bi-arrow-right"></i></a>
+      </div>
+    
     </div>
-    <div class="service-content " data-tooltip="System" id="our-story" style="background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source3_77C7F52B84A06.png);">
+    <div class="service-content " data-tooltip="System" id="our-story" >
       <header class="header-model-img section-header">
         <p>Sourced Agile System Features</p>
       </header>
-      <a href="index-main.html?&point=systemSkils" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+      <div class="read-more-btn-block">
+        <a href="index-main.html?&point=systemSkils" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+
+      </div>
     </div>
     <div id="testimonials " data-tooltip="Events" class="testimonials">
       <div class="container">

@@ -16,12 +16,25 @@ section {
   padding: 10vh 0 35px;
   background: #fff;
 }
-
+.service-content{
+  position: relative;
+}
 footer {
   padding: 10vh 0 35px !important;
 
 }
-
+#home{
+  background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source2_77C7F4CE1FF2D.png);
+}
+#services{
+  background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source_77C7F4E80BD94.png);
+}
+#Certificatie{
+  background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source4_77C7F5130238E.png) ;
+}
+#our-story{
+  background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source3_77C7F52B84A06.png);
+}
 .navbar a,
 .navbar a:focus {
 
@@ -33,77 +46,34 @@ footer {
 .section-header {
   padding-bottom: -0px !important;
   margin-top: 20px;
- /*  position: absolute;
+  /*  position: absolute;
   width: 100%; */
 }
 
-/* .service-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10vh;
-
-  background-repeat: no-repeat;
+.read-more-btn-block{
+  position: absolute;
+  width: 100%;
   text-align: center;
-
-
-} */
-
-/* .service-content img {
-
-  width: 90%;
-  height: 80%;
-  margin: auto;
-
-} */
-
+  bottom: 20px;
+}
 
 
 @media only screen and (orientation:portrait) {
-  .img-none-rotate {
-    display: none;
+  #home{
+    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source2_77C7F4CE1FF2D.png);
   }
-  .img-rotate {
-    display: block;
+  #services{
+    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source_77C7F4E80BD94.png);
   }
-}
-
-@media only screen and (orientation:landscape) {
-  .img-none-rotate {
-    display: block;
+  #Certificatie{
+    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source4_77C7F5130238E.png) ;
   }
-  .img-rotate {
-    display: none;
+  #our-story{
+    background-image: url(https://app.sourcedagile.com/api/get/zdfiles/traininghub/source3_77C7F52B84A06.png);
   }
 }
 
 
-@media (max-width: 767px) {
-
-
-  .service-content {
-  /*   padding-top: 7vh;
-    text-align: center;
-    position: relative; */
-
-
-
-  }
-  .header {
-   
-    padding: 5px 0;
-    
-}
-  .service-content img {
-
-    height: 70%;
-  }
-
-  .header .logo img {
-    max-height: 20px;
-    margin-right: 6px;
-}
-
-}
 
 @media (min-width: 1200px) {
   .container {
@@ -113,38 +83,14 @@ footer {
 
 
 
-#fullview > div {
+#fullview>div {
   background-size: 90%;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
- 
+
   align-items: center;
 
   flex-direction: column;
   padding: 25px;
 }
-
-
-button {
-  cursor: pointer;
-  margin-right: 0;
-  margin-bottom: 0;
-}
-
-
-
-#down {
-  box-shadow: 0px 2px 9px #888;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form label {
-  font-size: 1rem;
-  margin-bottom: 5px;
-}
-

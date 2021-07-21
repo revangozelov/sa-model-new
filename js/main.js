@@ -320,8 +320,7 @@ $(document).ready(function () {
   
       // Callback
       onScrollEnd: function (currentView, preView) {
-        console.log("Current", currentView);
-        console.log("Previus", preView);
+      
       }
     });
   
