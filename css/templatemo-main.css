@@ -85,7 +85,7 @@ footer {
     text-align: center;
     position: relative; */
 
-    
+
 
   }
   .header {
@@ -114,7 +114,9 @@ footer {
 
 
 #fullview > div {
-  background-size: cover;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
  
   align-items: center;
