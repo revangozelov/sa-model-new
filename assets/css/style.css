@@ -60,6 +60,9 @@ section {
 
   color: #012970;
 }
+.servce-content{
+  height: 100vh;
+}
 
 @media (max-width: 768px) {
   .section-header p {

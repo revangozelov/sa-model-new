@@ -1,181 +1,246 @@
-var UsId 
+var UsId
 
 
 var getUrlParameter = function getUrlParameter(sParam) {
   var sPageURL = window.location.search.substring(1),
-      sURLVariables = sPageURL.split('&'),
-      sParameterName,
-      i;
-       
-  for (i = 0; i < sURLVariables.length; i++) {
-      sParameterName = sURLVariables[i].split('=');
+    sURLVariables = sPageURL.split('&'),
+    sParameterName,
+    i;
 
-     
-      if (sParameterName[0] === sParam) {
-          return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-      }
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+
+    if (sParameterName[0] === sParam) {
+      return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    }
   }
   return false;
 };
 
-
+function topicBlockGen() {
+  return `<div class="container" id='topic-div-block-el' style="padding-top: 100px;">
+       <div class="col-12">
+            <div class="box-loader shimmer">
+              <div class="lines">
+                <div class="line s_shimmer"></div>
+               
+              </div>
+            </div>
+          </div>  
+          
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+          <div class="col-12">
+               <div class="box-loader shimmer">
+                 <div class="lines">
+                   <div class="line s_shimmer"></div>
+                  
+                 </div>
+               </div>
+             </div>  
+  
+  </div>`
+}
 
 (function () {
 
-  
-    var alte = getUrlParameter("point");
+
+  var alte = getUrlParameter("point");
 
 
 
-      if (alte === 'certificate') {
-          $('#services').show()
-    
-          var subdt = getUrlParameter('certificateId');
-          $('#certificatie-block').css("display","none");
-          $('#certificatie-block1').empty();
-          $('#certificatie-block1').show();
+  if (alte === 'topic') {
 
-          if(subdt===false){
 
-        
-            genCertificationBlock14()
-            
-          }else{
-            var crt = getUrlParameter('sub_cert');
+    $('#main').html(topicBlockGen());
+    genTopicBlock14() ;
 
-            if(crt === false){
-              getCertiDescription(subdt)
-          
-            }else{
-              genSertfifcationBlokLarge(crt);
-            }
-           
-          }
+
+  }
+  if (alte === 'certificate') {
+    $('#services').show()
+
+    var subdt = getUrlParameter('certificateId');
+    $('#certificatie-block').css("display", "none");
+    $('#certificatie-block1').empty();
+    $('#certificatie-block1').show();
+
+    if (subdt === false) {
+
+
+      genCertificationBlock14()
+
+    } else {
+      var crt = getUrlParameter('sub_cert');
+
+      if (crt === false) {
+        getCertiDescription(subdt)
+
+      } else {
+        genSertfifcationBlokLarge(crt);
+      }
+
+    }
+
+
+
+  }
+  if (alte === 'sourcedModelOver') {
+    $('#blog').show();
+
+    $(".trig-header").text("Sourced Agile Model Zones")
+    var subdt = getUrlParameter('sub_sect');
+    genSectionBlockGen();
+    if (subdt === false) {
+
+
+    } else {
+
+
+      genSectionSingle(subdt);
+    }
+
+
+  }
+  if (alte === 'eventListAll') {
+    $('#services').show();
+
+    $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events");
+    genEventsList2();
+
+
+  }
+  if (alte === 'sourcedModelOver1') {
+    $('#blog').show();
+
+    $(".trig-header").text("Sourced Agile Model Roles")
+    var subdt = getUrlParameter('sub_sect1');
+    genSectionBlockGen1();
+    if (subdt === false) {
+
+
+    } else {
+
+
+      genSectionSingle1(subdt);
+    }
+
+
+  }
+  if (alte === 'systemSkils') {
+    /* $('#skilss').show(); */
+
+
+    /*   var subdt = getUrlParameter('sub_future');
+      genSkilssBlock();
+      if(subdt===false){
       
         
+      }else{
 
-      }
-      if (alte === 'sourcedModelOver') {
-        $('#blog').show();
+         
+        genFeatureSingle(subdt);
+      } */
+    $.get("system.html", function (html_string) {
+      $('#main').html(html_string);
 
-        $(".trig-header").text("Sourced Agile Model Zones")
-        var subdt = getUrlParameter('sub_sect');
-        genSectionBlockGen();
-        if(subdt===false){
-        
-          
-        }else{
 
-           
-          genSectionSingle(subdt);
-        }
-     
+    });
 
-      }
-      if (alte === 'eventListAll') {
-        $('#services').show();
+  }
 
-        $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events");
-        genEventsList2();
-     
+  if (alte === 'profile') {
+    let sud = localStorage.getItem('UsId');
+    if (sud !== null) {
+      $.get("profile.html", function (html_string) {
+        $('#main').html(html_string);
 
-      }
-      if (alte === 'sourcedModelOver1') {
-        $('#blog').show();
+        $(".cstmtab .nav ul li").click(function () {
+          $(this)
+            .addClass("active")
+            .siblings()
+            .removeClass("active");
 
-        $(".trig-header").text("Sourced Agile Model Roles")
-        var subdt = getUrlParameter('sub_sect1');
-        genSectionBlockGen1();
-        if(subdt===false){
-        
-          
-        }else{
+          let vale = $(this).val()
+          tabs(vale);
 
-           
-          genSectionSingle1(subdt);
-        }
-     
-
-      }
-      if (alte === 'systemSkils') {
-        /* $('#skilss').show(); */
-
-        
-      /*   var subdt = getUrlParameter('sub_future');
-        genSkilssBlock();
-        if(subdt===false){
-        
-          
-        }else{
-
-           
-          genFeatureSingle(subdt);
-        } */
-        $.get("system.html", function (html_string)
-        {
-            $('#main').html(html_string);
-          
-      
         });
+        let tab = document.querySelectorAll(".tab");
 
-      }
-  
-      if (alte === 'profile') {
-       let sud = localStorage.getItem('UsId');
-        if (sud !== null) {
-          $.get("profile.html", function (html_string)
-          {
-              $('#main').html(html_string);
-            
-              $(".cstmtab .nav ul li").click(function () {
-                $(this)
-                  .addClass("active")
-                  .siblings()
-                  .removeClass("active");
-              
-                let vale = $(this).val()
-                tabs(vale);
-              
-              });
-              let tab = document.querySelectorAll(".tab");
-              
-              function tabs(panelIndex) {
-                tab.forEach(function (node) {
-                  node.style.display = "none";
-                });
-                $(tab[panelIndex]).css('display', 'block');
-              
-              }
-              tabs(0); 
+        function tabs(panelIndex) {
+          tab.forEach(function (node) {
+            node.style.display = "none";
           });
+          $(tab[panelIndex]).css('display', 'block');
+
         }
-        else{
-          window.location.href = 'index.html';
-        }
-       
+        tabs(0);
+      });
+    } else {
+      window.location.href = 'index.html';
+    }
 
-      }
-      if (alte === 'login') {
 
-        $.get("login.html", function (html_string)
-        {
-            $('#main').html(html_string);
-          
-      
-        });
+  }
+  if (alte === 'login') {
 
-      }
-      if (alte === 'active') {
-        var ids = getUrlParameter('id');
-        activProfileUserId(ids)
-      
-          
-      
+    $.get("login.html", function (html_string) {
+      $('#main').html(html_string);
 
-      }
-  
-      
-     
+
+    });
+
+  }
+  if (alte === 'active') {
+    var ids = getUrlParameter('id');
+    activProfileUserId(ids)
+
+
+
+
+  }
+
+
+
 
 
 
@@ -469,29 +534,30 @@ var getUrlParameter = function getUrlParameter(sParam) {
   });
 
 })();
+
 function convertStDate(dt) {
 
-	var arr = dt.slice(0, 4);
-	var arr1 = dt.slice(4, 6);
-	var arr2 = dt.slice(6, 8);
+  var arr = dt.slice(0, 4);
+  var arr1 = dt.slice(4, 6);
+  var arr2 = dt.slice(6, 8);
 
-	var fns = arr + "/" + arr1 + '/' + arr2;
+  var fns = arr + "/" + arr1 + '/' + arr2;
 
-	return fns
+  return fns
 }
 
 function convertStTime(dt) {
 
-	var arr = dt.slice(0, 2);
-	var arr1 = dt.slice(2, 4);
+  var arr = dt.slice(0, 2);
+  var arr1 = dt.slice(2, 4);
 
 
-	var fns = arr + ":" + arr1;
+  var fns = arr + ":" + arr1;
 
-	return fns
+  return fns
 }
 
-function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
+function getSingleEvent(fkId, id, header, lng, strtm, endtm) {
 
   var ts = {
     "kv": {
@@ -508,24 +574,25 @@ function getSingleEvent(fkId,id,header,lng,strtm,endtm) {
     crossDomain: true,
     dataType: "json",
     success: function (data, status, jqXHR) {
- 
-     
-      var dat = data.tbl[0].r
-        var logo = dat[0].logo
-      
-        $("#certificatie-block").hide()
-        $("#certificatie-block1").show()
 
-      $("#certificatie-block1").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
-  
-     
+
+      var dat = data.tbl[0].r
+      var logo = dat[0].logo
+
+      $("#certificatie-block").hide()
+      $("#certificatie-block1").show()
+
+      $("#certificatie-block1").append(genEventListBlock(id, logo, header, lng, strtm, endtm, fkId));
+
+
 
     }
   })
 
 
 }
-function getCertificationEventList(fkId,id,header,lng,strtm,endtm) {
+
+function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
 
   var ts = {
     "kv": {
@@ -542,14 +609,14 @@ function getCertificationEventList(fkId,id,header,lng,strtm,endtm) {
     crossDomain: true,
     dataType: "json",
     success: function (data, status, jqXHR) {
- 
-     
+
+
       var dat = data.tbl[0].r
-        var logo = dat[0].logo
-      
- 
-      $('#cert-event-list').append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
-     
+      var logo = dat[0].logo
+
+
+      $('#cert-event-list').append(genEventListBlock(id, logo, header, lng, strtm, endtm, fkId));
+
 
     }
   })
@@ -558,8 +625,8 @@ function getCertificationEventList(fkId,id,header,lng,strtm,endtm) {
 }
 
 
-function genEventListBlock(id,logo,header,lng,strtm,endtm,certId){
-  return  ` <div id='${id}' class=" col-lg-4 col-md-6">
+function genEventListBlock(id, logo, header, lng, strtm, endtm, certId) {
+  return ` <div id='${id}' class=" col-lg-4 col-md-6">
   <div class="testimonial-item">
   <div class="profile mt-auto">
   <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
@@ -580,19 +647,22 @@ function genEventListBlock(id,logo,header,lng,strtm,endtm,certId){
 </div>`
 }
 
-var lang  =[
-  {key:"en",
+var lang = [{
+    key: "en",
     value: "English"
-   },
-  {key:"az",
+  },
+  {
+    key: "az",
     value: "Azeribaijan"
-   },
-  {key:"ru",
+  },
+  {
+    key: "ru",
     value: "Russian"
-   },
-  
+  },
+
 ]
-function genEventsList2(){
+
+function genEventsList2() {
   $.ajax({
     type: "POST",
     url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
@@ -602,7 +672,7 @@ function genEventsList2(){
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
-      
+
       $("#certificatie-block1").empty();
       for (let index = 0; index < dat.length; index++) {
         var id = dat[index].id
@@ -610,18 +680,18 @@ function genEventsList2(){
         var header = dat[index].eventTitle
         var lng = dat[index].eventLang
         var stst = dat[index].eventStatus
-        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
-        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
- 
+        var strtm = ": " + convertStDate(dat[index].startDate) /* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": " + convertStDate(dat[index].endDate) /* +""+ convertStTime(dat[index].endTime) */
+
         var dl = lang.find(x => x.key === lng).value;
-        
- 
-        if(stst === "A"){
-         
-          getSingleEvent(fkId,id,header,dl,strtm,endtm)
+
+
+        if (stst === "A") {
+
+          getSingleEvent(fkId, id, header, dl, strtm, endtm)
         }
 
-        
+
 
 
       }
@@ -636,7 +706,7 @@ function genEventsList2(){
 }
 
 
-function getCertiDescription(id){
+function getCertiDescription(id) {
 
   var ts = {
     "kv": {
@@ -654,24 +724,24 @@ function getCertiDescription(id){
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r[0]
-      
+
       $('#certificatie-block1').empty();
-      
-        var idSld = dat.id
-        var desct = dat.description
-        var log = dat.logo
-           
-        
-        $('#certificatie-block1')
-          .append($("<div>").attr('id', idSld)
-            .addClass('col-lg-8 col-md-8')
-            .append($("<div>").addClass("text-left").append('<img width="300px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + log + '" alt="">'))
-            .append(desct)
-            )
+
+      var idSld = dat.id
+      var desct = dat.description
+      var log = dat.logo
+
+
+      $('#certificatie-block1')
+        .append($("<div>").attr('id', idSld)
+          .addClass('col-lg-8 col-md-8')
+          .append($("<div>").addClass("text-left").append('<img width="300px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + log + '" alt="">'))
+          .append(desct)
+        )
 
 
 
-            getGroupInside(id);
+      getGroupInside(id);
 
 
     },
@@ -684,7 +754,7 @@ function getCertiDescription(id){
 
 
 
-function addGenSectList(id,nm,img,desct){
+function addGenSectList(id, nm, img, desct) {
 
   return `
   <article class="entry" id='${id}'>
@@ -721,28 +791,28 @@ function genSectionBlockGen() {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
         var sctnm = dat[index].sectionName
-     
+
 
 
         $('#sidebarsection')
           .append($("<div>").attr('id', idSld)
             .addClass('post-item clearfix')
             .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-            .append('<h4><a href="#">'+sctnm+'</a></h4>'))
+            .append('<h4><a href="#">' + sctnm + '</a></h4>'))
 
 
 
-            var subdt = getUrlParameter('sub_sect');
+        var subdt = getUrlParameter('sub_sect');
 
 
-            if(subdt=== false){
+        if (subdt === false) {
 
-              $("#sidebarsection").children().first().click();
+          $("#sidebarsection").children().first().click();
 
-            }else{
-              $("#sidebarsection").find('#'+subdt).css("background",'aliceblue');
-            }
-            
+        } else {
+          $("#sidebarsection").find('#' + subdt).css("background", 'aliceblue');
+        }
+
       }
 
 
@@ -753,6 +823,7 @@ function genSectionBlockGen() {
     }
   });
 }
+
 function genSectionBlockGen1() {
 
   $.ajax({
@@ -770,29 +841,29 @@ function genSectionBlockGen1() {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
         var sctnm = dat[index].roleName
-     
 
 
-  
+
+
         $('#sidebarsection')
           .append($("<div>").attr('id', idSld)
             .addClass('post-item1 clearfix')
             .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-            .append('<h4><a href="#">'+sctnm+'</a></h4>'))
+            .append('<h4><a href="#">' + sctnm + '</a></h4>'))
 
 
 
-            var subdt = getUrlParameter('sub_sect1');
+        var subdt = getUrlParameter('sub_sect1');
 
 
-            if(subdt=== false){
+        if (subdt === false) {
 
-              $("#sidebarsection").children().first().click();
+          $("#sidebarsection").children().first().click();
 
-            }else{
-              $("#sidebarsection").find('#'+subdt).css("background",'aliceblue');
-            }
-            
+        } else {
+          $("#sidebarsection").find('#' + subdt).css("background", 'aliceblue');
+        }
+
       }
 
 
@@ -803,6 +874,7 @@ function genSectionBlockGen1() {
     }
   });
 }
+
 function genSkilssBlock() {
 
   $.ajax({
@@ -818,30 +890,30 @@ function genSkilssBlock() {
 
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
-  
+
         var sctnm = dat[index].featureName
         var ornm = dat[index].orderNo
-     
+
 
 
         $('#skilss-list-ul')
-                   .append($("<li>")
-                              .addClass("list-group-item feature-item").css("order",ornm).attr("id",idSld).attr("orderNo",ornm)
-                              .append(ornm+". "+sctnm))
+          .append($("<li>")
+            .addClass("list-group-item feature-item").css("order", ornm).attr("id", idSld).attr("orderNo", ornm)
+            .append(ornm + ". " + sctnm))
 
 
 
-            var subdt = getUrlParameter('sub_future');
+        var subdt = getUrlParameter('sub_future');
 
 
-            if(subdt=== false){
+        if (subdt === false) {
 
-              $("#skilss-list-ul").find("[orderNo='1']").first().click();
+          $("#skilss-list-ul").find("[orderNo='1']").first().click();
 
-            }else{
-              $("#skilss-list-ul").find('#'+subdt).addClass("active");
-            }
-            
+        } else {
+          $("#skilss-list-ul").find('#' + subdt).addClass("active");
+        }
+
       }
 
 
@@ -852,6 +924,7 @@ function genSkilssBlock() {
     }
   });
 }
+
 function genSectionSingle(id) {
   var ts = {
     "kv": {
@@ -871,19 +944,19 @@ function genSectionSingle(id) {
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
 
-  
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
         var sctnm = dat[index].sectionName
         var dsc = dat[index].sectionFullDesc
-     
 
 
-         
+
+
         $('#entries-model').empty();
         $('#entries-model')
-          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+          .append(addGenSectList(idSld, sctnm, imgSld, dsc))
 
 
 
@@ -899,6 +972,7 @@ function genSectionSingle(id) {
     }
   });
 }
+
 function genSectionSingle1(id) {
   var ts = {
     "kv": {
@@ -918,18 +992,18 @@ function genSectionSingle1(id) {
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
 
-  
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
         var sctnm = dat[index].roleName
         var dsc = dat[index].roleFullDesc
-     
+
 
 
         $('#entries-model').empty();
         $('#entries-model')
-          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+          .append(addGenSectList(idSld, sctnm, imgSld, dsc))
 
 
 
@@ -945,6 +1019,7 @@ function genSectionSingle1(id) {
     }
   });
 }
+
 function genFeatureSingle(id) {
   var ts = {
     "kv": {
@@ -964,25 +1039,25 @@ function genFeatureSingle(id) {
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
 
-  
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
         var imgSld = dat[index].logo
         var sctnm = dat[index].featureName
         var stat = dat[index].status
         var dsc = dat[index].featureDescription
-     
 
-       if(stat === "A"){
 
-        $('#entries-skilss').empty();
-        $('#entries-skilss')
-          .append(addGenSectList(idSld,sctnm,imgSld,dsc))
+        if (stat === "A") {
+
+          $('#entries-skilss').empty();
+          $('#entries-skilss')
+            .append(addGenSectList(idSld, sctnm, imgSld, dsc))
+
+        }
 
       }
 
-      }
-      
 
     },
 
@@ -991,6 +1066,7 @@ function genFeatureSingle(id) {
     }
   });
 }
+
 function genCertificationBlock14() {
 
   $.ajax({
@@ -1002,7 +1078,7 @@ function genCertificationBlock14() {
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
-      
+
       $('#certificatie-block1').empty();
       $('#certificatie-block1').append($("<div>").addClass('dropMenuListCert'))
 
@@ -1015,8 +1091,8 @@ function genCertificationBlock14() {
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
-       
-        
+
+
         $('#certificatie-block1')
           .append($("<div>").attr('id', idSld)
             .addClass('col-lg-4 col-md-6').attr('data-aos', 'fade-up').css('order', orn)
@@ -1038,6 +1114,35 @@ function genCertificationBlock14() {
   });
 }
 
+function genTopicBlock14() {
+
+  var ts = {
+    "kv": {
+      "code": "samdescription "
+    }
+  }
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/cl/traininghub/getTopicDescriptionByCode",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.kv
+
+  
+        $("#topic-div-block-el").html(dat.topicBody);
+      
+  
+       },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
+
 $(document).on("click", "#event-list-back", function (e) {
 
   genEventsList2()
@@ -1045,11 +1150,11 @@ $(document).on("click", "#event-list-back", function (e) {
 })
 
 $(document).on("click", "#event-apply-btn", function (e) {
-var evntNm = $(this).parents(".testimonial-item").find("h3").text();
-var evntId = $(this).parents(".testimonial-item").parent().attr("id");
+  var evntNm = $(this).parents(".testimonial-item").find("h3").text();
+  var evntId = $(this).parents(".testimonial-item").parent().attr("id");
 
-   $(".eventNameAplly").text("Event Name:"+evntNm);
-   $(".eventNameAplly").attr("id",evntId);
+  $(".eventNameAplly").text("Event Name:" + evntNm);
+  $(".eventNameAplly").attr("id", evntId);
 
   $("#applEventModal").modal("show");
 
@@ -1058,51 +1163,51 @@ var evntId = $(this).parents(".testimonial-item").parent().attr("id");
 })
 
 $(document).on("click", "#send-request", function (e) {
-    
-     var nm = $("#recipient-name").val();
-     var eml = $("#recipient-email").val();
-     var nmbr = $("#recipient-number").val();
-     var mesg = $("#recipient-message").val();
-     var srnm = $("#recipient-surname").val();
-     var id = $(".eventNameAplly").attr("id");
+
+  var nm = $("#recipient-name").val();
+  var eml = $("#recipient-email").val();
+  var nmbr = $("#recipient-number").val();
+  var mesg = $("#recipient-message").val();
+  var srnm = $("#recipient-surname").val();
+  var id = $(".eventNameAplly").attr("id");
 
 
-     if(nm.trim().length >2 && eml.trim().length >2 &&nmbr.trim().length >2 && mesg.trim().length >2 && srnm.trim().length> 2){
+  if (nm.trim().length > 2 && eml.trim().length > 2 && nmbr.trim().length > 2 && mesg.trim().length > 2 && srnm.trim().length > 2) {
 
-      sendRequestEventApply(nm,eml,srnm,mesg,id,nmbr);
+    sendRequestEventApply(nm, eml, srnm, mesg, id, nmbr);
 
-     }else{
+  } else {
 
-      alertBoxGenerate('Fill in all the fields!!!', "warning", "Error")
+    alertBoxGenerate('Fill in all the fields!!!', "warning", "Error")
 
-     }
-   
-   
+  }
+
+
 
 })
 $(document).on("click", ".service-box-list", function (e) {
 
- 
+
   var id = $(this).parent().attr('id');
   $('#certificatie-block1').empty();
-   
+
   getCertiDescription(id);
-   insertParam("certificateId", id)
+  insertParam("certificateId", id)
 
 })
 $(document).on("click", "body", function () {
 
- 
-   // $(".dropMenuListCert").hide()
 
-///  insertParam("certificateId", id)
+  // $(".dropMenuListCert").hide()
+
+  ///  insertParam("certificateId", id)
 
 })
 $(document).on("click", "#sub_certification", function () {
 
   var id = $(this).attr('pid');
-  
-  insertParam("section-tab", "cert"); 
+
+  insertParam("section-tab", "cert");
   genSertfifcationBlokLarge(id)
   insertParam("sub_cert", id)
 
@@ -1110,8 +1215,8 @@ $(document).on("click", "#sub_certification", function () {
 $(document).on("click", "#back_certififcationlist", function () {
 
   var id = $(this).attr('pid');
-  
-  $('#certificatie-block').css("display","none");
+
+  $('#certificatie-block').css("display", "none");
   $('#certificatie-block1').show();
 
   genCertificationBlock14();
@@ -1121,7 +1226,7 @@ $(document).on("click", "#back_certififcationlist", function () {
 $(document).on("click", "#training_dest_mini", function () {
 
   var id = $(this).attr('pid');
-  insertParam("section-tab", "train"); 
+  insertParam("section-tab", "train");
   genSertfifcationBlokLarge(id);
   insertParam("sub_cert", id)
 
@@ -1129,7 +1234,7 @@ $(document).on("click", "#training_dest_mini", function () {
 $(document).on("click", "#apply_dest", function () {
 
   var id = $(this).attr('pid');
-  insertParam("section-tab", "apply"); 
+  insertParam("section-tab", "apply");
   genSertfifcationBlokLarge(id);
   insertParam("sub_cert", id);
 
@@ -1137,22 +1242,26 @@ $(document).on("click", "#apply_dest", function () {
 $(document).on("click", ".post-item", function () {
 
   var id = $(this).attr('id');
-  $(".post-item").css("background","white");
-  $(this).css("background","aliceblue");
+  $(".post-item").css("background", "white");
+  $(this).css("background", "aliceblue");
   genSectionSingle(id)
   insertParam("sub_sect", id);
-  $('html, body').animate({ scrollTop: $('#entries-model').offset().top-300 }, 'fast');
+  $('html, body').animate({
+    scrollTop: $('#entries-model').offset().top - 300
+  }, 'fast');
 
 })
 $(document).on("click", ".post-item1", function () {
 
   var id = $(this).attr('id');
-  $(".post-item1").css("background","white");
-  $(this).css("background","aliceblue");
-   
+  $(".post-item1").css("background", "white");
+  $(this).css("background", "aliceblue");
+
   genSectionSingle1(id)
   insertParam("sub_sect1", id)
-  $('html, body').animate({ scrollTop: $('#entries-model').offset().top-300 }, 'fast');
+  $('html, body').animate({
+    scrollTop: $('#entries-model').offset().top - 300
+  }, 'fast');
 })
 $(document).on("click", ".feature-item", function () {
 
@@ -1185,14 +1294,14 @@ function getGroupInside(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-     
-      $('#certificatie-block1').show();
-   
 
-     var blak = $("<div>").addClass("col-lg-4 col-md-4")
+      $('#certificatie-block1').show();
+
+
+      var blak = $("<div>").addClass("col-lg-4 col-md-4")
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
-        
+
         var imgSld = dat[index].logo
         var order = dat[index].orderNo
 
@@ -1200,16 +1309,16 @@ function getGroupInside(id) {
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
-      
-        blak.append($("<div>").attr('id', idSld).css("order",order)
-            .addClass('col-lg-12 col-md-12').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
-            .append($("<div>")
-              .addClass('service-box ' + rand)
-              .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-              .append(' <a href="#" id="training_dest_mini" pid='+idSld+' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
-              .append(' <a href="#" id="apply_dest" pid='+idSld+' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
-              .append(' <a href="#" id="sub_certification" pid='+idSld+' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
-            ))
+
+        blak.append($("<div>").attr('id', idSld).css("order", order)
+          .addClass('col-lg-12 col-md-12').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
+          .append($("<div>")
+            .addClass('service-box ' + rand)
+            .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+            .append(' <a href="#" id="training_dest_mini" pid=' + idSld + ' class="read-more"><span>Training</span><i class="bi bi-arrow-right"></i> </a>')
+            .append(' <a href="#" id="apply_dest" pid=' + idSld + ' class="read-more"><span>Apply</span><i class="bi bi-arrow-right"></i></a>')
+            .append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+          ))
 
 
 
@@ -1221,6 +1330,7 @@ function getGroupInside(id) {
 
 
 }
+
 function getSingleSerc(id) {
 
   var ts = {
@@ -1242,19 +1352,19 @@ function getSingleSerc(id) {
       var dat = data.tbl[0].r
       $('#certificatie-block1').hide();
       $('#certificatie-block').show();
-   
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
         var desct = dat[index].description;
         var lgo = dat[index].logo;
         var crtnm = dat[index].certificationName;
-      
 
-        $("#certification-image-single").attr("src",UrlQb + 'api/get/zdfiles/traininghub/' + lgo)
+
+        $("#certification-image-single").attr("src", UrlQb + 'api/get/zdfiles/traininghub/' + lgo)
         $("#cert-name-single").text(crtnm);
-        $('#certificatie-block').attr("pid",idSld);
+        $('#certificatie-block').attr("pid", idSld);
         $(".certifications-desct").html(desct);
-     
+
 
       }
 
@@ -1264,7 +1374,8 @@ function getSingleSerc(id) {
 
 
 }
-function genSertfifcationBlokLarge(id){
+
+function genSertfifcationBlokLarge(id) {
   getSingleTraining(id);
   getSingleEventListApply(id);
   getSingleSerc(id);
@@ -1273,21 +1384,22 @@ function genSertfifcationBlokLarge(id){
 
 
   if (alte === 'train') {
-      $(".train-desct").click();
-   
+    $(".train-desct").click();
+
 
   }
   if (alte === 'cert') {
-      $(".cert-desct").click();
-   
+    $(".cert-desct").click();
+
 
   }
   if (alte === 'apply') {
-      $(".apply-cert").click();
-   
+    $(".apply-cert").click();
+
 
   }
 }
+
 function getSingleTraining(id) {
 
   var ts = {
@@ -1308,15 +1420,15 @@ function getSingleTraining(id) {
 
       var dat = data.tbl[0].r
 
-  
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id;
         var crtnm = dat[index].trainingDescription;
-      
-        
-         $('.training-full-desct').append(crtnm).attr("id",idSld);
-        
-       
+
+
+        $('.training-full-desct').append(crtnm).attr("id", idSld);
+
+
       }
 
 
@@ -1325,6 +1437,7 @@ function getSingleTraining(id) {
 
 
 }
+
 function getSingleEventListApply(id) {
 
   var ts = {
@@ -1344,27 +1457,27 @@ function getSingleEventListApply(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-        
-         
-     
+
+
+
       for (let index = 0; index < dat.length; index++) {
         var id = dat[index].id
         var fkId = dat[index].fkCertificationId
         var header = dat[index].eventTitle
         var lng = dat[index].eventLang
         var stst = dat[index].eventStatus
-        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
-        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
- 
+        var strtm = ": " + convertStDate(dat[index].startDate) /* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": " + convertStDate(dat[index].endDate) /* +""+ convertStTime(dat[index].endTime) */
+
         var dl = lang.find(x => x.key === lng).value;
-        
-    
-        if(stst === "A"){
-         
-          getCertificationEventList(fkId,id,header,dl,strtm,endtm)
+
+
+        if (stst === "A") {
+
+          getCertificationEventList(fkId, id, header, dl, strtm, endtm)
         }
 
-        
+
 
 
       }
@@ -1374,17 +1487,18 @@ function getSingleEventListApply(id) {
 
 
 }
-function sendRequestEventApply(nm,eml,srnm,msg,id,nmbr){
+
+function sendRequestEventApply(nm, eml, srnm, msg, id, nmbr) {
   var ts = {
-  
-      "kv":{
-          "applierSurname":srnm,
-          "fkEventsId": id,
-          "applierEmail":eml,
-          "applierMessage":msg,
-          "applierMobile":nmbr,
-          "applierName":nm
-      }
+
+    "kv": {
+      "applierSurname": srnm,
+      "fkEventsId": id,
+      "applierEmail": eml,
+      "applierMessage": msg,
+      "applierMobile": nmbr,
+      "applierName": nm
+    }
 
   }
 
@@ -1397,20 +1511,41 @@ function sendRequestEventApply(nm,eml,srnm,msg,id,nmbr){
     dataType: "json",
     success: function (data, status, jqXHR) {
 
-      
+
       $("#recipient-name").val();
       $("#recipient-email").val();
-     $("#recipient-number").val();
+      $("#recipient-number").val();
       $("#recipient-message").val();
       $("#recipient-surname").val();
       $("#applEventModal").modal("hide");
       alertBoxGenerate('Send Request Succesfuly', "success", "Notification")
 
-      
+
     }
   })
 
 
+}
+function genTutorialListBlock(id,logo,header,lng,strtm,endtm,certId){
+  return  ` <div id='${id}' class="swiper-slide">
+  <div class="testimonial-item">
+  <div class="profile mt-auto">
+  <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
+  <h3> ${header}</h3>
+  <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
+</div>
+    <p>
+    Language ${lng}
+    </p>
+
+    <a class="getstarted scrollto" id='event-apply-btn' href="">Apply</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=train">Training</a>
+    <br>
+    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=cert">Certification</a>
+        
+  </div>
+</div>`
 }
 function insertParam(name, value) {
   const params = new URLSearchParams(window.location.search);
