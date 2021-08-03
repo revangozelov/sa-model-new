@@ -1413,7 +1413,7 @@ function getSingleBlockEventFullDesct(id) {
           var header = dat.eventTitle;
           var lng = dat.eventLang;
           
-          var hasApply = dat.eventLang;
+          var hasApply = dat.hasApply;
           var applyUrl = dat.applyUrl;
           var fnlPrc =dat.finalPrice+" "+dat.priceUnit;
           var strtm = ": "+convertStDate(dat.startDate)/* +""+ convertStTime(dat[index].startTime) */
@@ -1456,22 +1456,22 @@ function getEventLogoUrl(id,header,lng,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply
                                           .attr("width","100%")
                                           .attr("src",UrlQb + 'api/get/zdfiles/traininghub/' + logo))
                                          
-                                          .append('<h5>Language: '+header+'</h5>')
+                                          .append('<h6 style="margin-top:10px"> <b>'+header+'</b></h6>')
                                           .append('<p>Language: '+lng+'</p>')
                                           .append('<p>Start Time: '+strtm+'</p>')
                                           .append('<p>End Time: '+endtm+'</p>')
-                                          .append('<p>Price: '+fnlPrc+'</p>')
+                                          .append('<p>Price: <span style="color:red;font-weight:bold;">'+fnlPrc+'</span></p>')
                                           .append('<a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert='+fkId+'&section-tab=cert">Certification info <i class="bi bi-arrow-right"></i> </a><br>')
                                          .append($("<span>").addClass("appLyTrigger"))
                                         )
                                 .append($("<div>")
                                            .addClass("col-lg-9 col-md-9")
-                                           .append(fullDesc));
+                                           .append("<div class='col-lg-12 col-md-12'>"+fullDesc+"</div>"));
 
 
-
+                                           console.log(hasApply);
      if(hasApply==1){
-       console.log(hasApply);
+      
       if(!applyUrl==""){
       $(".appLyTrigger").append('<a class="getstarted scrollto" href="'+applyUrl+'">Apply<i class="bi bi-arrow-right"></i> </a><br>');
     }
