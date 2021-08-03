@@ -1664,7 +1664,7 @@ function getSingleEventListApply(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    url: UrlQb + "api/post/cl/traininghub/getEventList4Web",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
