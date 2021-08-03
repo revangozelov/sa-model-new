@@ -1,5 +1,18 @@
 var fkUserCode = localStorage.getItem("UsId");
+var lang = [{
+    key: "en",
+    value: "English"
+  },
+  {
+    key: "az",
+    value: "Azeribaijan"
+  },
+  {
+    key: "ru",
+    value: "Russian"
+  },
 
+]
 var UrlQb = "https://app.sourcedagile.com/";
 $(document).on("click", '#sign_in_btn', function () {
     var userNm = $(this).parents('.modal-content').find('#exampleInputEmail1').val();
@@ -409,7 +422,7 @@ $(document).on('click', '#submit_regstr_qb', function () {
     setUserInfoDataBase()
 })
 
-getUserInfoProfile()
+getUserInfoProfile();
 
 function getUserInfoProfile() { // pass your data in method
 
@@ -433,7 +446,7 @@ function getUserInfoProfile() { // pass your data in method
 
         $.ajax({
             type: "POST",
-            url: UrlQb + "api/post/cl/traininghub/getUserFullInfo4Web",
+            url: UrlQb + "api/post/zd/traininghub/getUserFullInfo4Web",
             //	data: JSON.stringify(data), // now data come in this function
             contentType: "application/json; charset=utf-8",
             crossDomain: true,
@@ -442,8 +455,6 @@ function getUserInfoProfile() { // pass your data in method
             data: JSON.stringify(objectUser1),
             success: function (data, status, jqXHR) {
                 var dat = data.tbl[0].r
-                console.log(data);
-
                 for (let index = 0; index < dat.length; index++) {
 
                     var idTc = dat[index]['id'];

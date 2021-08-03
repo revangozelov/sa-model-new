@@ -142,11 +142,25 @@ function topicBlockGen() {
 
   }
   if (alte === 'eventListAll') {
+    var subdt = getUrlParameter('singLeEvents');
     $('#services').show();
+    
+    if (!subdt==false) {
+      $("#certificatie-block1").parents(".container").find(".section-header p").remove();
+      $('#certificatie-block').css("display", "none");
 
-    $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events");
-    genEventsList2();
+    $('#certificatie-block1').show();
+      
+      getSingleBlockEventFullDesct(subdt);
+      
+    }else{
+    
 
+      $("#certificatie-block1").parents(".container").find(".section-header p").text("Upcoming Events");
+      genEventsList2();
+  
+    }
+  
 
   }
   if (alte === 'sourcedModelOver1') {
@@ -238,6 +252,7 @@ function topicBlockGen() {
 
 
   }
+  
 
 
 
@@ -557,7 +572,7 @@ function convertStTime(dt) {
   return fns
 }
 
-function getSingleEvent(fkId, id, header, lng, strtm, endtm) {
+function getSingleEvent1(fkId, id, header, lng, strtm, endtm,endr,prc,fnlPrc) {
 
   var ts = {
     "kv": {
@@ -582,7 +597,7 @@ function getSingleEvent(fkId, id, header, lng, strtm, endtm) {
       $("#certificatie-block").hide()
       $("#certificatie-block1").show()
 
-      $("#certificatie-block1").append(genEventListBlock(id, logo, header, lng, strtm, endtm, fkId));
+      $("#certificatie-block1").append(genEventListBlock1(id, logo, header, lng, strtm, endtm, fkId,endr,prc,fnlPrc));
 
 
 
@@ -615,7 +630,7 @@ function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
       var logo = dat[0].logo
 
 
-      $('#cert-event-list').append(genEventListBlock(id, logo, header, lng, strtm, endtm, fkId));
+      $('#cert-event-list').append(genEventListBlock1(id, logo, header, lng, strtm, endtm, fkId));
 
 
     }
@@ -625,47 +640,41 @@ function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
 }
 
 
-function genEventListBlock(id, logo, header, lng, strtm, endtm, certId) {
+function genEventListBlock1(id, logo, header, lng, strtm, endtm, certId,endr,prc,fnlPrc) {
+  if(endr==""){
+    var hidden = "hidden"
+   }else{
+     var hidden = "visible"
+   }
   return ` <div id='${id}' class=" col-lg-4 col-md-6">
   <div class="testimonial-item">
+  <div class="ribbon" style="visibility:${hidden}">
+  <span>-${endr}%</span>
+</div>
   <div class="profile mt-auto">
   <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
   <h3> ${header}</h3>
   <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
 </div>
-    <p>
-    Language ${lng}
-    </p>
+<p>
+Language: ${lng}
+</p>
+<p>
+Price:<span id="old"> ${prc}</span><span id="new"> ${fnlPrc}</span>
+</p>
 
-    <a class="getstarted scrollto" id='event-apply-btn' href="#">Apply</a>
-    <br>
-    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=train">Training</a>
-    <br>
-    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=cert">Certification</a>
+    <a class="getstarted scrollto" href="index-main.html?&point=eventListAll&singLeEvents=${id}">Details</a>
         
   </div>
 </div>`
 }
 
-var lang = [{
-    key: "en",
-    value: "English"
-  },
-  {
-    key: "az",
-    value: "Azeribaijan"
-  },
-  {
-    key: "ru",
-    value: "Russian"
-  },
 
-]
 
 function genEventsList2() {
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    url: UrlQb + "api/post/cl/traininghub/getEventList4Web",
     data: JSON.stringify(), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -680,19 +689,20 @@ function genEventsList2() {
         var header = dat[index].eventTitle
         var lng = dat[index].eventLang
         var stst = dat[index].eventStatus
-        var strtm = ": " + convertStDate(dat[index].startDate) /* +""+ convertStTime(dat[index].startTime) */
-        var endtm = ": " + convertStDate(dat[index].endDate) /* +""+ convertStTime(dat[index].endTime) */
-
+        var endr = dat[index].disCount
+        var prc = dat[index].price+" "+dat[index].currency
+        var fnlPrc =dat[index].finalPrice+" "+dat[index].currency
+        var stst = dat[index].eventStatus
+        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
+ 
         var dl = lang.find(x => x.key === lng).value;
-
-
-        if (stst === "A") {
-
-          getSingleEvent(fkId, id, header, dl, strtm, endtm)
+        
+      
+        if(stst === "A"){
+     
+          getSingleEvent1(fkId,id,header,dl,strtm,endtm,endr,prc,fnlPrc);
         }
-
-
-
 
       }
 
@@ -734,7 +744,7 @@ function getCertiDescription(id) {
 
       $('#certificatie-block1')
         .append($("<div>").attr('id', idSld)
-          .addClass('col-lg-8 col-md-8')
+          .addClass('col-lg-9 col-md-9')
           .append($("<div>").addClass("text-left").append('<img width="300px" src="' + UrlQb + 'api/get/zdfiles/traininghub/' + log + '" alt="">'))
           .append(desct)
         )
@@ -1298,7 +1308,7 @@ function getGroupInside(id) {
       $('#certificatie-block1').show();
 
 
-      var blak = $("<div>").addClass("col-lg-4 col-md-4")
+      var blak = $("<div>").addClass("col-lg-3 col-md-3")
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
 
@@ -1373,6 +1383,104 @@ function getSingleSerc(id) {
   })
 
 
+}
+function getSingleBlockEventFullDesct(id) {
+
+  var ts = {
+    "kv": {
+      "id1": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/cl/traininghub/getEventInfo",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+    
+
+        var dat = data.kv;
+        console.log(dat);
+     
+          var header =dat.eventTitle;
+          var fullDesc =dat.fullDesc;
+      
+          var fkId = dat.fkCertificationId;
+          var header = dat.eventTitle;
+          var lng = dat.eventLang;
+          
+          var hasApply = dat.eventLang;
+          var applyUrl = dat.applyUrl;
+          var fnlPrc =dat.finalPrice+" "+dat.priceUnit;
+          var strtm = ": "+convertStDate(dat.startDate)/* +""+ convertStTime(dat[index].startTime) */
+          var endtm = ": "+convertStDate(dat.endDate)/* +""+ convertStTime(dat[index].endTime) */
+          var dl = lang.find(x => x.key === lng).value;
+          getEventLogoUrl(id,header,dl,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply,applyUrl);
+          
+
+      
+     
+
+    }
+  })
+
+
+}
+function getEventLogoUrl(id,header,lng,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply,applyUrl){
+  var ts = {
+    "kv": {
+      "id": fkId
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      $("#certificatie-block1").empty();
+      var dat = data.tbl[0].r
+        var logo = dat[0].logo
+   
+        $("#certificatie-block1").append($("<div>")
+                                           .addClass("col-lg-3 col-md-3")
+                                          .append($("<img>")
+                                          .attr("width","100%")
+                                          .attr("src",UrlQb + 'api/get/zdfiles/traininghub/' + logo))
+                                         
+                                          .append('<h5>Language: '+header+'</h5>')
+                                          .append('<p>Language: '+lng+'</p>')
+                                          .append('<p>Start Time: '+strtm+'</p>')
+                                          .append('<p>End Time: '+endtm+'</p>')
+                                          .append('<p>Price: '+fnlPrc+'</p>')
+                                          .append('<a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert='+fkId+'&section-tab=cert">Certification info <i class="bi bi-arrow-right"></i> </a><br>')
+                                         .append($("<span>").addClass("appLyTrigger"))
+                                        )
+                                .append($("<div>")
+                                           .addClass("col-lg-9 col-md-9")
+                                           .append(fullDesc));
+
+
+
+     if(hasApply==1){
+       console.log(hasApply);
+      if(!applyUrl==""){
+      $(".appLyTrigger").append('<a class="getstarted scrollto" href="'+applyUrl+'">Apply<i class="bi bi-arrow-right"></i> </a><br>');
+    }
+    else{
+       $(".appLyTrigger").append('<a class="getstarted scrollto" id="event-apply-btn" href="#">Apply<i class="bi bi-arrow-right"></i> </a>')
+     }
+    }
+    }
+  })
 }
 
 function genSertfifcationBlokLarge(id) {
@@ -1449,7 +1557,7 @@ function getSingleEventListApply(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    url: UrlQb + "api/post/cl/traininghub/getEventList4Web",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,

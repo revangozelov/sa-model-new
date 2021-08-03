@@ -315,7 +315,7 @@ function convertStTime(dt) {
 	return fns
 }
 
-function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
+function getSingleSerc(fkId,id,header,lng,strtm,endtm,endr,prc,fnlPrc) {
 
   var ts = {
     "kv": {
@@ -336,7 +336,8 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
       var dat = data.tbl[0].r
         var logo = dat[0].logo
    
-      $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId));
+      $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId,endr,prc,fnlPrc));
+      
 
      
     }
@@ -346,103 +347,111 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm) {
 }
 
 
-function genEventListBlock(id,logo,header,lng,strtm,endtm,certId){
+function genEventListBlock(id,logo,header,lng,strtm,endtm,certId,endr,prc,fnlPrc){
+
+  if(endr==""){
+   var hidden = "hidden"
+  }else{
+    var hidden = "visible"
+  }
   return  ` <div id='${id}' class="swiper-slide">
   <div class="testimonial-item">
+  <div class="ribbon" style="visibility:${hidden}">
+  <span>-${endr}%</span>
+</div>
   <div class="profile mt-auto">
   <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
   <h3> ${header}</h3>
   <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
 </div>
     <p>
-    Language ${lng}
+    Language: ${lng}
+    </p>
+    <p>
+    Price:<span id="old"> ${prc}</span><span id="new"> ${fnlPrc}</span>
     </p>
 
-    <a class="getstarted scrollto" id='event-apply-btn' href="">Apply</a>
+
     <br>
-    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=train">Training</a>
-    <br>
-    <a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert=${certId}&section-tab=cert">Certification</a>
+    <a class="getstarted scrollto" href="index-main.html?&point=eventListAll&singLeEvents=${id}">Details</a>
+  
         
   </div>
 </div>`
 }
 
-var lang  =[
-  {key:"en",
-    value: "English"
-   },
-  {key:"az",
-    value: "Azeribaijan"
-   },
-  {key:"ru",
-    value: "Russian"
-   },
-  
-]
+
 $(document).ajaxComplete(function(){
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 40
-      },
-  
-      1200: {
-        slidesPerView: 3,
-      }
-    }
-  });
+ 
 });
 function genEventsList(){
+ 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
+    url: UrlQb + "api/post/cl/traininghub/getEventList4Web",
     data: JSON.stringify(), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
     dataType: "json",
     success: function (data, status, jqXHR) {
       var dat = data.tbl[0].r
-      
+    
       for (let index = 0; index < dat.length; index++) {
         var id = dat[index].id
         var fkId = dat[index].fkCertificationId
         var header = dat[index].eventTitle
         var lng = dat[index].eventLang
         var stst = dat[index].eventStatus
+        var endr = dat[index].disCount
+        var prc = dat[index].price+" "+dat[index].currency
+        var fnlPrc =dat[index].finalPrice+" "+dat[index].currency
+        var stst = dat[index].eventStatus
         var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
         var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
  
         var dl = lang.find(x => x.key === lng).value;
         
-
+      
         if(stst === "A"){
      
-          getSingleSerc(fkId,id,header,dl,strtm,endtm);
+          getSingleSerc(fkId,id,header,dl,strtm,endtm,endr,prc,fnlPrc);
         }
-
-        
-
 
       }
 
+
+      setTimeout(function(){
+    
+        new Swiper('.testimonials-slider', {
+          speed: 600,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+          },
+          slidesPerView: 'auto',
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+          },
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 40
+            },
+        
+            1200: {
+              slidesPerView: 3,
+            }
+          }
+        });
+
+      },2000)
+ 
      
 
     },
-
     error: function (jqXHR, status) {
 
     }
