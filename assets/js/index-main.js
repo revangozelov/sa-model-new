@@ -1340,6 +1340,59 @@ function getGroupInside(id) {
 
 
 }
+function getSingleGruopShortInside(id) {
+
+  var ts = {
+    "kv": {
+      "fkCertificationGroupId": id
+
+    }
+  }
+
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationList",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+
+      var dat = data.tbl[0].r
+
+      $('#certificatie-block1').show();
+
+
+      var blak = $("<div>").addClass("col-lg-12 row col-md-12")
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+
+        var imgSld = dat[index].logo
+        var order = dat[index].orderNo
+
+
+        var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+
+
+        blak.append($("<div>").attr('id', idSld).css("order", order)
+          .addClass('col-lg-7 col-md-7').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
+          .append($("<div>")
+            .addClass('service-box ' + rand)
+            .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+           .append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+          ))
+
+
+
+      }
+
+      $('#other-sertification-sub').append(blak)
+    }
+  })
+
+
+}
 
 function getSingleSerc(id) {
 
@@ -1367,7 +1420,7 @@ function getSingleSerc(id) {
         var idSld = dat[index].id;
         var desct = dat[index].description;
         var lgo = dat[index].logo;
-        
+        var prtId = dat[index].parentId;
         var crtnm = dat[index].certificationName;
    
          
@@ -1376,6 +1429,9 @@ function getSingleSerc(id) {
         $('#certificatie-block').attr("pid", idSld);
         $(".certifications-desct").html(desct);
 
+
+
+        getSingleGruopShortInside(prtId)
 
 
       }
