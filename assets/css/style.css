@@ -1369,7 +1369,7 @@ section {
 .testimonial-item #new {
 
  display:inline-block;
-
+ font-weight: bold;
 }
 .testimonial-item #old {
   margin-right: 5px;
@@ -1377,6 +1377,8 @@ section {
   font-size: 0.85em;
  display:inline-block;
   text-decoration:line-through;
+  color: red;
+    font-weight: bold;
 }
  .testimonial-item .stars i {
   color: #ffc107;

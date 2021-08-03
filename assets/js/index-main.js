@@ -583,7 +583,7 @@ function getSingleEvent1(fkId, id, header, lng, strtm, endtm,endr,prc,fnlPrc) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/cl/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -607,7 +607,7 @@ function getSingleEvent1(fkId, id, header, lng, strtm, endtm,endr,prc,fnlPrc) {
 
 }
 
-function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
+function getCertificationEventList(fkId, id, header, lng, strtm, endtm,endr,prc,fnlPrc) {
 
   var ts = {
     "kv": {
@@ -618,7 +618,7 @@ function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/cl/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -630,7 +630,7 @@ function getCertificationEventList(fkId, id, header, lng, strtm, endtm) {
       var logo = dat[0].logo
 
 
-      $('#cert-event-list').append(genEventListBlock1(id, logo, header, lng, strtm, endtm, fkId));
+      $('#cert-event-list').append(genEventListBlock1(id, logo, header, lng, strtm, endtm, fkId,endr,prc,fnlPrc));
 
 
     }
@@ -653,7 +653,7 @@ function genEventListBlock1(id, logo, header, lng, strtm, endtm, certId,endr,prc
 </div>
   <div class="profile mt-auto">
   <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
-  <h3> ${header}</h3>
+  <h6 class="pt-5"><b> ${header}</b></h6>
   <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
 </div>
 <p>
@@ -1352,7 +1352,7 @@ function getSingleSerc(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/cl/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -1367,13 +1367,15 @@ function getSingleSerc(id) {
         var idSld = dat[index].id;
         var desct = dat[index].description;
         var lgo = dat[index].logo;
+        
         var crtnm = dat[index].certificationName;
-
-
+   
+         
         $("#certification-image-single").attr("src", UrlQb + 'api/get/zdfiles/traininghub/' + lgo)
-        $("#cert-name-single").text(crtnm);
+        $("#cert-name-single b").text(crtnm);
         $('#certificatie-block').attr("pid", idSld);
         $(".certifications-desct").html(desct);
+
 
 
       }
@@ -1404,7 +1406,7 @@ function getSingleBlockEventFullDesct(id) {
     
 
         var dat = data.kv;
-        console.log(dat);
+    
      
           var header =dat.eventTitle;
           var fullDesc =dat.fullDesc;
@@ -1422,9 +1424,6 @@ function getSingleBlockEventFullDesct(id) {
           getEventLogoUrl(id,header,dl,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply,applyUrl);
           
 
-      
-     
-
     }
   })
 
@@ -1440,7 +1439,7 @@ function getEventLogoUrl(id,header,lng,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/cl/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -1449,27 +1448,27 @@ function getEventLogoUrl(id,header,lng,strtm,fkId,fullDesc,endtm,fnlPrc,hasApply
       $("#certificatie-block1").empty();
       var dat = data.tbl[0].r
         var logo = dat[0].logo
-   
+        var prtId = dat[0].parentId;
         $("#certificatie-block1").append($("<div>")
                                            .addClass("col-lg-3 col-md-3")
                                           .append($("<img>")
                                           .attr("width","100%")
                                           .attr("src",UrlQb + 'api/get/zdfiles/traininghub/' + logo))
                                          
-                                          .append('<h6 style="margin-top:10px"> <b>'+header+'</b></h6>')
+                                          .append('<h6 class="pt-5"> <b>'+header+'</b></h6>')
                                           .append('<p>Language: '+lng+'</p>')
                                           .append('<p>Start Time: '+strtm+'</p>')
                                           .append('<p>End Time: '+endtm+'</p>')
                                           .append('<p>Price: <span style="color:red;font-weight:bold;">'+fnlPrc+'</span></p>')
-                                          .append('<a class="getstarted scrollto" href="index-main.html?&point=certificate&sub_cert='+fkId+'&section-tab=cert">Certification info <i class="bi bi-arrow-right"></i> </a><br>')
+                                          .append('<a class="getstarted scrollto" href="index-main.html?&point=certificate&certificateId='+prtId+'&sub_cert='+fkId+'#">Certification info <i class="bi bi-arrow-right"></i> </a><br>')
                                          .append($("<span>").addClass("appLyTrigger"))
                                         )
                                 .append($("<div>")
-                                           .addClass("col-lg-9 col-md-9")
+                                           .addClass("ps-5 col-lg-9 col-md-9")
                                            .append("<div class='col-lg-12 col-md-12'>"+fullDesc+"</div>"));
 
 
-                                           console.log(hasApply);
+                                        
      if(hasApply==1){
       
       if(!applyUrl==""){
@@ -1569,20 +1568,24 @@ function getSingleEventListApply(id) {
 
 
       for (let index = 0; index < dat.length; index++) {
-        var id = dat[index].id
+    var id = dat[index].id
         var fkId = dat[index].fkCertificationId
         var header = dat[index].eventTitle
         var lng = dat[index].eventLang
         var stst = dat[index].eventStatus
-        var strtm = ": " + convertStDate(dat[index].startDate) /* +""+ convertStTime(dat[index].startTime) */
-        var endtm = ": " + convertStDate(dat[index].endDate) /* +""+ convertStTime(dat[index].endTime) */
+        var endr = dat[index].disCount
+        var prc = dat[index].price+" "+dat[index].currency
+        var fnlPrc =dat[index].finalPrice+" "+dat[index].currency
+        var stst = dat[index].eventStatus
+        var strtm = ": "+convertStDate(dat[index].startDate)/* +""+ convertStTime(dat[index].startTime) */
+        var endtm = ": "+convertStDate(dat[index].endDate)/* +""+ convertStTime(dat[index].endTime) */
 
         var dl = lang.find(x => x.key === lng).value;
 
 
         if (stst === "A") {
 
-          getCertificationEventList(fkId, id, header, dl, strtm, endtm)
+          getCertificationEventList(fkId, id, header, dl, strtm, endtm,endr,prc,fnlPrc)
         }
 
 
@@ -1639,7 +1642,7 @@ function genTutorialListBlock(id,logo,header,lng,strtm,endtm,certId){
   <div class="testimonial-item">
   <div class="profile mt-auto">
   <img src="${UrlQb}api/get/zdfiles/traininghub/${logo}" class="testimonial-img" alt="">
-  <h3> ${header}</h3>
+  <h6 class="pt-5"><b> ${header}</b></h6>
   <h4>Start Time ${strtm} <br> End Time ${endtm}</h4>
 </div>
     <p>

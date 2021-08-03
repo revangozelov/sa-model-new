@@ -315,7 +315,7 @@ function convertStTime(dt) {
 	return fns
 }
 
-function getSingleSerc(fkId,id,header,lng,strtm,endtm,endr,prc,fnlPrc) {
+function getSingleSerc(fkId,id,header,lng,strtm,endtm,endr,prc,fnlPrc,inlx,evvelki) {
 
   var ts = {
     "kv": {
@@ -326,7 +326,7 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm,endr,prc,fnlPrc) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/zd/traininghub/getCertificationDescription",
+    url: UrlQb + "api/post/cl/traininghub/getCertificationDescription",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
@@ -339,6 +339,35 @@ function getSingleSerc(fkId,id,header,lng,strtm,endtm,endr,prc,fnlPrc) {
       $("#event_list_hub").append(genEventListBlock(id,logo,header,lng,strtm,endtm,fkId,endr,prc,fnlPrc));
       
 
+
+
+      if((inlx+1) === evvelki){
+        
+        new Swiper('.testimonials-slider', {
+          speed: 600,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+          },
+          slidesPerView: 'auto',
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+          },
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 40
+            },
+        
+            1200: {
+              slidesPerView: 3,
+            }
+          }
+        });
+      }
      
     }
   })
@@ -382,7 +411,8 @@ function genEventListBlock(id,logo,header,lng,strtm,endtm,certId,endr,prc,fnlPrc
 
 
 $(document).ajaxComplete(function(){
- 
+
+
 });
 function genEventsList(){
  
@@ -414,44 +444,18 @@ function genEventsList(){
       
         if(stst === "A"){
      
-          getSingleSerc(fkId,id,header,dl,strtm,endtm,endr,prc,fnlPrc);
+          getSingleSerc(fkId,id,header,dl,strtm,endtm,endr,prc,fnlPrc,index,dat.length);
         }
 
       }
 
 
-      setTimeout(function(){
-    
-        new Swiper('.testimonials-slider', {
-          speed: 600,
-          loop: true,
-          autoplay: {
-            delay: 5000,
-            disableOnInteraction: false
-          },
-          slidesPerView: 'auto',
-          pagination: {
-            el: '.swiper-pagination',
-            type: 'bullets',
-            clickable: true
-          },
-          breakpoints: {
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 40
-            },
-        
-            1200: {
-              slidesPerView: 3,
-            }
-          }
-        });
-
-      },2000)
+     
  
      
 
     },
+  
     error: function (jqXHR, status) {
 
     }
