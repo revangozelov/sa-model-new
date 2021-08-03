@@ -1360,7 +1360,7 @@ function getSingleGruopShortInside(id) {
 
       var dat = data.tbl[0].r
 
-      $('#certificatie-block1').show();
+     
 
 
       var blak = $("<div>").addClass("col-lg-12 row col-md-12")
