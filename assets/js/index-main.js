@@ -1123,6 +1123,58 @@ function genCertificationBlock14() {
     }
   });
 }
+function genCertificationBlock14Single(id) {
+
+  var ts = {
+    "kv": {
+      "id": id
+    }
+  }
+  $.ajax({
+    type: "POST",
+    url: UrlQb + "api/post/zd/traininghub/getCertificationGroupList4Web",
+    data: JSON.stringify(ts), // now data come in this function
+    contentType: "application/json; charset=utf-8",
+    crossDomain: true,
+    dataType: "json",
+    success: function (data, status, jqXHR) {
+      var dat = data.tbl[0].r
+
+     
+     
+      $('#parent-sertification').empty();
+
+      for (let index = 0; index < dat.length; index++) {
+        var idSld = dat[index].id
+        var imgSld = dat[index].logo
+        var orn = dat[index].orderNo
+
+
+        var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
+        var rand = myArray[Math.floor(Math.random() * myArray.length)];
+
+
+
+        $('#parent-sertification')
+          .append($("<div>").attr('id', idSld)
+            .addClass('col-lg-6 col-md-6').css('order', orn)
+            .append($("<div>")
+              .addClass('service-box service-box-list ' + rand)
+              .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
+            ))
+
+
+
+      }
+
+
+    },
+
+    error: function (jqXHR, status) {
+
+    }
+  });
+}
 
 function genTopicBlock14() {
 
@@ -1199,6 +1251,7 @@ $(document).on("click", ".service-box-list", function (e) {
 
 
   var id = $(this).parent().attr('id');
+  $('#certificatie-block').hide();
   $('#certificatie-block1').empty();
 
   getCertiDescription(id);
@@ -1359,9 +1412,7 @@ function getSingleGruopShortInside(id) {
     success: function (data, status, jqXHR) {
 
       var dat = data.tbl[0].r
-
-     
-
+      $('#other-sertification-sub').empty();
 
       var blak = $("<div>").addClass("col-lg-12 row col-md-12")
       for (let index = 0; index < dat.length; index++) {
@@ -1376,11 +1427,11 @@ function getSingleGruopShortInside(id) {
 
 
         blak.append($("<div>").attr('id', idSld).css("order", order)
-          .addClass('col-lg-7 col-md-7').attr('data-aos', 'fade-up').attr('data-aos-delay', (index + 100) * index)
+          .addClass('col-lg-7 col-md-7')
           .append($("<div>")
             .addClass('service-box ' + rand)
-            .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-           .append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>')
+            .append('')
+           .append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more"><img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt=""></a>')
           ))
 
 
@@ -1431,7 +1482,8 @@ function getSingleSerc(id) {
 
 
 
-        getSingleGruopShortInside(prtId)
+        getSingleGruopShortInside(prtId);
+        genCertificationBlock14Single(prtId)
 
 
       }
@@ -1612,7 +1664,7 @@ function getSingleEventListApply(id) {
 
   $.ajax({
     type: "POST",
-    url: UrlQb + "api/post/cl/traininghub/getEventList4Web",
+    url: UrlQb + "api/post/zd/traininghub/getEventList4Web",
     data: JSON.stringify(ts), // now data come in this function
     contentType: "application/json; charset=utf-8",
     crossDomain: true,
