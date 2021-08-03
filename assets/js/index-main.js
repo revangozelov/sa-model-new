@@ -628,7 +628,7 @@ function getCertificationEventList(fkId, id, header, lng, strtm, endtm,endr,prc,
 
       var dat = data.tbl[0].r
       var logo = dat[0].logo
-
+      
 
       $('#cert-event-list').append(genEventListBlock1(id, logo, header, lng, strtm, endtm, fkId,endr,prc,fnlPrc));
 
@@ -1146,22 +1146,16 @@ function genCertificationBlock14Single(id) {
 
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
-        var imgSld = dat[index].logo
+        var imgSld = dat[index].groupName
         var orn = dat[index].orderNo
 
 
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
+     console.log(dat);
 
 
-
-        $('#parent-sertification')
-          .append($("<div>").attr('id', idSld)
-            .addClass('col-lg-6 col-md-6').css('order', orn)
-            .append($("<div>")
-              .addClass('service-box service-box-list ' + rand)
-              .append('<img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt="">')
-            ))
+        $('#parent-sertification').append('<div id="'+idSld+'"> <a href="#" class="service-box-list" pid=' + idSld + ' class="read-more">'+imgSld+'</a></div>')
 
 
 
@@ -1414,25 +1408,21 @@ function getSingleGruopShortInside(id) {
       var dat = data.tbl[0].r
       $('#other-sertification-sub').empty();
 
-      var blak = $("<div>").addClass("col-lg-12 row col-md-12")
+      var blak = $("<div>").addClass("col-lg-12 row col-md-12");
+      console.log(dat);
+
       for (let index = 0; index < dat.length; index++) {
         var idSld = dat[index].id
 
-        var imgSld = dat[index].logo
+        var imgSld = dat[index].certificationName
         var order = dat[index].orderNo
-
-
+       
         var myArray = ['blue', 'red', 'orange', "green", 'purple', 'pink'];
         var rand = myArray[Math.floor(Math.random() * myArray.length)];
 
 
-        blak.append($("<div>").attr('id', idSld).css("order", order)
-          .addClass('col-lg-7 col-md-7')
-          .append($("<div>")
-            .addClass('service-box ' + rand)
-            .append('')
-           .append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more"><img src="' + UrlQb + 'api/get/zdfiles/traininghub/' + imgSld + '" alt=""></a>')
-          ))
+        blak.append(' <a href="#" id="sub_certification" pid=' + idSld + ' class="read-more">'+imgSld+'</a>')
+          
 
 
 
@@ -1482,8 +1472,8 @@ function getSingleSerc(id) {
 
 
 
-        getSingleGruopShortInside(prtId);
-        genCertificationBlock14Single(prtId)
+       /*  getSingleGruopShortInside(prtId);
+        genCertificationBlock14Single(prtId) */
 
 
       }
@@ -1673,7 +1663,7 @@ function getSingleEventListApply(id) {
 
       var dat = data.tbl[0].r
 
-
+      $('#cert-event-list').empty()
 
       for (let index = 0; index < dat.length; index++) {
     var id = dat[index].id

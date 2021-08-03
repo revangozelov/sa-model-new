@@ -388,6 +388,8 @@ function setUserInfoDataBase() {
                         } catch (error) {
                             resetFlud(eml);
                         }
+
+                        alertBoxGenerate("Registration succesfully completed. For activation your account please check your email.",'success',"Notification")
                     },
 
                     error: function (jqXHR, status) {
